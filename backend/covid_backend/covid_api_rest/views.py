@@ -4,26 +4,26 @@ from . import serializers
 
 
 # Create your views here.
-class DoctorViewSet(viewsets.ViewSet):
+class DoctorViewSet(viewsets.ModelViewSet):
+    queryset = models.Doctor.objects.all()
     serializer_class = serializers.DoctorSerializer
-    query_set = models.Doctor.objects.all()
 
 
-class ScoutViewSet(viewsets.ViewSet):
+class ScoutViewSet(viewsets.ModelViewSet):
     queryset = models.Scout.objects.all()
     serializer_class = serializers.ScoutSerializer
 
 
-class SymptomViewSet(viewsets.ViewSet):
+class SymptomViewSet(viewsets.ModelViewSet):
     queryset = models.Symptom.objects.all()
     serializer_class = serializers.SymptomSerializer
 
 
-class OnlineTestViewSet(viewsets.ViewSet):
+class OnlineTestViewSet(viewsets.ModelViewSet):
     queryset = models.OnlineTest.objects.all()
     serializer_class = serializers.OnlineTestSerializer
 
 
-class CitizenViewSet(viewsets.ViewSet):
+class CitizenViewSet(viewsets.ModelViewSet):
     queryset = models.Citizen.objects.all()
     serializer_class = serializers.CitizenSerializer

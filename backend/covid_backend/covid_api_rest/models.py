@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 
 # Create your models here.
@@ -13,7 +14,8 @@ class Citizen(models.Model):
         ('Cmr', 'Cameroonian'),
         ('Oth', 'Others')
     ], default="Cameroonian")
-    mobile_phone = models.IntegerField(default=0)
+    mobile_phone = models.IntegerField(null=False, blank=False, unique=True)
+    register_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "citizens"
@@ -28,7 +30,7 @@ class Doctor(models.Model):
     speciality = models.CharField(max_length=55, null=True)
 
     # Numero de telephone de travail
-    mobile_phone_working = models.IntegerField(default=0)
+    mobile_phone_working = models.IntegerField(null=False, blank=False, unique=True)
 
     class Meta:
         db_table = 'doctors'
@@ -43,7 +45,7 @@ class Scout(models.Model):
     ], max_length=14)
 
     # Numero de telephone de travail
-    mobile_phone_working = models.IntegerField(default=0)
+    mobile_phone_working = models.IntegerField(null=False, blank=False, unique=True)
 
     citizens_tracked = models.ManyToManyField(Citizen, through='HasScreened', related_name="citizens_tracked")
 
@@ -54,7 +56,7 @@ class Scout(models.Model):
 class HasScreened(models.Model):
     scout_who_screened = models.ForeignKey(Scout, on_delete=models.CASCADE, related_name="scout_info_tracker",
                                            null=True)
-    citizen_who_has_screened = models.ForeignKey(Citizen, on_delete=models.CASCADE,
+    citizen_who_has_been_screened = models.ForeignKey(Citizen, on_delete=models.CASCADE,
                                                  related_name="citizen_who_has_been_screened")
     status = models.CharField(choices=[
         ('+', '+'),
@@ -117,7 +119,7 @@ class OnlineTest(models.Model):
     comments = models.CharField(max_length=1024, default="")
     result = models.CharField(max_length=1024, default="")
     date_test = models.DateTimeField(auto_now=True)
-    user_has_been_tested = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    citizen_who_has_been_tested = models.ForeignKey(Citizen, null=True, on_delete=models.CASCADE)
     symptom_detected = models.ManyToManyField(Symptom)
 
     class Meta:
@@ -126,7 +128,7 @@ class OnlineTest(models.Model):
 
 class HasConsulted(models.Model):
     doctor_who_has_consulted = models.ForeignKey(Doctor, null=True, on_delete=models.CASCADE)
-    user_has_been_consulted = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
+    citizen_has_been_consulted = models.ForeignKey(Citizen, null=True, on_delete=models.CASCADE)
     date_consulted = models.DateField()
     doctor_observation = models.CharField(max_length=2048, default="")
 
