@@ -2,6 +2,12 @@ from rest_framework import serializers
 from . import models
 
 
+class UserSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = models.User
+        fields = "__all__"
+
+
 class CitizenSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = models.Citizen

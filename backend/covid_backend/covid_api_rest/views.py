@@ -4,6 +4,11 @@ from . import serializers
 
 
 # Create your views here.
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = models.User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+
 class DoctorViewSet(viewsets.ModelViewSet):
     queryset = models.Doctor.objects.all()
     serializer_class = serializers.DoctorSerializer

@@ -3,6 +3,7 @@ from rest_framework import routers
 from django.urls import include, path
 
 router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet, basename='user')
 router.register(r'citizens', views.CitizenViewSet, basename='citizen')
 router.register(r'doctors', views.DoctorViewSet, basename='doctor')
 router.register(r'symptoms', views.SymptomViewSet, basename='symptom')
