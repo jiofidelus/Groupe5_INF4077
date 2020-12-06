@@ -2,50 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Compiled_mobileApp/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Native_mobileApp/readme.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/backend/covid_backend/.idea/covid_backend.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/covid_backend.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0002_auto_20201205_1503.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0003_auto_20201205_1505.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0004_auto_20201205_1505.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0005_auto_20201205_1531.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0006_auto_20201205_1551.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/wsgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/db.sqlite3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/covid_backend/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/App.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/assets/logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/components/HelloWorld.vue" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/main.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +22,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Web_mobileApp/backend/covid_backend" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -76,7 +33,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607174054793</updated>
       <workItem from="1607174055853" duration="113000" />
-      <workItem from="1607242672897" duration="101000" />
+      <workItem from="1607242672897" duration="748000" />
     </task>
     <servers />
   </component>
@@ -84,9 +41,17 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1607174167339">
+    <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607243449084">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl/0.0.1920.1037@0.0.1920.1037" timestamp="1607174167339" />
+    <state x="0" y="176" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1037@0.0.1920.1037" timestamp="1607243449084" />
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1607243487965">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl/0.0.1920.1037@0.0.1920.1037" timestamp="1607243487965" />
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1607243042492">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1607243042492" />
   </component>
 </project>
