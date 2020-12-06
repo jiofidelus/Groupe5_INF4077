@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="" />
+    <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Compiled_mobileApp/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Native_mobileApp/readme.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/backend/covid_backend/.idea/covid_backend.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/covid_backend.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0002_auto_20201205_1503.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0003_auto_20201205_1505.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0004_auto_20201205_1505.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0005_auto_20201205_1531.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/0006_auto_20201205_1551.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_api_rest/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/asgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/settings.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/covid_backend/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/covid_backend/manage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/babel.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/assets/logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/components/HelloWorld.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/covid_app/src/main.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="JupyterTrust" id="059808cc-bbfb-47c7-8088-01162bd747d9" />
   <component name="ProjectId" id="1lEtPcwSwWodzt2YGoQqJYnH37C" />
@@ -15,8 +63,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/backend/covid_backend" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -27,6 +76,7 @@
       <option name="presentableId" value="Default" />
       <updated>1607174054793</updated>
       <workItem from="1607174055853" duration="113000" />
+      <workItem from="1607242672897" duration="101000" />
     </task>
     <servers />
   </component>

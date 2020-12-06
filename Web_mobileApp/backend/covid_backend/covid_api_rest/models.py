@@ -57,7 +57,7 @@ class HasScreened(models.Model):
     scout_who_screened = models.ForeignKey(Scout, on_delete=models.CASCADE, related_name="scout_info_tracker",
                                            null=True)
     citizen_who_has_been_screened = models.ForeignKey(Citizen, on_delete=models.CASCADE,
-                                                 related_name="citizen_who_has_been_screened")
+                                                      related_name="citizen_who_has_been_screened")
     status = models.CharField(choices=[
         ('+', '+'),
         ('-', '-'),
