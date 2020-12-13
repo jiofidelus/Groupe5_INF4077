@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/css/style_form.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/img/medikit.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/save_citizens.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/components/SideBar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/components/SideBar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +91,7 @@
       <workItem from="1607174055853" duration="113000" />
       <workItem from="1607242672897" duration="748000" />
       <workItem from="1607562508258" duration="4086000" />
-      <workItem from="1607798796646" duration="34894000" />
+      <workItem from="1607798796646" duration="38147000" />
     </task>
     <task id="LOCAL-00001" summary="Modifications générale.">
       <created>1607861335752</created>
@@ -102,7 +100,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607861335752</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Modifications générale.">
+      <created>1607867896658</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607867896658</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -130,10 +135,10 @@
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
     <state x="643" y="320" width="623" height="402" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1037@0.0.1920.1037" timestamp="1607816280867" />
-    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2" timestamp="1607861319940">
+    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2" timestamp="1607867896354">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2/0.0.1920.1037@0.0.1920.1037" timestamp="1607861319939" />
+    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2/0.0.1920.1037@0.0.1920.1037" timestamp="1607867896354" />
     <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1607803082077">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
@@ -142,10 +147,10 @@
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
     <state x="898" y="153" width="1022" height="736" key="SettingsEditor/0.0.1920.1037@0.0.1920.1037" timestamp="1607803585768" />
-    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1607861348378">
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1607867904071">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1607861348378" />
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1607867904071" />
     <state x="1046" y="100" width="774" height="837" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607798865799">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>

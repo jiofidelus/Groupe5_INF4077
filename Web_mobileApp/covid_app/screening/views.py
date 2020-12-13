@@ -23,11 +23,11 @@ def tables(request):
 
 
 def forgot_password(request):
-    return render(request, 'pages/forgot-password.html')
+    return render(request, 'pages/backOffice/forgot-password.html')
 
 
 def register(request):
-    return render(request, 'pages/register.html')
+    return render(request, 'pages/backOffice/register.html')
 
 
 class LoginView(views.LoginView):
