@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebResourcesPaths">
+    <contentEntries>
+      <entry url="file://$PROJECT_DIR$/Web_mobileApp/covid_app">
+        <entryData>
+          <resourceRoots>
+            <path value="file://$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static" />
+          </resourceRoots>
+        </entryData>
+      </entry>
+    </contentEntries>
+  </component>
+</project>
