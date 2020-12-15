@@ -1,0 +1,43 @@
+#canvas {
+    height: 1280px;
+    left: 50%;
+    margin: -150px 0 0 -300px;
+    position: absolute;
+    top: 50%;
+    width: 720px;
+}
+#paper {
+    height: 300px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 300px;
+}
+#nsw, #vic, #wa, #sa, #nt, #qld, #tas {
+    display: none;
+    height: 400px;
+    overflow: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 300px;
+}
+h2 {
+    text-align: center;
+}
+
+body{
+    background-size: cover;
+    background-position: center;
+    background-image: linear-gradient(to right, #020024 , #2c2c88);
+}
+
+a, h2{
+    color: white;
+}
+
+.banner{
+    position: relative;
+    min-height: 100vh;
+    padding: 250px 0 200px;
+}

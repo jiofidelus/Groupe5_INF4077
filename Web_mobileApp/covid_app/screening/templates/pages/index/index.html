@@ -10,21 +10,16 @@
 </head>
 
 <body id="top">
-  <!-- ################################################################################################ -->
   <div id="app">
-    <!-- ################################################################################################ -->
     <div class="wrapper row0">
       <div id="topbar" class="hoc clear">
         <div class="fl_left">
-          <!-- ################################################################################################ -->
           <ul class="nospace">
             <li><i class="fas fa-phone rgtspace-5"></i> +237 698868709</li>
             <li><i class="far fa-envelope rgtspace-5"></i> modo@gmail.com</li>
           </ul>
-          <!-- ################################################################################################ -->
         </div>
         <div class="fl_right">
-          <!-- ################################################################################################ -->
           <ul class="nospace">
             <li><a href="index.html"><i class="fas fa-home"></i></a></li>
             <li><a href="#" title="Help Centre"><i class="far fa-life-ring"></i></a></li>
@@ -42,42 +37,32 @@
               </div>
             </li>
           </ul>
-          <!-- ################################################################################################ -->
         </div>
       </div>
     </div>
-    <!-- ################################################################################################ -->
     <div class="wrapper row1">
       <header id="header" class="hoc clear">
         <div id="logo" class="fl_left">
-          <!-- ################################################################################################ -->
           <h1><a href="index.html">MODO</a></h1>
-          <!-- ################################################################################################ -->
         </div>
         <nav id="mainav" class="fl_right">
-          <!-- ################################################################################################ -->
           <ul class="clear">
             </router-link to="/">
-            <li class="active"><a href="index.html">Accueil</a></li>
+            <li class="active"><a href="{% url 'screening:home' %}">Accueil</a></li>
             </router-link>
-            <li><a href="#">Statistiques</a></li>
+            <li><a href="{% url 'statistiques:index' %}">Statistiques</a></li>
             <li><a href="#">News et Actualite</a></li>
             <li><a href="#">Forum</a></li>
             <li><a href="#">Contacts</a></li>
           </ul>
-          <!-- ################################################################################################ -->
         </nav>
       </header>
     </div>
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
-    <!-- ################################################################################################ -->
     <div class="wrapper bgded overlay gradient" style="background-image:url('images/demo/backgrounds/01.jpg');">
       <div id="pageintro" class="hoc clear">
-        <!-- ################################################################################################ -->
         <article>
-          <p>Modo, votre application de suivie lié au problème Covid-19</p>
-          <h3 class="heading">Laisser nous vous accompagnée avec cette solution numerique</h3>
+          <p>Aidez nous a combattre le Covid-19</p>
+          <h3 class="heading">Laisser nous vous accompagner avec cette solution numerique</h3>
           <p>Médécins, chercheurs, Malades, usagers.</p>
           <footer>
             <ul class="nospace inline pushright">
@@ -86,61 +71,59 @@
             </ul>
           </footer>
         </article>
-        <!-- ################################################################################################ -->
       </div>
     </div>
-    <!-- ################################################################################################ -->
     <div class="wrapper row2">
       <section class="hoc container clear">
-        <!-- ################################################################################################ -->
         <div class="sectiontitle">
-          <h6 class="heading">Espace Utilisateur pour vous</h6>
-          <p>Acceder a votre interface de connexion</p>
+          <h6 class="heading">Connectez vous et soyez plus efficace</h6>
+          <p>Accedez a votre interface de connexion</p>
         </div>
         <ul class="nospace group prices">
-          <a href="{% url 'screening:login'%}">
-              <li class="one_third">
-                     <article><i class="fas fa-heart red"></i>
-                      <h6 class="heading">Médécin</h6>
-                      <p>Acceder a cet interface pour vous connecter en tant que medecin,
-                        afin d'acceder aux informations des patients
-                      </p>
-                    </article>
-            </li>
-          </a>
-         <li class="one_third">
-              <a href="{% url 'screening:login'%}">
-            <article><i class="fas fa-sun green"></i>
-              <h6 class="heading">Dépisteur</h6>
-              <p>Connecter vous en tant que depisteur, acceder a l'interface d'examen des usagers</p>
-            </article>
-              </a>
+          <li class="one_third">
+            <a href="{% url 'screening:login'%}">
+               <article>
+                <i class="fas fa-heart red"></i>
+                <h6 class="heading">Médécin</h6>
+                <p>Accedez a cet interface pour vous connecter en tant que medecin. Vous pourriez alors
+                  avoir acces aux informations des patients
+                </p>
+              </article>  
+            </a>
+          </li>
+          <li class="one_third">
+            <a href="{% url 'screening:login'%}">
+              <article>
+                <i class="fas fa-sun green"></i>
+                <h6 class="heading">Dépisteur</h6>
+                <p>Connectez vous en tant que depisteur et accedez a l'interface d'examen des usagers</p>
+              </article>
+            </a>
           </li>
 
-            <li class="one_third">
-            <article><i class="fas fa-users blue"></i>
-              <h6 class="heading">Usagers</h6>
-              <p>Effectuez votre test de covid en ligne ici</p>
-            </article>
+          <li class="one_third">
+            <a href="#">
+              <article>
+                <i class="fas fa-users blue"></i>
+                <h6 class="heading">Usagers</h6>
+                <p>
+                  Effectuez votre test de covid-19 maintenant
+                  </br></br></br>
+                </p>
+              </article>
+            </a>
           </li>
         </ul>
-        <!-- ################################################################################################ -->
       </section>
     </div>
-    <!-- ################################################################################################ -->
     <div class="wrapper coloured">
       <article class="hoc cta clear">
-        <!-- ################################################################################################ -->
-        <h6 class="three_quarter first">Pour acceder aux statistiques National:</h6>
-        <footer class="one_quarter"><a class="btn" href="#">stat-nat-covid</a></footer>
-        <!-- ################################################################################################ -->
+        <h6 class="three_quarter first">Des statistiques detailles sur l'evolution du covid-19</h6>
+        <footer class="one_quarter"><a class="btn" href="{% url 'statistiques:index'%}">stat-nat-covid</a></footer>
       </article>
     </div>
-    <!-- ################################################################################################ -->
     <div class="wrapper row3">
       <main class="hoc container clear">
-        <!-- main body -->
-        <!-- ################################################################################################ -->
         <section id="introblocks">
           <div class="sectiontitle">
             <h6 class="heading">Faire Confiance a MODO</h6>
@@ -151,6 +134,7 @@
               <article><a href="#"><i class="fas fa-moon green"></i></a>
                 <h6 class="heading">La Qualité</h6>
                 <p>Modo est utilisé et recommendé par la pluard des médécins nationaux [&hellip;]
+                  </br>
                 </p>
                 <footer><a class="btn" href="#">Voir Plus</a></footer>
               </article>
@@ -173,29 +157,23 @@
             </li>
           </ul>
         </section>
-        <!-- ################################################################################################ -->
-        <!-- / main body -->
         <div class="clear"></div>
       </main>
     </div>
-    <!-- ################################################################################################ -->
     <div class="wrapper row5">
       <div id="copyright" class="hoc clear">
-        <!-- ################################################################################################ -->
-        <p class="fl_left">Copyright &copy; 2018 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        <p class="fl_left">Copyright &copy; 2020 - All Rights Reserved - <a href="#">Domain Name</a></p>
         <p class="fl_right">App coded By <a target="_blank" href="#"
             title="MoDo APP">TP 4077 - Jiomekong</a></p>
-        <!-- ################################################################################################ -->
       </div>
     </div>
     <router-view></router-view>
   </div>
-  <!-- ################################################################################################ -->
   <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
   <!-- JAVASCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
-  <script>src ="https://unpkg.com/vue-router/dist/vue-router.js"</script>
-  <script>src ="{% static 'screening/index_static/layout/scripts/vue.js' %}"</script>
+  <script src ="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src ="{% static 'screening/index_static/layout/scripts/vue.js' %}"></script>
   <script src="{% static 'screening/index_static/layout/scripts/jquery.min.js' %}"></script>
   <script src="{% static 'screening/index_static/layout/scripts/jquery.backtotop.js' %}"></script>
   <script src="{% static 'screening/index_static/layout/scripts/jquery.mobilemenu.js' %}"></script>
