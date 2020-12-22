@@ -9,13 +9,11 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
-from pathlib import Path, os
+import os
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MY_BASE_DIR = Path(__file__).resolve().parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -28,7 +26,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -39,8 +36,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'screening',
-    'statistiques.apps.StatistiquesConfig',
+    'bootstrap_modal_forms',
+    'crispy_forms',
+    'widget_tweaks',
+    'mapbox_location_field',
+    'material'
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'covid_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -72,9 +75,7 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'covid_app.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -85,7 +86,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -105,7 +105,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -119,11 +118,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    os.path.join(MY_BASE_DIR, 'static'),
-)
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+AUTH_USER_MODEL = 'screening.User'
+
+MAPBOX_KEY = "pk.eyJ1IjoiZG9uYWxkbzIwMTkiLCJhIjoiY2tpdDJ2aHpsMHFubTJ4c2NiYzNsZjhhbyJ9.85r_tQknaCT-vcwrmage8w"
+
+TWILIO_ACCOUNT_SID = "AC379612fc38fcb5339eac1e5a4b8a92fe"
+TWILIO_AUTH_TOKEN = "18fad11f2f27246b6a5d8cd7de50da06"
+TWILIO_NUMBER = "+12256277080"
+SMS_BROADCAST_TO_NUMBERS = []
