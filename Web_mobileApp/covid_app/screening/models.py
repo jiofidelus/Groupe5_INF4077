@@ -4,13 +4,11 @@ from django.urls import reverse
 from django.utils import timezone
 from covid_app import settings
 
-from django.contrib.auth.models import (
-    BaseUserManager, AbstractBaseUser
-)
+from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 
 class MyUserManager(BaseUserManager):
-    def create_user(self, mobile_phone_working, is_doctor, is_scout, password=None):
+    def create_user(self, username, is_doctor, is_scout, mobile_phone_working, first_name, last_name, password=None):
         """
         Creates and saves a User with the given email, date of
         birth and password.
@@ -19,27 +17,35 @@ class MyUserManager(BaseUserManager):
             raise ValueError('doctor/scout must have mobile phone')
 
         user = self.model(
+            username=username,
             mobile_phone_working=mobile_phone_working,
             is_doctor=is_doctor,
-            is_scout=is_scout
+            is_scout=is_scout,
+            first_name=first_name,
+            last_name=last_name
         )
-
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, mobile_phone_working, is_doctor, is_scout, password=None):
+    def create_superuser(self, username, is_doctor, is_scout, mobile_phone_working, first_name, last_name,
+                         password=None):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
         user = self.create_user(
+            username=username,
             password=password,
             mobile_phone_working=mobile_phone_working,
             is_doctor=is_doctor,
-            is_scout=is_scout
+            is_scout=is_scout,
+            first_name=first_name,
+            last_name=last_name
         )
-        user.is_admin = True
+        user.is_superuser = True
+        user.get_all_permissions()
+        user.is_staff = True
         user.save(using=self._db)
         return user
 
@@ -74,8 +80,7 @@ class User(AbstractUser):
     mobile_phone_working = models.IntegerField(null=True, blank=True, unique=True)
     is_doctor = models.BooleanField(default=False)
     is_scout = models.BooleanField(default=False)
-    is_admin = models.BooleanField(default=False)
-    REQUIRED_FIELDS = ['is_doctor', 'is_scout', 'is_admin', 'first_name', 'last_name', 'mobile_phone_working']
+    REQUIRED_FIELDS = ['is_doctor', 'is_scout', 'first_name', 'last_name', 'mobile_phone_working']
     citizens_screened = models.ManyToManyField(Citizen, through='HasScreened')
     objects = MyUserManager()
 

@@ -2,24 +2,26 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/webResources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/covid_app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/media/citizens_pictures/DSC_0014.JPG" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/citizens_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0002_auto_20201222_1257.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0003_auto_20201222_1304.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/covid_app/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/covid_app/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/covid_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/covid_app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/db.sqlite3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/components/TopBar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/components/TopBar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/save_citizens.html" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice/save_citizens.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0002_auto_20201215_0026.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0003_auto_20201215_0031.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0004_auto_20201215_0509.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0005_auto_20201215_0531.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0006_auto_20201217_0446.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0007_auto_20201217_0507.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0008_auto_20201218_0045.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0009_auto_20201220_1902.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +73,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="js.buildTools.grunt.grunt-cli.package" value="" />
     <property name="js.buildTools.gulp.gulp_package_dir" value="" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/Web_mobileApp/covid_app/covid_app/settings.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Web_mobileApp/covid_app" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -85,19 +87,19 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/img" />
-      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/css" />
-      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/Home_static" />
-      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/Home" />
-      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice" />
       <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/BackOffice_static" />
       <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages" />
       <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/components" />
       <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/img" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/css" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/Home_static" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/Home" />
     </key>
   </component>
   <component name="RunManager" selected="Django Server.covid_app">
@@ -185,6 +187,7 @@
       <workItem from="1607935518985" duration="484000" />
       <workItem from="1607936006561" duration="122000" />
       <workItem from="1607936964296" duration="4034000" />
+      <workItem from="1608637176679" duration="3608000" />
     </task>
     <task id="LOCAL-00001" summary="Modifications générale.">
       <created>1607861335752</created>
@@ -239,18 +242,18 @@
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
     <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2/0.0.1920.1037@0.0.1920.1037" timestamp="1607873348959" />
-    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1607948665450">
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1608639309762">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl/0.0.1920.1037@0.0.1920.1037" timestamp="1607948665450" />
-    <state x="898" y="153" width="1022" height="736" key="SettingsEditor" timestamp="1607948674255">
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl/0.0.1920.1037@0.0.1920.1037" timestamp="1608639309762" />
+    <state x="898" y="153" width="1022" height="736" key="SettingsEditor" timestamp="1608637999987">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="898" y="153" width="1022" height="736" key="SettingsEditor/0.0.1920.1037@0.0.1920.1037" timestamp="1607948674255" />
-    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1607873356854">
+    <state x="898" y="153" width="1022" height="736" key="SettingsEditor/0.0.1920.1037@0.0.1920.1037" timestamp="1608637999987" />
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1608637331592">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
-    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1607873356854" />
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1608637331592" />
     <state x="1046" y="100" width="774" height="837" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607798865799">
       <screen x="0" y="0" width="1920" height="1037" />
     </state>
