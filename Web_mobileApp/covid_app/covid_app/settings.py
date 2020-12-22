@@ -35,12 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'screening',
+    'screening.apps.ScreeningConfig',
     'bootstrap_modal_forms',
     'crispy_forms',
     'widget_tweaks',
-    'mapbox_location_field',
-    'material'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
