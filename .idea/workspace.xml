@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0002_auto_20201222_1257.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0003_auto_20201222_1304.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/covid_app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/.idea/covid_app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0002_auto_20201215_0026.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0003_auto_20201215_0031.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0004_auto_20201215_0509.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0005_auto_20201215_0531.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0006_auto_20201217_0446.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0007_auto_20201217_0507.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0008_auto_20201218_0045.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/migrations/0009_auto_20201220_1902.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/models.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="hiddenUrls">
+      <set>
+        <option value="https://github.com/jiofidelus/Groupe5_INF4077" />
+      </set>
+    </option>
+  </component>
+  <component name="JupyterTrust" id="059808cc-bbfb-47c7-8088-01162bd747d9" />
+  <component name="ProjectId" id="1lEtPcwSwWodzt2YGoQqJYnH37C" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="js.buildTools.grunt.grunt-cli.package" value="" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Web_mobileApp/covid_app" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.standard" value="" />
+    <property name="nodejs.jest.jest_package" value="" />
+    <property name="nodejs.protractor.protractor_package" value="" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/backOffice" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/BackOffice_static" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/components" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/img" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/backOffice_static/css" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/static/screening/Home_static" />
+      <recent name="$PROJECT_DIR$/Web_mobileApp/covid_app/screening/templates/pages/Home" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Django Server.covid_app">
+    <configuration name="covid_app" type="Python.DjangoServer" factoryName="Django server">
+      <module name="covid_app" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+        <env name="DJANGO_SETTINGS_MODULE" value="covid_app.settings" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="migrate" type="Python.DjangoServer" factoryName="Django server">
+      <module name="covid_app" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/anaconda3/bin/python" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="launchJavascriptDebuger" value="false" />
+      <option name="port" value="8000" />
+      <option name="host" value="" />
+      <option name="additionalOptions" value="" />
+      <option name="browserUrl" value="" />
+      <option name="runTestServer" value="false" />
+      <option name="runNoReload" value="false" />
+      <option name="useCustomRunCommand" value="false" />
+      <option name="customRunCommand" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt">
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Django Server.migrate" />
+      <item itemvalue="Django Server.covid_app" />
+    </list>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f11a4530-21a7-4af5-ba8d-e1d86fc932c3" name="Default Changelist" comment="" />
+      <created>1607174054793</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1607174054793</updated>
+      <workItem from="1607174055853" duration="113000" />
+      <workItem from="1607242672897" duration="748000" />
+      <workItem from="1607562508258" duration="4086000" />
+      <workItem from="1607798796646" duration="52032000" />
+      <workItem from="1607935518985" duration="484000" />
+      <workItem from="1607936006561" duration="122000" />
+      <workItem from="1607936964296" duration="4034000" />
+      <workItem from="1608637176679" duration="3608000" />
+    </task>
+    <task id="LOCAL-00001" summary="Modifications générale.">
+      <created>1607861335752</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607861335752</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Modifications générale.">
+      <created>1607867896658</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607867896658</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Modifications générale.">
+      <created>1607873349038</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1607873349038</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Modifications générale." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifications générale." />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="301" y="410" width="298" height="223" key="#ESLint" timestamp="1607586047980">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="301" y="410" width="298" height="223" key="#ESLint/0.0.1920.1037@0.0.1920.1037" timestamp="1607586047980" />
+    <state x="84" y="200" width="732" height="643" key="#Inspections" timestamp="1607585957022">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="84" y="200" width="732" height="643" key="#Inspections/0.0.1920.1037@0.0.1920.1037" timestamp="1607585957022" />
+    <state x="0" y="176" width="1124" height="836" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607948699846">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="0" y="176" width="1124" height="836" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1037@0.0.1920.1037" timestamp="1607948699846" />
+    <state x="643" y="320" width="623" height="402" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1607816280867">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="643" y="320" width="623" height="402" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1037@0.0.1920.1037" timestamp="1607816280867" />
+    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2" timestamp="1607873348959">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="394" y="66" width="1122" height="910" key="CommitChangelistDialog2/0.0.1920.1037@0.0.1920.1037" timestamp="1607873348959" />
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl" timestamp="1608639309762">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="743" y="276" width="424" height="490" key="FileChooserDialogImpl/0.0.1920.1037@0.0.1920.1037" timestamp="1608639309762" />
+    <state x="898" y="153" width="1022" height="736" key="SettingsEditor" timestamp="1608637999987">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="898" y="153" width="1022" height="736" key="SettingsEditor/0.0.1920.1037@0.0.1920.1037" timestamp="1608637999987" />
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2" timestamp="1608637331592">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="555" y="254" width="800" height="534" key="Vcs.Push.Dialog.v2/0.0.1920.1037@0.0.1920.1037" timestamp="1608637331592" />
+    <state x="1046" y="100" width="774" height="837" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607798865799">
+      <screen x="0" y="0" width="1920" height="1037" />
+    </state>
+    <state x="1046" y="100" width="774" height="837" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1037@0.0.1920.1037" timestamp="1607798865799" />
+  </component>
+</project>

@@ -1,0 +1,118 @@
+{% extends './base.html' %}
+{% load static %}
+
+
+{% block pageContentRow %}
+
+    <h3 class="text-center text-info"> Screening Table </h3>
+
+    <div class="row text-center centered" style="margin-top: 25px; margin-left:33%">
+
+        <button id="create-citizen" class="btn btn-info col-sm-2" data-dismiss="modal" data-backdrop="false">create citizen</button>
+        <button id="make-screening"  class="btn btn-secondary col-sm-2"  data-dismiss="modal" data-backdrop="false">make screening</button>
+        <button class="btn btn-danger col-sm-2">camera mode</button>
+
+    </div>
+
+
+
+
+        <table class="table table-striped table-inverse table-responsive" style="margin-top: 45px; margin-left: 7%">
+            <thead class="thead-default">
+            <tr>
+                <th> No_s</th>
+                <th> No_citizen </th>
+                <th> first_name</th>
+                <th> second_name</th>
+                <th> gender</th>
+                <th>years</th>
+                <th> Nationality</th>
+                <th> Card_id</th>
+                <th>Mobile Phone</th>
+                <th> Status</th>
+                <th>Screening Date</th>
+                <th>Picture</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                  {% for hasscreened in hasscreened_list %}
+
+                      <tr>
+                          <td scope="row">
+                              <button type="button" data-form-url="{% url 'screening:has_screened-detail' hasscreened.id %}" id="read-has_screened" class="btn btn-light bs-modal"> {{ hasscreened.id  }} </button>
+                          </td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened_id }}</td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.first_name }}</td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.second_name }}</td>
+
+                          <td>  {{ hasscreened.citizen_who_has_been_screened.gender }}</td>
+
+                          <td></td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.nationality }}</td>
+
+                         <td>{{ hasscreened.citizen_who_has_been_screened.identity_card_id }}</td>
+
+                          <td>{{ hasscreened.citizen_who_has_been_screened.mobile_phone }}</td>
+                          <td>  {% if hasscreened.status == "+" %}
+                                  <span><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">  </button></span></i></span>
+                                {% elif hasscreened.status == "-" %}
+                                  <span><button type="button" class="btn btn-success btn-rounded btn-sm my-0">  </button></span></i></span>
+                                {% else %}
+                                  <span><button type="button" class="btn btn-facebook btn-rounded btn-sm my-0">  </button></span></i></span>
+                               {% endif %}
+                          </td>
+
+                          <td>{{ hasscreened.screening_date }}</td>
+
+                          <td> <a href="/{{ hasscreened.citizen_who_has_been_screened.picture }}">see it</a> </td>
+
+                          <td> <button class="btn btn-danger bs-modal" data-form-url="{% url 'screening:has_screened-delete' hasscreened.id %}">delete</button></td>
+
+                          <td><button class="btn btn-facebook bs-modal" data-form-url="{% url 'screening:has_screened-update' hasscreened.id %}">update</button></td>
+
+                      </tr>
+
+                  {% endfor %}
+
+            </tbody>
+        </table>
+
+{% endblock %}
+
+
+{% block ScriptBottom  %}
+
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function (){
+
+             $(".bs-modal").each(function () {
+                  $(this).modalForm({
+                      formURL: $(this).data('form-url')
+                  });
+            });
+
+            $('#create-citizen').modalForm({
+
+                        formURL: "{% url 'screening:citizens-create' %}",
+                        modalID: "#create-modal"
+                    })
+
+            $('#make-screening').modalForm({
+                        formURL: "{% url 'screening:has_screened-create' %}",
+                        modalID: "#create-modal"
+                    })
+            })
+      </script>
+
+{% endblock %}
+

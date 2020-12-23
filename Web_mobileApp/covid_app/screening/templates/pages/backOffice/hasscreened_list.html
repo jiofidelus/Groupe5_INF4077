@@ -1,0 +1,39 @@
+{% extends './base.html' %}
+{% load static %}
+
+{% block pageContentRow %}
+
+
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-default">
+            <tr>
+                <th> citizen_detail</th>
+                <th> type screen</th>
+                <th> screened date</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                  {% for hascreen in  hasscreened_list %}
+
+                      <tr>
+                          <td scope="row">
+                              <a href="{% url 'screening:citizen-detail' hascreen.citizen_who_has_been_screened_id %}"
+
+                                 data
+                              >
+                                  {{ forloop.counter }}
+
+
+                              </a></td>
+                          <td> {{ hascreen.type_screening }}</td>
+                          <td> {{ hascreen.screening_date }}</td>
+                      </tr>
+
+                  {% endfor %}
+
+            </tbody>
+        </table>
+
+
+{% endblock %}

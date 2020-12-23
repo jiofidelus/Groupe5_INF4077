@@ -1,0 +1,388 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>MODO - STATISTIQUES</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link href="{% static 'statistiques/vendor/bootstrap/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all">
+  <link href="{% static 'screening/index_static/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+
+
+  <script src ="{% static 'screening/index_static/layout/scripts/vue.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.min.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.backtotop.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.mobilemenu.js' %}"></script>
+
+  <script src="{% static 'statistiques/vendor/bootstrap/bootstrap.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'statistiques/vendor/raphael/raphael.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'statistiques/vendor/chartjs/Chart.min.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'statistiques/vendor/highmap/highmaps.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'statistiques/vendor/highmap/exporting.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'statistiques/cm-all.js' %}" type="text/javascript" charset="utf-8"></script>
+  <style type="text/css" media="screen">
+    #total-cases{
+      color: white;
+      font-weight: bold;
+    }
+    #total-active{
+      color: orange;
+      font-weight: bold;
+    }
+    #total-recovered{
+      color: green;
+      font-weight: bold;
+    }
+    #total-dead{
+      color: red;
+      font-weight: bold;
+    }
+    .card-header{
+      background: #D1D1D1;
+    }
+    .card{
+      background: #D9D9D9;
+    }
+    .card:hover .card-text{
+      transform:scale(1.8);
+    }
+    .card:hover{
+      transform:scale(1.03);
+    }
+    .card:hover{
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+    }
+    .chart-effect-hover:hover{
+      transform:scale(1.015);
+    }
+    .card:hover:hover{
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body id="top">
+  <!-- ################################################################################################ -->
+  <div id="app">
+    <!-- ################################################################################################ -->
+    <div class="wrapper row0">
+      <div id="topbar" class="hoc clear">
+        <div class="fl_left">
+          <!-- ################################################################################################ -->
+          <ul class="nospace">
+            <li><i class="fas fa-phone rgtspace-5"></i> +237 698868709</li>
+            <li><i class="far fa-envelope rgtspace-5"></i> modo@gmail.com</li>
+          </ul>
+          <!-- ################################################################################################ -->
+        </div>
+        <div class="fl_right">
+          <!-- ################################################################################################ -->
+          <ul class="nospace">
+            <li><a href="index.html"><i class="fas fa-home"></i></a></li>
+            <li><a href="#" title="Help Centre"><i class="far fa-life-ring"></i></a></li>
+            <li><a href="#" title="Login"><i class="fas fa-sign-in-alt"></i></a></li>
+            <li><a href="#" title="Sign Up"><i class="fas fa-edit"></i></a></li>
+            <li id="searchform">
+              <div>
+                <form action="#" method="post">
+                  <fieldset>
+                    <legend>Quick Search:</legend>
+                    <input type="text" placeholder="Enter search term&hellip;">
+                    <button type="submit"><i class="fas fa-search"></i></button>
+                  </fieldset>
+                </form>
+              </div>
+            </li>
+          </ul>
+          <!-- ################################################################################################ -->
+        </div>
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper row1">
+      <header id="header" class="hoc clear">
+        <div id="logo" class="fl_left">
+          <!-- ################################################################################################ -->
+          <h1><a href="index.html">MODO</a></h1>
+          <!-- ################################################################################################ -->
+        </div>
+        <nav id="mainav" class="fl_right">
+          <!-- ################################################################################################ -->
+          <ul class="clear">
+            </router-link to="/">
+            <li><a href="{% url 'screening:home' %}">Accueil</a></li>
+            </router-link>
+            <li class="active"><a href="{% url 'statistiques:index' %}">Statistiques</a></li>
+            <li><a href="#">News et Actualite</a></li>
+            <li><a href="#">Forum</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>
+          <!-- ################################################################################################ -->
+        </nav>
+      </header>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper bgded overlay gradient" style="background-image:url('{% static 'statistiques/images/demo/backgrounds/01.jpg' %}');">
+      <div id="pageintro" class="hoc clear">
+        <article>
+          <p>suivez l'evolution du covid-19 en temps reel.</p>
+          <h3 class="heading">Des cartes, des diagrammes, des courbes pour plus de precisions sur l'evolution.</h3>
+          </br>
+        </article>
+      </div>
+    </div>
+    <div class="wrapper row2">
+        <div class="row" style="padding: 2%;">
+          <div class="col-md-3">
+            <div class="card text-dark border-light mb-3 text-center">
+              <div class="card-header">Positifs</div>
+              <div class="card-body">
+                <h5 class="card-title">Total des cas positifs</h5>
+                <p class="card-text" id="total-positive" class="font-weight-bold">
+                  {{ totalPositive }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-dark border-warning mb-3 text-center">
+              <div class="card-header">Actifs</div>
+              <div class="card-body">
+                <h5 class="card-title">Total des cas actifs</h5>
+                <p class="card-text" id="total-active" class="font-weight-bold">
+                  {{ totalActive }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-dark border-success mb-3 text-center">
+              <div class="card-header">Gueris</div>
+              <div class="card-body">
+                <h5 class="card-title">Total des cas gueris</h5>
+                <p class="card-text" id="total-recovered" class="font-weight-bold">
+                  {{ totalRecovered }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card text-dark border-danger mb-3 text-center">
+              <div class="card-header">Decedes</div>
+              <div class="card-body">
+                <h5 class="card-title">Total des cas decedes</h5>
+                <p class="card-text" id="total-dead"class="font-weight-bold">
+                  {{ totalDead }}
+                </p>
+              </div>
+            </div>
+        </div>
+        <div class="container-fluid" style="height: 700px;">
+          <div class="row">
+            <div id="mydata" class="col-md-12 chart-effect-hover" style="height: 700px;"></div>
+          </div>
+        </div>
+        <div class="container-fluid" style="height: 500px; margin-top: 1%;">
+          <div class="row">
+            <div id="activeCase" class="col-md-6 chart-effect-hover" style="height: 500px;"></div>
+            <div id="ageCase" class="col-md-6 chart-effect-hover" style="height: 500px;"></div>
+            <!-- <div id="genreCase" class="col-md-6 chart-effect-hover" style="height: 500px;"></div> -->
+          </div>
+        </div>
+        <div class="container-fluid" style="height: 500px; margin-top: 1%;">
+          <div class="row">
+            <div id="genreAgeCasePositive" class="col-md-4 chart-effect-hover" style="height: 500px;"></div>
+            <div id="genreAgeCaseRecovered" class="col-md-4 chart-effect-hover" style="height: 500px;"></div>
+            <div id="genreAgeCaseDead" class="col-md-4 chart-effect-hover" style="height: 500px;"></div>
+          </div>
+        </div>
+        <div class="container-fluid" style="height: 700px; margin-top: 1%;">
+          <div class="row">
+            <div id="mainStatistics" class="col-md-12 chart-effect-hover"  style="height: 700px;"></div>
+          </div>
+        </div>
+    </div>
+    <div class="wrapper row5" >
+      <div id="copyright" class="hoc clear">
+        <p class="fl_left">Copyright &copy; 2020 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        <p class="fl_right">App coded By <a target="_blank" href="#"
+            title="MoDo APP">TP 4077 - Jiomekong</a></p>
+      </div>
+    </div>
+    <router-view></router-view>
+  </div>
+  <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+  <!-- JAVASCRIPTS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src ="https://unpkg.com/vue-router/dist/vue-router.js"></script> -->
+  <script src="{% static 'statistiques/vendor/highcharts/highcharts.src.js' %}"></script>
+  <script type="text/javascript" charset="utf-8">
+  window.onload = function () {
+    var myJSONList = (("{{map_cases_json}}").replace(/&(l|g|quo)t;/g, function(a,b){
+          return {
+              l   : '<',
+              g   : '>',
+              quo : '"'
+          }[b];
+      }));
+
+      var totalActive = 0;
+      var totalRecovered = 0;
+      var totalDead = 0;
+      var totalPositive = 0;
+
+    map_cases = JSON.parse( myJSONList );
+    var regionActive = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
+    for (var i = 0; i < map_cases.length; i++) {
+      var regionObject = map_cases[i];
+      totalActive += regionObject.active;
+      totalPositive += regionObject.positive;
+      totalRecovered += regionObject.recovered;
+      totalDead += regionObject.dead;
+      if(regionObject.region == "Adamaoua"){
+        regionActive[1] = regionObject.positive;
+      }
+      if(regionObject.region == "Centre"){
+        regionActive[2] = regionObject.positive;
+      }
+      if(regionObject.region == "East"){
+        regionActive[3] = regionObject.positive;
+      }
+      if(regionObject.region == "Extreme_North"){
+        regionActive[4] = regionObject.positive;
+      }
+      if(regionObject.region == "Littoral"){
+        regionActive[5] = regionObject.positive;
+      }
+      if(regionObject.region == "North"){
+        regionActive[6] = regionObject.positive;
+      }
+      if(regionObject.region == "North_West"){
+        regionActive[7] = regionObject.positive;
+      }
+      if(regionObject.region == "West"){
+        regionActive[8] = regionObject.positive;
+      }
+      if(regionObject.region == "South"){
+        regionActive[9] = regionObject.positive;
+      }
+      if(regionObject.region == "South_West"){
+        regionActive[10] = regionObject.positive;
+      }
+    }
+    
+    var data = [
+        ['cm-es', regionActive[3]],
+        ['cm-ad', regionActive[1]],
+        ['cm-nw', regionActive[7]],
+        ['cm-no', regionActive[6]],
+        ['cm-ce', regionActive[2]],
+        ['cm-ou', regionActive[8]],
+        ['cm-en', regionActive[4]],
+        ['cm-sw', regionActive[10]],
+        ['cm-lt', regionActive[5]],
+        ['cm-su', regionActive[9]]
+    ];
+
+    document.getElementById("total-active").textContent=totalActive;
+    document.getElementById("total-recovered").textContent=totalRecovered;
+    document.getElementById("total-dead").textContent=totalDead;
+    document.getElementById("total-positive").textContent=totalPositive;
+
+    // Create the chart
+    Highcharts.mapChart('mydata', {
+        chart: {
+            map: 'countries/cm/cm-all',
+            backgroundColor: {
+              linearGradient: [0, 0, 0, 400],
+              stops: [
+              [0, '#D9D9D9'],
+              [1, '#D9D9D9']
+              ]
+            },
+            borderWidth: 0,
+            borderRadius: 5,
+            plotShadow: false,
+            plotBorderWidth: 0
+        },
+
+        title: {
+            text: 'covid-19 : map du Cameroun'
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        // tooltip: {
+        //     backgroundColor: {
+        //         linearGradient: [0, 0, 0, 60],
+        //         stops: [
+        //             [0, '#FFFFFF'],
+        //             [1, '#E0E0E0']
+        //         ]
+        //     },
+        //     borderWidth: 1,
+        //     borderColor: '#AAA',
+        //     borderRadius: 2
+        // },
+        legend: {
+            title: {
+                text: 'covid-19 : positifs'
+            },
+            align: 'left',
+            verticalAlign: 'middle',
+            y: 0,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: 'white'
+        },
+
+        mapNavigation: {
+            enabled: true,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+        colorAxis: {
+            min: 1,
+            max: 10000,
+            type: 'logarithmic',
+            minColor: '#fffcfc',
+            maxColor: '#ff0000',
+            lineColor: 'black',
+            lineWidth: 1
+        },
+
+        series: [{
+            data: data,
+            name: 'Positifs',
+            states: {
+                hover: {
+                    color: '#8affe8'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    });
+  };
+  </script>
+  <script>
+    Highcharts.chart('activeCase', {{ chart_cases|safe }});
+    Highcharts.chart('ageCase', {{ chart_ages_cases|safe }});
+    // Highcharts.chart('genreCase', {{ chart_genre_cases|safe }});
+    Highcharts.chart('genreAgeCasePositive', {{ chart_genre_age_cases_positive|safe }});
+    Highcharts.chart('genreAgeCaseRecovered', {{ chart_genre_age_cases_recovered|safe }});
+    Highcharts.chart('genreAgeCaseDead', {{ chart_genre_age_cases_dead|safe }});
+    Highcharts.chart('mainStatistics', {{ chart_main_statistics|safe }});
+  </script>
+</body>
+
+</html>
