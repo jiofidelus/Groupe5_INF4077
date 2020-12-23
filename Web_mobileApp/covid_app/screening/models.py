@@ -4,12 +4,9 @@ from django.urls import reverse
 from django.utils import timezone
 from covid_app import settings
 
-<<<<<<< HEAD
 from datetime import date, timedelta
 from dateutil.relativedelta import relativedelta
 
-=======
->>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
 from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
 
 
@@ -70,15 +67,11 @@ class Citizen(models.Model):
     mobile_phone = models.CharField(null=False, blank=False, unique=True, max_length=20, default=0)
     picture = models.ImageField(upload_to="media/citizens_pictures", blank=True, null=True)
     register_date = models.DateTimeField(auto_now_add=True)
-<<<<<<< HEAD
     age = models.IntegerField(default=0)
-=======
->>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
 
     def get_absolute_url(self):
         return reverse('citizen-detail', kwargs={'pk': self.id})
 
-<<<<<<< HEAD
     @property
     def get_age(self):
         return abs(date.today().year - self.birth_day.year)
@@ -87,8 +80,6 @@ class Citizen(models.Model):
         self.age = self.get_age
         super(Citizen, self).save(*args, **kwargs)
 
-=======
->>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
     """def __str__(self):
         return "id: {},first_name:{},id_card:{}".format(self.id, self.first_name, self.identity_card_id)
     """
@@ -118,13 +109,9 @@ class HasScreened(models.Model):
     status = models.CharField(choices=[
         ('+', '+'),
         ('-', '-'),
-<<<<<<< HEAD
         ('?', '?'),
         ('r', 'r'),
         ('d', 'd')
-=======
-        ('?', '?')
->>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
     ], max_length=1)
     screening_date = models.DateTimeField(auto_now=True)
     type_screening = models.CharField(choices=[
@@ -149,7 +136,6 @@ class HasScreened(models.Model):
     quarter = models.CharField(max_length=25)
     city = models.CharField(max_length=25)
     site_following_him = models.CharField(max_length=255, blank=True, null=True)
-<<<<<<< HEAD
     screening_date_date = models.DateField(auto_now=True)
 
     import datetime
@@ -164,8 +150,6 @@ class HasScreened(models.Model):
     def save(self, *args, **kwargs):
         self.screening_date_date = self.get_screening_date_date
         super(HasScreened, self).save(*args, **kwargs)
-=======
->>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
 
     class Meta:
         db_table = "has_screened"
