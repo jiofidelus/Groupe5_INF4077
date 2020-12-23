@@ -21,7 +21,10 @@ from django.urls import path,include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('screening.urls')),
+<<<<<<< HEAD
     path('statistiques/', include('statistiques.urls')),
+=======
+>>>>>>> 14a089bf640d5f94caec34251f740f593fdc8922
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
