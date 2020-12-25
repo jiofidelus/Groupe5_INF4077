@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/topDark"/>
+            android:background="@color/topBarColor"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:text="MODO"
                         android:textSize="18sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/grey4"
                         android:textStyle="bold|italic"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -84,7 +84,7 @@
                         android:layout_below="@+id/logoTitle"
                         android:text="Covid-19 au Cameroun"
                         android:textSize="16sp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/grey4"
                         android:textStyle="bold|italic"
                         android:ellipsize="end"
                         android:maxLines="1"
@@ -126,7 +126,7 @@
                 android:inputType="textPersonName|textEmailAddress"
                 android:hint="Nom ou adresse mail"
                 android:layout_below="@+id/topRelative"
-                android:drawableTint="@color/black"
+                android:drawableTint="@color/grey4"
                 tools:ignore="UnusedAttribute" />
             <EditText
                 android:id="@+id/password"
@@ -144,7 +144,7 @@
                 android:inputType="textPassword"
                 android:hint="Mot de passe"
                 android:layout_below="@+id/userName"
-                android:drawableTint="@color/black"
+                android:drawableTint="@color/grey4"
                 tools:ignore="UnusedAttribute"
                 />
             <androidx.cardview.widget.CardView

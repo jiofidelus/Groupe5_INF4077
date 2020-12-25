@@ -19,9 +19,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="center"
-            app:tint="@color/grey5"
+            app:tint="@color/grey4"
             android:src="@drawable/ic_lungs"
-            android:background="@drawable/gradient_symptom"/>
+            />
     </androidx.cardview.widget.CardView>
     <TextView
         android:id="@+id/symptomTitle"

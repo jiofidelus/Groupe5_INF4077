@@ -1,30 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#5CDCE5</color>
-    <color name="purple_500">#3BC1CB</color>
-
-    <color name="most">#5CDCE5</color>
-    <color name="topDark">#5CDCE5</color>
-    <color name="buttonMostDark">#3BC1CB</color>
-
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="purple_700">#00E7EF</color>
+    <color name="topBarColor">#524180</color>
+    <color name="mainColor">#524180</color>
+    <color name="mainButton">#6C599E</color>
 
     <color name="grey0">#FFFFFF</color>
     <color name="grey1">#F4F4F4</color>
     <color name="grey12">#E6E6E6</color>
-    <color name="grey">#737373</color>
     <color name="grey2">#D1D1D1</color>
     <color name="grey3">#AEAEAE</color>
     <color name="grey4">#8A8A8A</color>
     <color name="grey5">#575757</color>
-    <color name="black">#FF000000</color>
-    <color name="semiBlack">#80FFFFFF</color>
     <color name="semiWhite">#80FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="transparent">#00FFFFFF</color>
     <color name="subWhite">#B3FFFFFF</color>
+    <color name="semiBlack">#80FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00FFFFFF</color>
 
     <color name="red">#FF6A6A</color>
     <color name="blueLight">#4473F8</color>

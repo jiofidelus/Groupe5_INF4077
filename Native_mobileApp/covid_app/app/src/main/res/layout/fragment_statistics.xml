@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:background="@color/topDark"/>
+            android:background="@color/topBarColor"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -49,8 +49,8 @@
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:background="@drawable/ic_topsemibackground"
+                    android:layout_height="200dp"
+                    android:background="@drawable/gradient_background_bottom_rounded"
                     android:padding="20dp"
                     >
                     <com.airbnb.lottie.LottieAnimationView
@@ -155,16 +155,6 @@
                                     android:background="@drawable/ic_positivebackground"
                                     android:padding="10dp"
                                     >
-                                    <ImageView
-                                        android:id="@+id/statisticPoint"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:scaleType="center"
-                                        android:visibility="gone"
-                                        android:layout_margin="10dp"
-                                        android:background="@drawable/positive_circle"
-                                        android:elevation="10dp"
-                                        tools:ignore="UnusedAttribute" />
                                     <TextView
                                         android:id="@+id/statsTitle"
                                         android:layout_width="wrap_content"
@@ -178,8 +168,6 @@
                                         android:maxLines="1"
                                         android:ellipsize="end"
                                         android:textSize="16sp"
-                                        android:layout_toRightOf="@+id/statisticPoint"
-                                        android:layout_toEndOf="@+id/statisticPoint"
                                         />
                                     <TextView
                                         android:id="@+id/statsPositive"
@@ -275,16 +263,6 @@
                                     android:background="@drawable/ic_recoveredbackground"
                                     android:padding="10dp"
                                     >
-                                    <ImageView
-                                        android:id="@+id/statisticRecoveredPoint"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:scaleType="center"
-                                        android:layout_margin="10dp"
-                                        android:visibility="gone"
-                                        android:background="@drawable/recovered_circle"
-                                        android:elevation="10dp"
-                                        tools:ignore="UnusedAttribute"/>
                                     <TextView
                                         android:id="@+id/statsRecoveredTitle"
                                         android:layout_width="wrap_content"
@@ -298,8 +276,6 @@
                                         android:maxLines="1"
                                         android:ellipsize="end"
                                         android:textSize="16sp"
-                                        android:layout_toRightOf="@+id/statisticRecoveredPoint"
-                                        android:layout_toEndOf="@+id/statisticRecoveredPoint"
                                         />
                                     <TextView
                                         android:id="@+id/statsRecovered"
@@ -329,16 +305,6 @@
                                     android:background="@drawable/ic_deadbackground"
                                     android:padding="10dp"
                                     >
-                                    <ImageView
-                                        android:id="@+id/statisticDeadPoint"
-                                        android:layout_width="20dp"
-                                        android:layout_height="20dp"
-                                        android:scaleType="center"
-                                        android:visibility="gone"
-                                        android:layout_margin="10dp"
-                                        android:background="@drawable/dead_circle"
-                                        android:elevation="10dp"
-                                        tools:ignore="UnusedAttribute"/>
                                     <TextView
                                         android:id="@+id/statsDeadTitle"
                                         android:layout_width="wrap_content"
@@ -352,8 +318,6 @@
                                         android:maxLines="1"
                                         android:ellipsize="end"
                                         android:textSize="16sp"
-                                        android:layout_toRightOf="@+id/statisticDeadPoint"
-                                        android:layout_toEndOf="@+id/statisticDeadPoint"
                                         />
                                     <TextView
                                         android:id="@+id/statsDead"
@@ -378,7 +342,7 @@
                     android:text="Progression journaliere"
                     android:textStyle="bold"
                     android:textSize="18sp"
-                    android:textColor="@color/buttonMostDark"
+                    android:textColor="@color/mainColor"
                     android:layout_below="@+id/statsInfoRelative"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
