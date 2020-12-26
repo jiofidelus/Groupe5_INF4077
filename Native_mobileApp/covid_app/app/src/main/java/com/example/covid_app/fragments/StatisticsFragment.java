@@ -66,7 +66,7 @@ public class StatisticsFragment extends Fragment {
         cases.add(new PieEntry(1223, "Total"));
         cases.add(new PieEntry(783, "Active"));
         cases.add(new PieEntry(187, "Recovered"));
-        cases.add(new PieEntry(31, "Dead"));
+        cases.add(new PieEntry(311, "Dead"));
         PieDataSet pieDataSet = new PieDataSet(cases, "Cas");
         pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         pieDataSet.setValueTextColor(Color.WHITE);
