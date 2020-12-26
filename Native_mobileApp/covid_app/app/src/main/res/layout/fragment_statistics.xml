@@ -126,7 +126,11 @@
                 <LinearLayout
                     android:id="@+id/statsInfoRelative"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="250dp"
+=======
+                    android:layout_height="220dp"
+>>>>>>> UI statistics update
                     android:orientation="vertical"
                     android:layout_marginBottom="20dp"
                     >
@@ -339,7 +343,11 @@
                     android:id="@+id/statistics"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+<<<<<<< HEAD
                     android:text="Progression journaliere"
+=======
+                    android:text="Positifs au covid-19 par regions"
+>>>>>>> UI statistics update
                     android:textStyle="bold"
                     android:textSize="18sp"
                     android:textColor="@color/mainColor"
@@ -350,11 +358,16 @@
                     android:layout_marginRight="10dp"/>
                 <RelativeLayout
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="400dp"
+=======
+                    android:layout_height="wrap_content"
+>>>>>>> UI statistics update
                     android:layout_below="@+id/statistics"
                     android:layout_marginTop="10dp"
                     >
                     <androidx.cardview.widget.CardView
+<<<<<<< HEAD
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
@@ -366,6 +379,35 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="MAP"/>
+=======
+                        android:id="@+id/lineChartCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        >
+                        <com.github.mikephil.charting.charts.HorizontalBarChart
+                            android:id="@+id/barChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+                    </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/barChartCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:layout_margin="10dp"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="5dp"
+                        android:layout_below="@+id/lineChartCard"
+                        >
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChart"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            />
+>>>>>>> UI statistics update
                     </androidx.cardview.widget.CardView>
                 </RelativeLayout>
             </RelativeLayout>
