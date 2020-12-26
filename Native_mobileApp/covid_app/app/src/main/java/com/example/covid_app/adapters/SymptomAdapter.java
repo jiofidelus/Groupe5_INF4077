@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covid_app.R;
-import com.example.covid_app.models.Prevention;
 import com.example.covid_app.models.Symptom;
 
 import java.util.ArrayList;

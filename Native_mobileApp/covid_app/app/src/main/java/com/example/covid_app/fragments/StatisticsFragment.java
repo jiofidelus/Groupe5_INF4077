@@ -2,29 +2,20 @@ package com.example.covid_app.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-<<<<<<< HEAD
-=======
 import android.graphics.Color;
->>>>>>> UI statistics update
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import com.example.covid_app.R;
-<<<<<<< HEAD
-=======
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -33,17 +24,11 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
->>>>>>> UI statistics update
 
 import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 
@@ -71,11 +56,6 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-<<<<<<< HEAD
-
-        getViews();
-        OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
-=======
         getViews();
         OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
 
@@ -136,7 +116,6 @@ public class StatisticsFragment extends Fragment {
         barChart.setDrawingCacheEnabled(true);
         barChart.setFitBars(true);
         barChart.invalidate();
->>>>>>> UI statistics update
     }
 
     void getViews(){

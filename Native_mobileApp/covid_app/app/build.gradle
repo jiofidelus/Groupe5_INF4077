@@ -8,11 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.covid_app"
-<<<<<<< HEAD
         minSdkVersion 16
-=======
-        minSdkVersion 19
->>>>>>> UI statistics update
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -49,9 +45,5 @@ dependencies {
     implementation 'jp.wasabeef:fresco-processors:2.1.0'
     implementation 'me.everything:overscroll-decor-android:1.1.0'
     implementation 'com.google.android:flexbox:2.0.1'
-<<<<<<< HEAD
-=======
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-    implementation 'com.highsoft.highcharts:highcharts:8.1.2'
->>>>>>> UI statistics update
 }

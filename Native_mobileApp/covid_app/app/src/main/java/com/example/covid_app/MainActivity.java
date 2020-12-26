@@ -1,11 +1,11 @@
 package com.example.covid_app;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
-
-import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.covid_app.fragments.AccountFragment;
 import com.example.covid_app.fragments.HomeFragment;
