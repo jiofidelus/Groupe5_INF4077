@@ -47,7 +47,7 @@
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="350dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/gradient_background_bottom_rounded"
                     android:padding="20dp">
                     <com.airbnb.lottie.LottieAnimationView
@@ -132,8 +132,8 @@
                         >
                         <androidx.cardview.widget.CardView
                             android:id="@+id/callButton"
-                            android:layout_width="100dp"
-                            android:layout_height="40dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginRight="10dp"
                             android:layout_marginEnd="10dp"
                             app:cardCornerRadius="5dp"
@@ -142,11 +142,12 @@
                             >
                             <RelativeLayout
                                 android:id="@+id/callButtonClick"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/ripple_light_red"
                                 android:clickable="true"
                                 android:focusable="true"
+                                android:padding="10dp"
                                 >
                                 <ImageView
                                     android:id="@+id/callButtonIcon"
@@ -180,8 +181,8 @@
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
                             android:id="@+id/smsButton"
-                            android:layout_width="100dp"
-                            android:layout_height="40dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginStart="10dp"
                             android:layout_toEndOf="@+id/callButton"
@@ -192,19 +193,14 @@
                             >
                             <RelativeLayout
                                 android:id="@+id/smsButtonClick"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/ripple_light_blue"
                                 android:clickable="true"
                                 android:focusable="true"
                                 android:gravity="center"
+                                android:padding="10dp"
                                 >
-                                <RelativeLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/ripple_light_blue"
-                                    android:clickable="true"
-                                    android:focusable="true"/>
                                 <ImageView
                                     android:id="@+id/smsButtonIcon"
                                     android:layout_width="wrap_content"
@@ -312,7 +308,7 @@
                         <androidx.cardview.widget.CardView
                             android:id="@+id/testButton"
                             android:layout_width="wrap_content"
-                            android:layout_height="40dp"
+                            android:layout_height="wrap_content"
                             android:layout_marginRight="20dp"
                             android:layout_marginEnd="20dp"
                             android:layout_marginTop="10dp"
@@ -326,10 +322,11 @@
                             <RelativeLayout
                                 android:id="@+id/testButtonClick"
                                 android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/ripple_light"
                                 android:clickable="true"
                                 android:focusable="true"
+                                android:padding="10dp"
                                 >
                                 <TextView
                                     android:id="@+id/testButtonText"

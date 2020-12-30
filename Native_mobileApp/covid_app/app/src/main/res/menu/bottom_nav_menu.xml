@@ -13,12 +13,6 @@
         app:showAsAction="ifRoom"
         android:enabled="true"
         />
-    <item android:id="@+id/newsFragment"
-        android:title="Actualites"
-        android:icon="@drawable/ic_earth"
-        app:showAsAction="ifRoom"
-        android:enabled="true"
-        />
     <item android:id="@+id/accountFragment"
         android:title="Compte"
         android:icon="@drawable/ic_account"

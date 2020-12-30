@@ -12,6 +12,7 @@
     <color name="grey4">#8A8A8A</color>
     <color name="grey5">#575757</color>
     <color name="semiWhite">#80FFFFFF</color>
+    <color name="miniWhite">#40FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="subWhite">#B3FFFFFF</color>
     <color name="semiBlack">#80FFFFFF</color>
@@ -21,6 +22,11 @@
     <color name="red">#FF6A6A</color>
     <color name="blueLight">#4473F8</color>
     <color name="orange">#FFB546</color>
+    <color name="green">#36B63B</color>
+
+    <color name="link">#6A91FF</color>
+    <color name="ripple_citizen">#47C174</color>
+    <color name="ripple_hasscreened">#787878</color>
 
     <color name="prevention">#E2ECD8</color>
     <color name="symptom">#ECE7D8</color>

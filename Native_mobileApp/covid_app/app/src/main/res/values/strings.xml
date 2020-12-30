@@ -2,4 +2,35 @@
     <string name="app_name">covid_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="genders">
+        <item>Masculin</item>
+        <item>Feminin</item>
+    </string-array>
+    <string-array name="nationality">
+        <item>Cameroun</item>
+        <item>Autres</item>
+    </string-array>
+    <string-array name="status">
+        <item>+</item>
+        <item>-</item>
+        <item>\?</item>
+        <item>R</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="type">
+        <item>Rapide</item>
+        <item>Longue duree</item>
+    </string-array>
+    <string-array name="region">
+        <item>Adamaoua</item>
+        <item>Est</item>
+        <item>Extrême-Nord</item>
+        <item>Centre</item>
+        <item>Littoral</item>
+        <item>Nord</item>
+        <item>Nord-Ouest</item>
+        <item>Ouest</item>
+        <item>Sud</item>
+        <item>Sud-Ouest</item>
+    </string-array>
 </resources>
