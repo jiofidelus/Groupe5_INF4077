@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.example.covid_app.R;
@@ -35,7 +36,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 public class StatisticsFragment extends Fragment {
 
     Context context;
-    Activity activity;
+    AppCompatActivity activity;
 
     ScrollView statisticScrollView;
 
@@ -43,7 +44,7 @@ public class StatisticsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = requireContext();
-        activity = requireActivity();
+        activity = (AppCompatActivity) context;
     }
 
     @Override

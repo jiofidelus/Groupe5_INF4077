@@ -53,16 +53,14 @@
                     android:background="@drawable/gradient_background_bottom_rounded"
                     android:padding="20dp"
                     >
-                    <com.airbnb.lottie.LottieAnimationView
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/lottieLogo"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        app:lottie_rawRes="@raw/covid2"
-                        app:lottie_loop="true"
                         android:scaleType="centerCrop"
-                        app:lottie_autoPlay="true"
-                        android:background="@drawable/gradient_light"
-                        android:layout_alignParentTop="true"/>
+                        android:layout_alignParentTop="true"
+                        app:placeholderImage="@drawable/ic_coronavirus_icon_app"
+                        />
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"

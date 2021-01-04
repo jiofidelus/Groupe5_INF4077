@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Fresco.initialize(this);
         setContentView(R.layout.activity_main);
-        getViews();
+        initViews();
         firebaseAuthentification();
         fragmentManager = getSupportFragmentManager();
         if (findViewById(R.id.fragment) != null) {
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 FragmentTransaction ft = fragmentManager.beginTransaction();
                                 //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                                ft.replace(R.id.fragment, new ConnectedFragment());
+                                ft.replace(R.id.fragment, new AccountFragment());
                                 ft.commit();
                             }
                         }
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         currentUser = firebaseAuth.getCurrentUser();
     }
 
-    void getViews(){
+    void initViews(){
         bottomNavigationView = findViewById(R.id.bottomNavView);
     }
 }

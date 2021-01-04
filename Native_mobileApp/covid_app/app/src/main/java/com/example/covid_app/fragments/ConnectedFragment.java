@@ -23,6 +23,7 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.provider.MediaStore;
@@ -101,7 +102,7 @@ ConnectedFragment extends Fragment {
     private StorageReference storageReference;
 
     private ScrollView connectedScrollView;
-    private Activity activity;
+    private AppCompatActivity activity;
     private Context context;
 
     TextView accountMail;
@@ -136,6 +137,7 @@ ConnectedFragment extends Fragment {
     String citizenProfilePictureDownloadUrl = null;
     private SimpleDraweeView registerCitizenPicture;
     private HasScreened hasScreened;
+    private int LOCATION_PERMISSION_CODE = 200;
 
 
     @Override
@@ -285,7 +287,7 @@ ConnectedFragment extends Fragment {
         localisationButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
+                showMap();
             }
         });
         sensibilisationButtonClick.setOnClickListener(new View.OnClickListener() {
@@ -294,6 +296,14 @@ ConnectedFragment extends Fragment {
                 //
             }
         });
+    }
+
+    void showMap(){
+
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.fragment, new GoogleMapFragment()).addToBackStack(null);
+        ft.commit();
     }
 
     void firebaseAuthentification(){
@@ -622,16 +632,6 @@ ConnectedFragment extends Fragment {
         });
     }
 
-    private void checkCameraPermissions(){
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
-        }else{
-            getPicture();
-        }
-    }
-
     private void getPicture(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAMERA_PERMISSION_CODE);
@@ -688,6 +688,34 @@ ConnectedFragment extends Fragment {
             }else{
                 Toast.makeText(context, "Permissions refusees", Toast.LENGTH_SHORT).show();
             }
+        }
+        if (requestCode == CAMERA_PERMISSION_CODE){
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
+                Toast.makeText(context, "Permissions acceptees", Toast.LENGTH_SHORT).show();
+                checkCameraPermissions();
+            }else{
+                Toast.makeText(context, "Permissions refusees", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void checkCameraPermissions(){
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, CAMERA_PERMISSION_CODE);
+        }else{
+            getPicture();
+        }
+    }
+
+    private void checkLocationPermissions(){
+        if (ContextCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
+        }else{
+            getPicture();
         }
     }
 

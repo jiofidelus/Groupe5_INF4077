@@ -3,6 +3,7 @@
     <color name="topBarColor">#524180</color>
     <color name="mainColor">#524180</color>
     <color name="mainButton">#6C599E</color>
+    <color name="BackgroundIconColor">#ECE6FF</color>
 
     <color name="grey0">#FFFFFF</color>
     <color name="grey1">#F4F4F4</color>

@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -29,7 +30,7 @@ import me.everything.android.ui.overscroll.OverScrollDecoratorHelper;
 public class HomeFragment extends Fragment {
 
     Context context;
-    Activity activity;
+    AppCompatActivity activity;
 
     RecyclerView preventionRecyclerView;
     RecyclerView symptomRecyclerView;
@@ -48,7 +49,7 @@ public class HomeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         context = requireContext();
-        activity = requireActivity();
+        activity = (AppCompatActivity) context;
     }
 
     @Override
