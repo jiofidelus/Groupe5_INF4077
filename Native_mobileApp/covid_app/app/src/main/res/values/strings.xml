@@ -2,7 +2,7 @@
     <string name="app_name">covid_app</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="mapbox_access_token">MAPBOX_ACCESS_TOKEN</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiNGtwcm9zeiIsImEiOiJja2kzMzlyazMxanN4MnVvYTFzNWJ6YTB6In0.hRk8q2p_yO2vMet15s7t3g</string>
     <string-array name="genders">
         <item>Masculin</item>
         <item>Feminin</item>

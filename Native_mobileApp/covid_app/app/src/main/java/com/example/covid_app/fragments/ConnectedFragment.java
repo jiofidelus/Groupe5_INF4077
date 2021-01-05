@@ -1,7 +1,6 @@
 package com.example.covid_app.fragments;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -12,8 +11,21 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,41 +35,20 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
+import com.example.covid_app.activities.MapActivity;
 import com.example.covid_app.adapters.CitizenAdapter;
 import com.example.covid_app.adapters.CustomCitizenSpinnerAdapter;
 import com.example.covid_app.adapters.HasScreenedAdapter;
-import com.example.covid_app.adapters.PreventionAdapter;
-import com.example.covid_app.adapters.SymptomAdapter;
 import com.example.covid_app.models.Citizen;
 import com.example.covid_app.models.HasScreened;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
-import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -70,7 +61,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -78,13 +68,9 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 
-import org.w3c.dom.Text;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.security.Permission;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
@@ -300,10 +286,11 @@ ConnectedFragment extends Fragment {
 
     void showMap(){
 
-        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.fragment, new GoogleMapFragment()).addToBackStack(null);
-        ft.commit();
+//        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+//        ft.replace(R.id.fragment, new GoogleMapFragment()).addToBackStack(null);
+//        ft.commit();
+        startActivity(new Intent(activity, MapActivity.class));
     }
 
     void firebaseAuthentification(){
@@ -704,16 +691,6 @@ ConnectedFragment extends Fragment {
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, CAMERA_PERMISSION_CODE);
-        }else{
-            getPicture();
-        }
-    }
-
-    private void checkLocationPermissions(){
-        if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, LOCATION_PERMISSION_CODE);
         }else{
             getPicture();
         }
