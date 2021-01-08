@@ -137,7 +137,7 @@ public class AccountFragment extends Fragment {
                     ft.commit();
                     Toast.makeText(context, "Utilisateur "+ firebaseUser.getEmail() + " connecte", Toast.LENGTH_SHORT).show();
                 }else {
-                    connectionError.setText("Utilisateur non existant");
+                    connectionError.setText("Erreur");
                     connectionError.setAlpha(1.0f);
                 }
             }

@@ -35,11 +35,11 @@ import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
-import com.example.covid_app.activities.MapActivity;
 import com.example.covid_app.adapters.CitizenAdapter;
 import com.example.covid_app.adapters.CustomCitizenSpinnerAdapter;
 import com.example.covid_app.adapters.HasScreenedAdapter;
@@ -286,11 +286,10 @@ ConnectedFragment extends Fragment {
 
     void showMap(){
 
-//        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-//        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-//        ft.replace(R.id.fragment, new GoogleMapFragment()).addToBackStack(null);
-//        ft.commit();
-        startActivity(new Intent(activity, MapActivity.class));
+        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+        ft.replace(R.id.fragmentActivity, new MapFragment());
+        ft.commit();
     }
 
     void firebaseAuthentification(){
@@ -688,9 +687,9 @@ ConnectedFragment extends Fragment {
 
     private void checkCameraPermissions(){
         if (ContextCompat.checkSelfPermission(context,
-                Manifest.permission.ACCESS_FINE_LOCATION)
+                Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, CAMERA_PERMISSION_CODE);
+            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CAMERA}, CAMERA_PERMISSION_CODE);
         }else{
             getPicture();
         }
