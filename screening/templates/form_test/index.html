@@ -1,0 +1,134 @@
+{%load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test En Ligne</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href=" {% static 'screening/form_test/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link href="{% static 'screening/backOffice_static/css/animate.min.css' %}" rel="stylesheet">
+
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{%static 'screening/form_test/css/style.css'%}">
+</head>
+<body>
+
+    <div class="main animate__animated animate__fadeIn animate__delay-1s">
+        <div class="container">
+            <div class="signup-content">
+                <div class="signup-img">
+                    <img src="{% static 'screening/form_test/images/doctoress.jpeg'%}" width="140%" alt="">
+                </div>
+                <div class="signup-form">
+                    {{ form.non_field_errors }}
+                    <form action="" method="post" class="register-form" id="register-form" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <h2>Test en Ligne Pour Vous</h2>
+
+                            <div class="form-group">
+                                {{ form.first_name.label_tag }}
+                                {{ form.first_name }}
+                                <p class="help">{{ form.first_name.help_text|safe }}</p>
+                                <span style="color: red">  {{ form.first_name.errors }} </span>
+                            </div>
+                            <div class="form-group">
+                                {{ form.second_name.label_tag }}
+                                {{ form.second_name }}
+                                 <p class="help"> {{ form.second_name.help_text|safe }} </p>
+                                <span style="color: red"> {{ form.second_name.errors }}</span>
+
+                            </div>
+                        <div class="form-group">
+                           <div class="form-group">
+                                {{ form.birth_day.label_tag }}
+                                {{ form.birth_day }}
+                               <p class="helper-text"> {{ form.birth_day.help_text|safe }}</p>
+                               <span style="color: red"> {{ form.birth_day.errors }}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                {{ form.mobile_phone.label_tag }}
+                                {{ form.mobile_phone }}
+                                {{ form.mobile_phone.errors }}
+                            </div>
+                        </div>
+                        <div class="form-radio">
+                            <div class="form-group">
+                                {{ form.gender.label_tag }}
+                                {{ form.gender }}
+                                <span style="color: red"> {{ form.gender.errors }} </span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                {{ form.nationality.label_tag }}
+                                {{ form.nationality }}
+                                {{ form.nationality.help_text }}
+                                <span style="color: red"> {{ form.nationality.errors }} </span>
+                            </div>
+                            <div class="form-group">
+                                {{ form.identity_card_id.label_tag }}
+                                {{ form.identity_card_id }}
+                                <span style="color: red">   {{ form.identity_card_id.errors }} </span>
+                            </div>
+                        </div>
+
+                      <div class="form-checkbox-item">
+                            <h3>SYMPTOMES (Choissisez vos symptômes)</h3>
+
+                           {% for symptom in  form.symptoms %}
+                               <div class="form-checkbox-item">
+                                    <label for="{{ symptom.id_for_label }}">
+                                    {{ symptom.choice_label }}
+                                    <span class="radio">{{ symptom.tag }}</span>
+                                   </label>
+
+                            </div> <br>
+
+                           {% endfor %}
+
+                          <span style="color: red"> {{ form.symptoms.errors }}</span>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="input-group-prepend">
+                                 {{ form.state.label_tag }}
+                                 {{ form.state }}
+                            </div>
+
+                          </div>
+
+                        <span style="color: red"> {{ form.etat.errors }}</span>
+
+                        <div class="form-group">
+                            <div class="input-group-prepend">
+                                 {{ form.voice.label_tag }}
+                            </div>
+                            {{ form.voice }}
+                            <span style="color: red"> {{ form.voice.errors }}</span>
+                          </div>
+
+                         <p style="color: red"> {% if integrity_error is not None %} {{ integrity_error }} {% endif %}</p>
+
+
+                        <div class="form-submit">
+                            <input type="submit" value="Submit Form" class="submit" name="submit" id="submit" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'screening/form_test/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'screening/form_test/js/main.js ' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

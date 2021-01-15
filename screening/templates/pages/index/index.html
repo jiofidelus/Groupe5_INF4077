@@ -1,0 +1,212 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+
+
+<head>
+  <title>MODO</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link href="{% static 'screening/statistiques/vendor/bootstrap/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all">
+  <link href="{% static 'screening/index_static/layout/styles/layout.css' %}" rel="stylesheet" type="text/css" media="all">
+
+
+  <script src ="{% static 'screening/index_static/layout/scripts/vue.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.min.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.backtotop.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.mobilemenu.js' %}"></script>
+
+  <script src="{% static 'screening/statistiques/vendor/bootstrap/bootstrap.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'screening/statistiques/vendor/raphael/raphael.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'screening/statistiques/vendor/chartjs/Chart.min.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'screening/statistiques/vendor/highmap/highmaps.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'screening/statistiques/vendor/highmap/exporting.js' %}" type="text/javascript" charset="utf-8"></script>
+  <script src="{% static 'screening/statistiques/cm-all.js' %}" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body id="top">
+  <!-- ################################################################################################ -->
+  <div id="app">
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="" style="margin-left:0%;">
+      <div class="row">
+        <div class="col-md-12">
+          <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">MODO           </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02" style="margin-left:25%;">
+              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                  <a class="nav-link" href="">Accueil <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Actualites</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="">Forum</a>
+                </li>
+              </ul>
+              <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Rechercher">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
+              </form>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <!-- ################################################################################################ -->
+    <div class="wrapper bgded overlay gradient" style="background-image:url('{% static 'screening/index_static/images/demo/backgrounds/01.jpg'%}');">
+      <div id="pageintro" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <article>
+          <p>Modo, votre application de suivie liée au problème Covid-19</p>
+          <h3 class="heading">Laisser nous vous accompagner avec cette solution numerique</h3>
+          <p>Médécins, chercheurs, Malades, usagers.</p>
+          <footer>
+            <ul class="nospace inline pushright">
+              <li><a class="btn" id="btnStats1">Statistiques</a></li>
+              <li><a class="btn inverse" href="#">Documentation</a></li>
+            </ul>
+          </footer>
+        </article>
+        <!-- ################################################################################################ -->
+      </div>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper row2">
+      <section class="hoc container clear">
+        <!-- ################################################################################################ -->
+        <div class="sectiontitle">
+          <h6 class="heading">Espace Utilisateur pour vous</h6>
+          <p>Acceder a votre interface de connexion</p>
+        </div>
+        <ul class="nospace group prices">
+          <a href="{% url 'screening:login'%}">
+            <li class="one_third">
+               <article><i class="fas fa-heart red"></i>
+                <h6 class="heading">Médécin</h6>
+                <p>Accedez a cet interface pour vous connecter en tant que medecin.</br></br>
+                </p>
+              </article>
+            </li>
+          </a>
+         <li class="one_third">
+              <a href="{% url 'screening:login'%}">
+            <article><i class="fas fa-sun green"></i>
+              <h6 class="heading">Dépisteur</h6>
+              <p>Connectez vous en tant que depisteur et accedez a l'interface d'examen des usagers.</p>
+            </article>
+              </a>
+          </li>
+
+           <li class="one_third"><a href="{% url 'screening:online_test' %}">
+            <article><i class="fas fa-users blue"></i>
+              <h6 class="heading">Usagers</h6>
+              <p>Effectuez votre test de covid en ligne ici.</br></br>
+              </p>
+            </article>
+           </a></li>
+        </ul>
+        <!-- ################################################################################################ -->
+      </section>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper coloured">
+      <article class="hoc cta clear">
+        <!-- ################################################################################################ -->
+        <h6 class="three_quarter first">Statistiques et map sur l'evolution du covid-19</h6>
+        <footer class="one_quarter"><a class="btn" id="btnStats2">Voir les statistiques</a></footer>
+        <!-- ################################################################################################ -->
+      </article>
+    </div>
+    <!-- ################################################################################################ -->
+    <div class="wrapper row3">
+      <main class="hoc container clear">
+        <!-- main body -->
+        <!-- ################################################################################################ -->
+        <section id="introblocks">
+          <div class="sectiontitle">
+            <h6 class="heading">Faire Confiance a MODO</h6>
+            <p>MODO, application de surveillance epidemiologique</p>
+          </div>
+          <ul class="nospace group">
+            <li class="one_third first">
+              <article><a href="#"><i class="fas fa-moon green"></i></a>
+                <h6 class="heading">La Qualité</h6>
+                <p>Modo est utilisé et recommendé par la plus part des médécins nationaux.</br>
+                </p>
+                <footer><a class="btn" href="#">Voir Plus</a></footer>
+              </article>
+            </li>
+            <li class="one_third">
+              <article><a href="#"><i class="fas fa-seedling red"></i></a>
+                <h6 class="heading">L'assurance</h6>
+                <p>Une fois depiste par platforme,les donnees sont traitee et renvoyees sous 48h.</br>
+                </p>
+                <footer><a class="btn" href="#">Voir Plus</a></footer>
+              </article>
+            </li>
+            <li class="one_third">
+              <article><a href="#"><i class="fas fa-ship blue"></i></a>
+                <h6 class="heading">L'accompagnement</h6>
+                <p>Modo vous notifiera autant de fois que necessaire sur les informations concernant
+                 votre situation</p>
+                <footer><a class="btn" href="#">Voir Plus</a></footer>
+              </article>
+            </li>
+          </ul>
+        </section>
+        <!-- ################################################################################################ -->
+        <!-- / main body -->
+        <div class="clear"></div>
+      </main>
+      {% include 'layouts/statistiques.html' %}
+    </div>
+    
+    <!-- ################################################################################################ -->
+    <div class="wrapper row5">
+      <div id="copyright" class="hoc clear">
+        <!-- ################################################################################################ -->
+        <p class="fl_left">Copyright &copy; 2020 - All Rights Reserved - <a href="#">Domain Name</a></p>
+        <p class="fl_right">App coded By <a target="_blank" href="#"
+            title="MoDo APP">TP 4077 - Jiomekong</a></p>
+        <!-- ################################################################################################ -->
+      </div>
+    </div>
+    <router-view></router-view>
+  </div>
+  <!-- ################################################################################################ -->
+  <a id="backtotop" href="#top"><i class="fas fa-chevron-up"></i></a>
+  <!-- JAVASCRIPTS -->
+  <script src ="{% static 'screening/index_static/layout/scripts/vue.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.min.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.backtotop.js' %}"></script>
+  <script src="{% static 'screening/index_static/layout/scripts/jquery.mobilemenu.js' %}"></script>
+  <script src="{% static 'screening/statistiques/vendor/highcharts/highcharts.src.js' %}"></script>
+  <script type="text/javascript">
+
+      $("#btnStats1").click(function() {
+          $('html, body').animate({
+              scrollTop: $("#stats").offset().top
+          }, 500);
+      });
+
+      $("#btnStats2").click(function() {
+          $('html, body').animate({
+              scrollTop: $("#stats").offset().top
+          }, 1000);
+      });
+
+
+  </script>
+</body>
+
+</html>

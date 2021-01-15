@@ -1,0 +1,166 @@
+{% extends './base.html' %}
+{% load static %}
+
+
+{% block pageContentRow %}
+
+    <div class="card" style="width: auto;">
+        <div class="card-body">
+           <!-- <img class="card-img-top" src="../../../static/screening/form_test/images/doctoress.jpeg" alt="Card image cap"> -->
+
+            <h5 class="card-title text-info text-center" style="margin-top:10px ">
+                <p> Is broadcast sms ? </p>
+
+                <div class="choice_box center-block"style="margin-top: 10px">
+
+                 <button class="btn-yes btn-info btn btn-sm">Yes</button>
+                    <button class="btn-no btn btn-danger btn-sm">No</button>
+
+                </div>
+
+              </h5>
+
+          <form class="sms_box">
+              <div class="input-group input-group-sm mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text number_label" id="inputGroup-sizing-sm">Number</span>
+                  </div>
+                  <input name="phone" type="text" class="form-control number_input" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+              </div>
+
+               <div class="form-group">
+                  <div class="col-sm-1-12">
+                        <textarea name="text" class="form-control text_area" aria-label="With textarea" placeholder="Enter your sms here"></textarea>
+                  </div>
+              </div>
+
+              <div class="form-group row">
+                  <div class="col-sm-10">
+                  <button type="submit" class="btn btn-success btn-sm btn_send">send<i class="fas fa-sms" style="margin-left: 4px"></i></button>
+                      <button type="button" class="btn btn-success btn-sm btn-back"><i class="fas fa-angle-left" style="margin-right: 4px"></i>back</button>
+                  </div>
+              </div>
+
+
+              <p class="result" style="color: red">...</p>
+          </form>
+
+  </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block ScriptBottom  %}
+
+    {{ block.super }}
+
+    <script>
+
+    $(() => {
+
+        let body = document.getElementById("page-top")
+        let choice_box = document.querySelector(".choice_box")
+        let sms_box = document.querySelector('.sms_box')
+        let number_input = document.querySelector('.number_input')
+        let number_label = document.querySelector(".number_label")
+        let card_title_p = document.querySelector('.card-title p')
+        let text_area = document.querySelector('.text_area')
+        let result = document.querySelector('.result')
+
+        sms_box.style.display = "none"
+
+        let btn_yes = document.querySelector('.btn-yes')
+        let btn_no = document.querySelector('.btn-no')
+        let btn_back = document.querySelector('.btn-back')
+
+        let access_Token
+
+
+        btn_yes.addEventListener('click', () => {
+            number_input.type = "hidden"
+            number_label.style.display = "none"
+            choice_box.style.display = "none"
+            sms_box.style.display = "block"
+            card_title_p.innerHTML = "Broadcast sms"
+        })
+
+        btn_no.addEventListener('click', () => {
+            choice_box.style.display = "none"
+            sms_box.style.display = "block"
+            number_input.type = "number"
+            number_label.style.display = "block"
+            card_title_p.innerHTML = "Personal sms"
+        })
+
+        btn_back.addEventListener('click', () => {
+            sms_box.style.display = "none"
+            choice_box.style.display = "block"
+            card_title_p.innerHTML = "Is broadcast sms ?"
+        })
+
+        let get_TokenAccess = function (){
+
+            let user_ip = "d4de65bb-62ee-454e-b3f3-6593112cb6d5"
+            let user_secret = "0f6bbc6c4c4e1189d54d93c9d21266e5"
+            let Auth = "Basic " + btoa(user_ip+":"+ user_secret)
+
+            $.ajax({
+
+                "url": "https://api.web2sms237.com/token",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": Auth,
+                    "Content-Type": "application/json"
+                },
+
+            }).done(function (response) {
+                access_Token = response.access_token
+            })
+
+        }
+
+        get_TokenAccess()
+
+
+         let send_sms = function (number , text , access_token ){
+            return $.ajax({
+
+                "url": "https://api.web2sms237.com/sms/send",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Bearer " + access_token,
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                    "phone":number,
+                    "text":text,
+                    "flash":false
+                }),
+
+            })
+         }
+
+
+         $('.sms_box').submit(function(e){
+             e.preventDefault()
+             let num_convert = "+" + number_input.value
+             let ajax_send = send_sms(num_convert, text_area.value, access_Token)
+             ajax_send.done(function (response){
+                 result.style.color = "green"
+                 result.innerHTML = "successful send to " + num_convert + "!"
+             }).fail(function(xhr, textStatus, errorThrown){
+                 result.innerHTML = xhr.responseText
+                })
+         })
+    })
+
+
+
+    </script>
+
+{% endblock %}
+

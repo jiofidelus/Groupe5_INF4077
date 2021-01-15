@@ -1,0 +1,22 @@
+{% extends './base.html' %}
+{% block pageContentRow %}
+
+    <div class="card text-center" style="width: 18rem;" >
+
+          <img class="card-img-top" src="/{{ citizen.picture }}" alt="Card image cap" width="200" height="200" >
+
+        <div class="card-body">
+            <h5 class="card-title">{{ citizen.first_name }}'s infos</h5>
+             <h4 class="card-title">Details</h4>
+            <p class="card-text">first name: {{ citizen.first_name }}</p>
+            <p class="card-text">second name: {{ citizen.second_name}}</p>
+            <p class="card-text">age: {{ citizen.birth_day }}</p>
+            <p class="card-text">gender: {{ citizen.gender }}</p>
+            <p class="card-text">identity card: {{ citizen.identity_card_id }}</p>
+                  <a href="#" class="btn btn-primary">Back To Citizen's Management</a>
+        </div>
+
+    </div>
+
+
+{% endblock %}

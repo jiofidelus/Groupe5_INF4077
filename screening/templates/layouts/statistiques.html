@@ -1,0 +1,688 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <title>MODO - STATISTIQUES</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style type="text/css" media="screen">
+    #total-cases{
+      color: white;
+      font-weight: bold;
+    }
+    #total-active{
+      color: orange;
+      font-weight: bold;
+    }
+    #total-recovered{
+      color: green;
+      font-weight: bold;
+    }
+    #total-dead{
+      color: red;
+      font-weight: bold;
+    }
+    .card-header{
+      background: #363638;
+    }
+    .card{
+      background: #3e3e40;
+    }
+    .card:hover .card-text{
+      transform:scale(1.8);
+    }
+    .card:hover{
+      transform:scale(1.03);
+    }
+    .card:hover{
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+    }
+    .chart-effect-hover:hover{
+      transform:scale(1.015);
+    }
+    .card:hover:hover{
+      box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+      transition: all 0.3s ease;
+    }
+  </style>
+  <div id="stats" class="row" style="padding: 2%;">
+    <div class="col-md-3">
+      <div class="card text-white border-light mb-3 text-center">
+        <div class="card-header">Positifs</div>
+        <div class="card-body">
+          <h5 class="card-title">Total des cas positifs</h5>
+          <p class="card-text" id="total-positive" class="font-weight-bold">
+            {{ totalPositive }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white border-warning mb-3 text-center">
+        <div class="card-header">Actifs</div>
+        <div class="card-body">
+          <h5 class="card-title">Total des cas actifs</h5>
+          <p class="card-text" id="total-active" class="font-weight-bold">
+            {{ totalActive }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white border-success mb-3 text-center">
+        <div class="card-header">Gueris</div>
+        <div class="card-body">
+          <h5 class="card-title">Total des cas gueris</h5>
+          <p class="card-text" id="total-recovered" class="font-weight-bold">
+            {{ totalRecovered }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <div class="card text-white border-danger mb-3 text-center">
+        <div class="card-header">Decedes</div>
+        <div class="card-body">
+          <h5 class="card-title">Total des cas decedes</h5>
+          <p class="card-text" id="total-dead"class="font-weight-bold">
+            {{ totalDead }}
+          </p>
+        </div>
+      </div>
+  </div>
+  <div class="container-fluid" style="height: 700px;">
+    <div class="row">
+      <div id="mydata" class="col-md-12 chart-effect-hover" style="height: 700px;"></div>
+    </div>
+  </div>
+  <div class="container-fluid" style="height: 500px; margin-top: 1%;">
+    <div class="row">
+      <div id="activeCase" class="col-md-6 chart-effect-hover" style="height: 500px; padding-bottom:1%;"></div>
+      <div id="ageCase" class="col-md-6 chart-effect-hover" style="height: 500px; padding-bottom:1%;"></div>
+      <!-- <div id="genreCase" class="col-md-6 chart-effect-hover" style="height: 500px;"></div> -->
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div id="genreAgeCasePositive" class="col-md-4 chart-effect-hover" style="height: 500px; padding-bottom:1%;"></div>
+      <div id="genreAgeCaseRecovered" class="col-md-4 chart-effect-hover" style="height: 500px; padding-bottom:1%;"></div>
+      <div id="genreAgeCaseDead" class="col-md-4 chart-effect-hover" style="height: 500px; padding-bottom:1%;"></div>
+    </div>
+  </div>
+  <div class="container-fluid" style="height: 700px; margin-bottom:2%;">
+    <div class="row">
+      <div id="mainStatistics" class="col-md-12 chart-effect-hover"  style="height: 700px;"></div>
+    </div>
+  </div>
+  <!-- JAVASCRIPTS -->
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+  <script src ="https://unpkg.com/vue-router/dist/vue-router.js"></script> -->
+  <script src="{% static 'statistiques/vendor/highcharts/highcharts.src.js' %}"></script>
+  <script type="text/javascript" charset="utf-8">
+  window.onload = function () {
+    var myJSONList = (("{{map_cases_json}}").replace(/&(l|g|quo)t;/g, function(a,b){
+          return {
+              l   : '<',
+              g   : '>',
+              quo : '"'
+          }[b];
+      }));
+
+      var totalActive = 0;
+      var totalRecovered = 0;
+      var totalDead = 0;
+      var totalPositive = 0;
+
+    map_cases = JSON.parse( myJSONList );
+    var regionActive = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1];
+    for (var i = 0; i < map_cases.length; i++) {
+      var regionObject = map_cases[i];
+      totalActive += regionObject.active;
+      totalPositive += regionObject.positive;
+      totalRecovered += regionObject.recovered;
+      totalDead += regionObject.dead;
+      if(regionObject.region == "Adamaoua"){
+        regionActive[1] = regionObject.positive;
+      }
+      if(regionObject.region == "Centre"){
+        regionActive[2] = regionObject.positive;
+      }
+      if(regionObject.region == "East"){
+        regionActive[3] = regionObject.positive;
+      }
+      if(regionObject.region == "Extreme_North"){
+        regionActive[4] = regionObject.positive;
+      }
+      if(regionObject.region == "Littoral"){
+        regionActive[5] = regionObject.positive;
+      }
+      if(regionObject.region == "North"){
+        regionActive[6] = regionObject.positive;
+      }
+      if(regionObject.region == "North_West"){
+        regionActive[7] = regionObject.positive;
+      }
+      if(regionObject.region == "West"){
+        regionActive[8] = regionObject.positive;
+      }
+      if(regionObject.region == "South"){
+        regionActive[9] = regionObject.positive;
+      }
+      if(regionObject.region == "South_West"){
+        regionActive[10] = regionObject.positive;
+      }
+    }
+    
+    var data = [
+        ['cm-es', regionActive[3]],
+        ['cm-ad', regionActive[1]],
+        ['cm-nw', regionActive[7]],
+        ['cm-no', regionActive[6]],
+        ['cm-ce', regionActive[2]],
+        ['cm-ou', regionActive[8]],
+        ['cm-en', regionActive[4]],
+        ['cm-sw', regionActive[10]],
+        ['cm-lt', regionActive[5]],
+        ['cm-su', regionActive[9]]
+    ];
+
+    document.getElementById("total-active").textContent=totalActive;
+    document.getElementById("total-recovered").textContent=totalRecovered;
+    document.getElementById("total-dead").textContent=totalDead;
+    document.getElementById("total-positive").textContent=totalPositive;
+
+    Highcharts.theme = {
+      colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+      chart: {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+          stops: [
+              [0, '#3e3e40'],
+              [1, '#535354']
+          ]
+        },
+        style: {
+          fontFamily: '\'Unica One\', sans-serif'
+        },
+        plotBorderColor: '#606063'
+      },
+      title: {
+        style: {
+          color: '#E0E0E3',
+          textTransform: 'uppercase',
+          fontSize: '20px'
+        }
+      },
+      subtitle: {
+        style: {
+          color: '#E0E0E3',
+          textTransform: 'uppercase'
+        }
+      },
+      xAxis: {
+        gridLineColor: '#707073',
+        labels: {
+          style: {
+              color: '#E0E0E3'
+          }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        title: {
+          style: {
+              color: '#A0A0A3'
+
+          }
+        }
+      },
+      yAxis: {
+        gridLineColor: '#707073',
+        labels: {
+          style: {
+              color: '#E0E0E3'
+          }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        tickWidth: 1,
+        title: {
+          style: {
+              color: '#A0A0A3'
+          }
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        style: {
+          color: '#F0F0F0'
+        }
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+              color: '#B0B0B3'
+          },
+          marker: {
+              lineColor: '#333'
+          }
+        },
+        boxplot: {
+          fillColor: '#505053'
+        },
+        candlestick: {
+          lineColor: 'white'
+        },
+        errorbar: {
+          color: 'white'
+        }
+      },
+      legend: {
+        itemStyle: {
+          color: '#E0E0E3'
+        },
+        itemHoverStyle: {
+          color: '#FFF'
+        },
+        itemHiddenStyle: {
+          color: '#606063'
+        }
+      },
+      credits: {
+        style: {
+          color: '#666'
+        }
+      },
+      labels: {
+        style: {
+          color: '#707073'
+        }
+      },
+
+      drilldown: {
+        activeAxisLabelStyle: {
+          color: '#F0F0F3'
+        },
+        activeDataLabelStyle: {
+          color: '#F0F0F3'
+        }
+      },
+
+      navigation: {
+        buttonOptions: {
+          symbolStroke: '#DDDDDD',
+          theme: {
+              fill: '#505053'
+          }
+        }
+      },
+
+      // scroll charts
+      rangeSelector: {
+        buttonTheme: {
+          fill: '#505053',
+          stroke: '#000000',
+          style: {
+              color: '#CCC'
+          },
+          states: {
+              hover: {
+                fill: '#707073',
+                stroke: '#000000',
+                style: {
+                    color: 'white'
+                }
+              },
+              select: {
+                fill: '#000003',
+                stroke: '#000000',
+                style: {
+                    color: 'white'
+                }
+              }
+          }
+        },
+        inputBoxBorderColor: '#505053',
+        inputStyle: {
+          backgroundColor: '#333',
+          color: 'silver'
+        },
+        labelStyle: {
+          color: 'silver'
+        }
+      },
+
+      navigator: {
+        handles: {
+          backgroundColor: '#666',
+          borderColor: '#AAA'
+        },
+        outlineColor: '#CCC',
+        maskFill: 'rgba(255,255,255,0.1)',
+        series: {
+          color: '#7798BF',
+          lineColor: '#A6C7ED'
+        },
+        xAxis: {
+          gridLineColor: '#505053'
+        }
+      },
+
+      scrollbar: {
+        barBackgroundColor: '#808083',
+        barBorderColor: '#808083',
+        buttonArrowColor: '#CCC',
+        buttonBackgroundColor: '#606063',
+        buttonBorderColor: '#606063',
+        rifleColor: '#FFF',
+        trackBackgroundColor: '#404043',
+        trackBorderColor: '#404043'
+      },
+
+      // special colors for some of the
+      legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+      background2: '#505053',
+      dataLabelsColor: '#B0B0B3',
+      textColor: '#C0C0C0',
+      contrastTextColor: '#F0F0F3',
+      maskColor: 'rgba(255,255,255,0.3)'
+    };
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+    // Create the chart
+    Highcharts.mapChart('mydata', {
+        chart: {
+            map: 'countries/cm/cm-all',
+            // backgroundColor: {
+            //   linearGradient: [0, 0, 0, 400],
+            //   stops: [
+            //   [0, '#D9D9D9'],
+            //   [1, '#D9D9D9']
+            //   ]
+            // },
+            borderWidth: 0,
+            borderRadius: 5,
+            plotShadow: false,
+            plotBorderWidth: 0
+        },
+
+        title: {
+            text: 'covid-19 : map du Cameroun'
+        },
+
+        subtitle: {
+            text: ''
+        },
+
+        // tooltip: {
+        //     backgroundColor: {
+        //         linearGradient: [0, 0, 0, 60],
+        //         stops: [
+        //             [0, '#FFFFFF'],
+        //             [1, '#E0E0E0']
+        //         ]
+        //     },
+        //     borderWidth: 1,
+        //     borderColor: '#AAA',
+        //     borderRadius: 2
+        // },
+        legend: {
+            title: {
+                text: 'covid-19 : positifs'
+            },
+            align: 'left',
+            verticalAlign: 'top',
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: 'white'
+        },
+
+        mapNavigation: {
+            enabled: false,
+            buttonOptions: {
+                verticalAlign: 'bottom'
+            }
+        },
+        colorAxis: {
+            min: 1,
+            max: 10000,
+            type: 'logarithmic',
+            minColor: '#fffcfc',
+            maxColor: '#ff0000',
+            lineColor: 'black',
+            lineWidth: 1
+        },
+
+        series: [{
+            data: data,
+            name: 'Positifs',
+            states: {
+                hover: {
+                    color: '#8affe8'
+                }
+            },
+            dataLabels: {
+                enabled: true,
+                format: '{point.name}'
+            }
+        }]
+    });
+
+  };
+  </script>
+  <script>
+    Highcharts.theme = {
+      colors: ['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
+      chart: {
+        backgroundColor: {
+          linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+          stops: [
+              [0, '#3e3e40'],
+              [1, '#535354']
+          ]
+        },
+        style: {
+          fontFamily: '\'Unica One\', sans-serif'
+        },
+        plotBorderColor: '#606063'
+      },
+      title: {
+        style: {
+          color: '#E0E0E3',
+          textTransform: 'uppercase',
+          fontSize: '20px'
+        }
+      },
+      subtitle: {
+        style: {
+          color: '#E0E0E3',
+          textTransform: 'uppercase'
+        }
+      },
+      xAxis: {
+        gridLineColor: '#707073',
+        labels: {
+          style: {
+              color: '#E0E0E3'
+          }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        title: {
+          style: {
+              color: '#A0A0A3'
+
+          }
+        }
+      },
+      yAxis: {
+        gridLineColor: '#707073',
+        labels: {
+          style: {
+              color: '#E0E0E3'
+          }
+        },
+        lineColor: '#707073',
+        minorGridLineColor: '#505053',
+        tickColor: '#707073',
+        tickWidth: 1,
+        title: {
+          style: {
+              color: '#A0A0A3'
+          }
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(0, 0, 0, 0.85)',
+        style: {
+          color: '#F0F0F0'
+        }
+      },
+      plotOptions: {
+        series: {
+          dataLabels: {
+              color: '#B0B0B3'
+          },
+          marker: {
+              lineColor: '#333'
+          }
+        },
+        boxplot: {
+          fillColor: '#505053'
+        },
+        candlestick: {
+          lineColor: 'white'
+        },
+        errorbar: {
+          color: 'white'
+        }
+      },
+      legend: {
+        itemStyle: {
+          color: '#E0E0E3'
+        },
+        itemHoverStyle: {
+          color: '#FFF'
+        },
+        itemHiddenStyle: {
+          color: '#606063'
+        }
+      },
+      credits: {
+        style: {
+          color: '#666'
+        }
+      },
+      labels: {
+        style: {
+          color: '#707073'
+        }
+      },
+
+      drilldown: {
+        activeAxisLabelStyle: {
+          color: '#F0F0F3'
+        },
+        activeDataLabelStyle: {
+          color: '#F0F0F3'
+        }
+      },
+
+      navigation: {
+        buttonOptions: {
+          symbolStroke: '#DDDDDD',
+          theme: {
+              fill: '#505053'
+          }
+        }
+      },
+
+      // scroll charts
+      rangeSelector: {
+        buttonTheme: {
+          fill: '#505053',
+          stroke: '#000000',
+          style: {
+              color: '#CCC'
+          },
+          states: {
+              hover: {
+                fill: '#707073',
+                stroke: '#000000',
+                style: {
+                    color: 'white'
+                }
+              },
+              select: {
+                fill: '#000003',
+                stroke: '#000000',
+                style: {
+                    color: 'white'
+                }
+              }
+          }
+        },
+        inputBoxBorderColor: '#505053',
+        inputStyle: {
+          backgroundColor: '#333',
+          color: 'silver'
+        },
+        labelStyle: {
+          color: 'silver'
+        }
+      },
+
+      navigator: {
+        handles: {
+          backgroundColor: '#666',
+          borderColor: '#AAA'
+        },
+        outlineColor: '#CCC',
+        maskFill: 'rgba(255,255,255,0.1)',
+        series: {
+          color: '#7798BF',
+          lineColor: '#A6C7ED'
+        },
+        xAxis: {
+          gridLineColor: '#505053'
+        }
+      },
+
+      scrollbar: {
+        barBackgroundColor: '#808083',
+        barBorderColor: '#808083',
+        buttonArrowColor: '#CCC',
+        buttonBackgroundColor: '#606063',
+        buttonBorderColor: '#606063',
+        rifleColor: '#FFF',
+        trackBackgroundColor: '#404043',
+        trackBorderColor: '#404043'
+      },
+
+      // special colors for some of the
+      legendBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+      background2: '#505053',
+      dataLabelsColor: '#B0B0B3',
+      textColor: '#C0C0C0',
+      contrastTextColor: '#F0F0F3',
+      maskColor: 'rgba(255,255,255,0.3)'
+    };
+    // Apply the theme
+    Highcharts.setOptions(Highcharts.theme);
+    Highcharts.chart('activeCase', {{ chart_cases|safe }});
+    Highcharts.chart('ageCase', {{ chart_ages_cases|safe }});
+    // Highcharts.chart('genreCase', {{ chart_genre_cases|safe }});
+    Highcharts.chart('genreAgeCasePositive', {{ chart_genre_age_cases_positive|safe }});
+    Highcharts.chart('genreAgeCaseRecovered', {{ chart_genre_age_cases_recovered|safe }});
+    Highcharts.chart('genreAgeCaseDead', {{ chart_genre_age_cases_dead|safe }});
+    Highcharts.chart('mainStatistics', {{ chart_main_statistics|safe }});
+
+  </script>

@@ -1,0 +1,394 @@
+{% extends './base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+
+
+
+{% block pageContentRow %}
+
+
+      <!-- Pills navs -->
+<ul class="nav nav-pills mb-3" id="ex1" role="tablist">
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link active"
+      id="ex1-tab-1"
+      data-mdb-toggle="pill"
+      href="#ex1-pills-1"
+      role="tab"
+      aria-controls="ex1-pills-1"
+      aria-selected="true"
+      >check</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex1-tab-2"
+      data-mdb-toggle="pill"
+      href="#ex1-pills-2"
+      role="tab"
+      aria-controls="ex1-pills-2"
+      aria-selected="false"
+      >create ci</a
+    >
+  </li>
+  <li class="nav-item" role="presentation">
+    <a
+      class="nav-link"
+      id="ex1-tab-3"
+      data-mdb-toggle="pill"
+      href="#ex1-pills-3"
+      role="tab"
+      aria-controls="ex1-pills-3"
+      aria-selected="false"
+      >scr</a
+    >
+  </li>
+
+    <!--
+<li>
+
+    <button id="make-screening"  class="btn btn-secondary col-sm-2"  data-dismiss="modal" data-backdrop="false">mk scr</button>
+
+</li> -->
+
+</ul>
+<!-- Pills navs -->
+
+
+<!-- Pills content -->
+<div class="tab-content" id="ex1-content">
+
+    <div
+            class="tab-pane fade active show"
+
+            id="ex1-pills-1"  role="tabpanel"  aria-labelledby="ex1-tab-1">
+
+        <table class="table  table-responsive">
+            <thead class="thead-default">
+            <tr>
+                <th> No_s</th>
+                <th> No_citizen </th>
+                <th> first_name</th>
+                <th> second_name</th>
+                <th> gender</th>
+                <th>years</th>
+                <th> Nationality</th>
+                <th> Card_id</th>
+                <th>Mobile Phone</th>
+                <th> Status</th>
+                <th>Screening Date</th>
+                <th>Picture</th>
+                <th>Delete</th>
+                <th>Update</th>
+            </tr>
+            </thead>
+            <tbody>
+
+                  {% for hasscreened in hl %}
+
+                      <tr>
+                          <td scope="row">
+                              <button type="button" data-form-url="{% url 'screening:has_screened-detail' hasscreened.id %}" id="read-has_screened" class="btn btn-light bs-modal"> {{ hasscreened.id  }} </button>
+                          </td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened_id }}</td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.first_name }}</td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.second_name }}</td>
+
+                          <td>  {{ hasscreened.citizen_who_has_been_screened.gender }}</td>
+
+                          <td>{{ hasscreened.citizen_who_has_been_screened.get_age }}</td>
+
+                          <td> {{ hasscreened.citizen_who_has_been_screened.nationality }}</td>
+
+                         <td>{{ hasscreened.citizen_who_has_been_screened.identity_card_id }}</td>
+
+                          <td>{{ hasscreened.citizen_who_has_been_screened.mobile_phone }}</td>
+                          <td>  {% if hasscreened.status == "+" %}
+                                  <span><button type="button" class="btn btn-danger btn-rounded btn-sm my-0">  </button></span></i></span>
+                                {% elif hasscreened.status == "-" %}
+                                  <span><button type="button" class="btn btn-success btn-rounded btn-sm my-0">  </button></span></i></span>
+                                {% else %}
+                                  <span><button type="button" class="btn btn-facebook btn-rounded btn-sm my-0">  </button></span></i></span>
+                               {% endif %}
+                          </td>
+
+                          <td>{{ hasscreened.screening_date }}</td>
+
+                          <td>
+                               {% if hasscreened.citizen_who_has_been_screened.picture%}
+                                    <a href="{{ hasscreened.citizen_who_has_been_screened.picture.url}}">see it</a>
+                               {% else %}
+                                    <a href="#">see it</a>
+                               {% endif %}
+                          </td>
+
+                          <td> <button class="btn btn-danger bs-modal" data-form-url="{% url 'screening:has_screened-delete' hasscreened.id %}">delete</button></td>
+
+                          <td><button class="btn btn-facebook bs-modal" data-form-url="{% url 'screening:has_screened-update' hasscreened.id %}">update</button></td>
+
+                      </tr>
+
+                  {% endfor %}
+
+            </tbody>
+        </table>
+  </div>
+
+    <div class="tab-pane fade row" id="ex1-pills-2" role="tabpanel" aria-labelledby="ex1-tab-2">
+
+        <div class="card col-sm-auto" style="margin-top: 20px">
+
+              <div class="card-body">
+                 <div class="card-text">
+                    <form  enctype="multipart/form-data" method="post"  id="save_citizens_forms" data-token = "{{ csrf_token }}">
+                    {% csrf_token %}
+                        {% for field in form %}
+                              <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% render_field field class="form-control form-control-sm input_save_client" placeholder=field.label %}
+                                    <p class="error_{{forloop.counter}} error_p"></p>
+                                </div>
+                         {% endfor %}
+                         <input type="submit" value="Save Citizen" class="submit btn btn-success btn-small" name="submit" id="submit" /><br><br>
+                    </form>
+                 </div>
+                 </div>
+
+
+        </div>
+
+    </div>
+
+    <div class="tab-pane fade" id="ex1-pills-3" role="tabpanel" aria-labelledby="ex1-tab-3">
+
+        <div class="card">
+
+              <div class="card-body">
+                 <div class="card-text">
+                     <form  enctype="multipart/form-data" method="post"  id="save_screening_forms">
+                    {% csrf_token %}
+                        {% for field in form2 %}
+                              <div class="form-group">
+                                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {% render_field field class="form-control form-control-sm input_save_screening" placeholder=field.label %}
+                                    <p class="error_s_{{forloop.counter}} error_s_p"></p>
+                                </div>
+                         {% endfor %}
+                         <button type="submit" class="submit btn btn-success" name="submit" id="submit" >save screening</button>
+                    </form>
+                 </div>
+                 </div>
+              </div>
+    </div>
+
+</div>
+    <!-- Pills content -->
+
+{% endblock %}
+
+
+{% block ScriptBottom  %}
+    {{ block.super }}
+
+    <script type="text/javascript">
+
+        $(document).ready(function (){
+
+             $(".bs-modal").each(function () {
+                  $(this).modalForm({
+                      formURL: $(this).data('form-url')
+                  });
+            });
+
+            $('#create-citizen').modalForm({
+
+                        formURL: "{% url 'screening:citizens-create' %}",
+                        modalID: "#create-modal"
+                    })
+
+            $('#make-screening').modalForm({
+                        formURL: "{% url 'screening:has_screened-create' %}",
+                        modalID: "#create-modal"
+                    })
+            })
+      </script>
+
+    <script>
+
+       $(function (){
+
+         $('#save_citizens_forms').submit(function(event){
+
+             var $formData = new FormData()
+            event.preventDefault()
+            $(".error_p ").each(function(el){
+                $(this).text(" ")
+            })
+
+            $.ajax({
+                data: $(this).serialize(),
+                type: "post",
+                url: "{% url 'screening:citizen-save-ajax' %}",
+                success: function(response){
+                    console.log(response.content)
+                    let was_save = response.content["was_save"]
+                    if (was_save === false){
+
+                                let errors = response.content["errors"]
+
+                                let  first_name = errors.first_name
+                                let birth_day = errors.birth_day
+                                let gender = errors.gender
+                                let identity_card = errors.identity_card_id
+                                let nationality = errors.nationality
+                                let mobile_phone = errors.mobile_phone
+
+
+                                if (first_name != null){
+                                    $('.error_1').text(errors.first_name[0]).attr('style', 'color: red; font-size:12px')
+                                }
+                                if (birth_day != null){
+                                    $('.error_3').text(errors.birth_day[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (gender != null){
+                                    $('.error_4').text(errors.gender[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (identity_card != null){
+                                    $('.error_5').text(errors.identity_card_id[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+
+                                if (nationality != null){
+                                    $('.error_6').text(errors.nationality[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (mobile_phone != null){
+                                    $('.error_7').text(errors.mobile_phone[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+                            }else {
+
+
+                            alert("Citoyen Bien enregistré!!")
+
+                            $(".input_save_client").each(function(el){
+                                $(this).val(" ")
+                            })
+
+                           $(".error_p ").each(function(el){
+                                $(this).text(" ")
+                            })
+
+                    }
+
+                }
+            })
+
+
+    })
+
+         $('#save_screening_forms').submit(function(event){
+
+            event.preventDefault()
+            $(".error_s_p").each(function(el){
+                $(this).text(" ")
+            })
+
+            $.ajax({
+                data: $(this).serialize(),
+                type: "post",
+                url: "{% url 'screening:screening-save-ajax' %}",
+                success: function(response){
+                    console.log(response.content)
+                    let was_save = response.content["was_save"]
+                    if (was_save === false){
+
+                                let errors = response.content["errors"]
+
+                                let citizen_who_has_been_screened = errors. citizen_who_has_been_screened
+                                let status = errors.status
+                                let type_screening = errors.type_screening
+                                let region = errors.region
+                                let department = errors.department
+                                let quarter = errors.quarter
+                                let city = errors.city
+                                let site_following_him = errors.site_following_him
+
+
+                                if (citizen_who_has_been_screened != null){
+                                    $('.error_1').text(errors.citizen_who_has_been_screened[0]).attr('style', 'color: red; font-size:12px')
+                                }
+                                if (status != null){
+                                    $('.error_2').text(errors.status[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (type_screening != null){
+                                    $('.error_3').text(errors.type_screening[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (region != null){
+                                    $('.error_4').text(errors.region[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+                                if (department != null){
+                                    $('.error_5').text(errors.department[0]).attr('style', 'color: red; font-size:12px')
+                                }
+
+                                if (mobile_phone != null){
+                                    $('.error_6').text(errors.mobile_phone[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+
+                                if (quarter != null){
+                                    $('.error_7').text(errors.city[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+                                if (city != null){
+                                    $('.error_8').text(errors.city[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+                                if (site_following_him != null){
+                                    $('.error_9').text(errors.site_following_him[0]).attr('style', 'color: red; font-size:12px')
+
+                                }
+
+                            }else {
+
+
+                                alert(" Dépistage Bien enregistré!!")
+
+                                $(".input_save_screening").each(function(el){
+                                    $(this).val(" ")
+                                })
+
+                               $(".error_s_p ").each(function(el){
+                                    $(this).text(" ")
+                                })
+
+                    }
+
+                }
+            })
+
+    })
+
+       })
+
+    </script>
+{% endblock %}
+
