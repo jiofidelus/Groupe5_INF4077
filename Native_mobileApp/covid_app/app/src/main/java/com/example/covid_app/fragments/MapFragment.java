@@ -136,25 +136,25 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapboxM
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getContext();
-        activity = (AppCompatActivity) context;
-        Mapbox.getInstance(context, getString(R.string.mapbox_access_token));
+        Mapbox.getInstance(getContext(), getString(R.string.mapbox_access_token));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_map, container, false);
-    }
+        View result = inflater.inflate(R.layout.fragment_map, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        initView();
+
+        context = result.getContext();
+        activity = (AppCompatActivity) context;
+
+        initView(result);
         mapView.onCreate(savedInstanceState);
         checkInteractions();
         checkLocationPermissions();
+
+        return result;
     }
 
     @Override
@@ -196,10 +196,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapboxM
         mapView.getMapAsync(this);
     }
 
-    void initView() {
-        mapView = activity.findViewById(R.id.mapView);
-        navigationButton = activity.findViewById(R.id.navigationButton);
-        navigationButtonClick = activity.findViewById(R.id.navigationButtonClick);
+    void initView(View view) {
+        mapView = view.findViewById(R.id.mapView);
+//        navigationButton = view.findViewById(R.id.navigationButton);
+//        navigationButtonClick = view.findViewById(R.id.navigationButtonClick);
     }
 
     @Override
@@ -272,18 +272,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, MapboxM
     @SuppressWarnings( {"MissingPermission"})
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
-        Point destinationPoint = Point.fromLngLat(point.getLongitude(), point.getLatitude());
-        Point originPoint = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(),
-                locationComponent.getLastKnownLocation().getLatitude());
-
-        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("destination-source-id");
-        if (source != null) {
-            source.setGeoJson(Feature.fromGeometry(destinationPoint));
-        }
-
-        getRoute(originPoint, destinationPoint);
-        navigationButton.setAlpha(1);
-        navigationButton.setVisibility(View.VISIBLE);
+//        Point destinationPoint = Point.fromLngLat(point.getLongitude(), point.getLatitude());
+//        Point originPoint = Point.fromLngLat(locationComponent.getLastKnownLocation().getLongitude(),
+//                locationComponent.getLastKnownLocation().getLatitude());
+//
+//        GeoJsonSource source = mapboxMap.getStyle().getSourceAs("destination-source-id");
+//        if (source != null) {
+//            source.setGeoJson(Feature.fromGeometry(destinationPoint));
+//        }
+//
+//        getRoute(originPoint, destinationPoint);
+//        navigationButton.setAlpha(1);
+//        navigationButton.setVisibility(View.VISIBLE);
         return true;
     }
 

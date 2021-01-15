@@ -34,69 +34,79 @@ public class MainFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getContext();
-        activity = (AppCompatActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View result = inflater.inflate(R.layout.fragment_main, container, false);
+
+        context = result.getContext();
+        activity = (AppCompatActivity) context;
+        initViews(result);
+        firebaseAuthentification();
+        fragmentManager = activity.getSupportFragmentManager();
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        if (item.getItemId() == R.id.homeFragment) {
+                            FragmentTransaction ft = fragmentManager.beginTransaction();
+                            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                            ft.replace(R.id.fragment, new HomeFragment());
+                            ft.commit();
+                        } else if (item.getItemId() == R.id.statisticsFragment) {
+                            FragmentTransaction ft = fragmentManager.beginTransaction();
+                            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                            ft.replace(R.id.fragment, new StatisticsFragment());
+                            ft.commit();
+                        } else if (item.getItemId() == R.id.accountFragment) {
+                            FragmentTransaction ft = fragmentManager.beginTransaction();
+                            if (currentUser != null) {
+                                if (currentUser.isAnonymous()){
+                                    //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                                    ft.replace(R.id.fragment, new AccountFragment());
+                                }else {
+                                    //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                                    ft.replace(R.id.fragment, new ConnectedFragment());
+                                }
+                            } else {
+                                //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                                ft.replace(R.id.fragment, new AccountFragment());
+                            }
+                            ft.commit();
+                        }else if(item.getItemId() == R.id.roomFragment){
+                            FragmentTransaction ft = fragmentManager.beginTransaction();
+                            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                            ft.replace(R.id.fragment, new RoomFragment());
+                            ft.commit();
+                        }
+                        return true;
+                    }
+                });
+        FragmentTransaction ft = fragmentManager.beginTransaction();
+        if (currentUser != null) {
+            if (currentUser.isAnonymous()){
+                //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                ft.replace(R.id.fragment, new HomeFragment());
+            }else {
+                //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                ft.replace(R.id.fragment, new ConnectedFragment());
+            }
+        } else {
+            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+            ft.replace(R.id.fragment, new HomeFragment());
+        }
+        ft.commit();
+
+        return result;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initViews();
-        firebaseAuthentification();
-        fragmentManager = activity.getSupportFragmentManager();
-        if (activity.findViewById(R.id.fragment) != null) {
-            if (savedInstanceState != null) {
-                return;
-            }
-            bottomNavigationView.setOnNavigationItemSelectedListener(
-                    new BottomNavigationView.OnNavigationItemSelectedListener() {
-                        @Override
-                        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                            if (item.getItemId() == R.id.homeFragment) {
-                                FragmentTransaction ft = fragmentManager.beginTransaction();
-                                //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                                ft.replace(R.id.fragment, new HomeFragment());
-                                ft.commit();
-                            } else if (item.getItemId() == R.id.statisticsFragment) {
-                                FragmentTransaction ft = fragmentManager.beginTransaction();
-                                //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                                ft.replace(R.id.fragment, new StatisticsFragment());
-                                ft.commit();
-                            } else if (item.getItemId() == R.id.accountFragment) {
-                                FragmentTransaction ft = fragmentManager.beginTransaction();
-                                if (currentUser != null) {
-                                    //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                                    ft.replace(R.id.fragment, new ConnectedFragment());
-                                } else {
-                                    //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                                    ft.replace(R.id.fragment, new AccountFragment());
-                                }
-                                ft.commit();
-                            }
-                            return true;
-                        }
-                    });
-        }
-        FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        if (currentUser != null) {
-            bottomNavigationView.setSelectedItemId(R.id.accountFragment);
-            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.replace(R.id.fragment, new ConnectedFragment());
-        } else {
-            bottomNavigationView.setSelectedItemId(R.id.homeFragment);
-            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.replace(R.id.fragment, new HomeFragment());
-        }
-        ft.commit();
     }
 
 
@@ -105,8 +115,8 @@ public class MainFragment extends Fragment {
         currentUser = firebaseAuth.getCurrentUser();
     }
 
-    void initViews(){
-        bottomNavigationView = activity.findViewById(R.id.bottomNavView);
+    void initViews(View view){
+        bottomNavigationView = view.findViewById(R.id.bottomNavView);
     }
 
 }

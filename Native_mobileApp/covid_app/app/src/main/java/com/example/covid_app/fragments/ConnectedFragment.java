@@ -129,8 +129,6 @@ ConnectedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getContext();
-        activity = (AppCompatActivity) getContext();
         db = FirebaseFirestore.getInstance();
         firebaseStorage = FirebaseStorage.getInstance();
         storageReference = firebaseStorage.getReference();
@@ -140,39 +138,39 @@ ConnectedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_connected, container, false);
-    }
+        View result = inflater.inflate(R.layout.fragment_connected, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        context = result.getContext();
+        activity = (AppCompatActivity) getContext();
 
-        initViews();
+        initViews(result);
         OverScrollDecoratorHelper.setUpOverScroll(connectedScrollView);
         firebaseAuthentification();
         checkInteractions();
         setupAdapter();
         getCitizenList();
         getHasScreenedList();
+        return result;
     }
 
-    void initViews(){
-        connectedScrollView = activity.findViewById(R.id.connectedScrollView);
 
-        listCitizenSwitch = activity.findViewById(R.id.listCitizenSwitch);
+    void initViews(View view){
+        connectedScrollView = view.findViewById(R.id.connectedScrollView);
 
-        newCitizenButtonClick = activity.findViewById(R.id.newCitizenButtonClick);
-        newHasScreenedButtonClick = activity.findViewById(R.id.newHasScreenedButtonClick);
-        localisationButtonClick = activity.findViewById(R.id.localisationButtonClick);
-        sensibilisationButtonClick = activity.findViewById(R.id.sensibilisationButtonClick);
+        listCitizenSwitch = view.findViewById(R.id.listCitizenSwitch);
 
-        citizenRecyclerView = activity.findViewById(R.id.citizenRecyclerView);
-        hasScreenedRecyclerView = activity.findViewById(R.id.hasScreenedRecyclerView);
+        newCitizenButtonClick = view.findViewById(R.id.newCitizenButtonClick);
+        newHasScreenedButtonClick = view.findViewById(R.id.newHasScreenedButtonClick);
+        localisationButtonClick = view.findViewById(R.id.localisationButtonClick);
+        sensibilisationButtonClick = view.findViewById(R.id.sensibilisationButtonClick);
 
-        accountMail = activity.findViewById(R.id.accountMail);
+        citizenRecyclerView = view.findViewById(R.id.citizenRecyclerView);
+        hasScreenedRecyclerView = view.findViewById(R.id.hasScreenedRecyclerView);
 
-        citizenRelativeList = activity.findViewById(R.id.citizenRelativeList);
-        hasScreenedRelativeList = activity.findViewById(R.id.hasScreenedRelativeList);
+        accountMail = view.findViewById(R.id.accountMail);
+
+        citizenRelativeList = view.findViewById(R.id.citizenRelativeList);
+        hasScreenedRelativeList = view.findViewById(R.id.hasScreenedRelativeList);
     }
 
     private void uploadImageToFirebaseStorage(){
@@ -285,10 +283,9 @@ ConnectedFragment extends Fragment {
     }
 
     void showMap(){
-
         FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
-        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-        ft.replace(R.id.fragmentActivity, new MapFragment());
+        ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+        ft.add(R.id.fragmentActivity, new MapFragment()).addToBackStack(null);
         ft.commit();
     }
 

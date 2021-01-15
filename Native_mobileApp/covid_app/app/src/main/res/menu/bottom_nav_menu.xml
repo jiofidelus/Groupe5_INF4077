@@ -13,6 +13,12 @@
         app:showAsAction="ifRoom"
         android:enabled="true"
         />
+    <item android:id="@+id/roomFragment"
+        android:title="Salon"
+        android:icon="@drawable/ic_sms"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
     <item android:id="@+id/accountFragment"
         android:title="Compte"
         android:icon="@drawable/ic_account"

@@ -47,34 +47,31 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = requireContext();
-        activity = (AppCompatActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
-    }
+        View result =  inflater.inflate(R.layout.fragment_home, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        context = result.getContext();
+        activity = (AppCompatActivity) context;
 
-        getViews();
+        initView(result);
         symptomRecyclerView.setNestedScrollingEnabled(false);
         preventionRecyclerView.setNestedScrollingEnabled(false);
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
         getPreventionList();
         getSymptomList();
         setupAdapter();
+        return result;
     }
 
-    void getViews(){
-        preventionRecyclerView = activity.findViewById(R.id.preventionRecyclerView);
-        symptomRecyclerView = activity.findViewById(R.id.symptomRecyclerView);
-        scrollView = activity.findViewById(R.id.scrollView);
+    void initView(View view){
+        preventionRecyclerView = view.findViewById(R.id.preventionRecyclerView);
+        symptomRecyclerView = view.findViewById(R.id.symptomRecyclerView);
+        scrollView = view.findViewById(R.id.scrollView);
     }
 
     void setupAdapter(){

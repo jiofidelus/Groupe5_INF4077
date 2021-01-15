@@ -24,7 +24,7 @@
         android:text="Chargement"
         android:gravity="center"
         android:layout_gravity="center"
-        android:textSize="18sp"
+        android:textSize="14sp"
         android:layout_marginTop="20dp"
         android:textColor="@color/mainColor"
         android:maxLines="1"

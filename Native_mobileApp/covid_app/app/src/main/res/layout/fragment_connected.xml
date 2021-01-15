@@ -49,25 +49,23 @@
                 >
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="260dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/gradient_background_bottom_rounded"
                     android:padding="20dp"
                     >
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/lottieLogo"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:scaleType="centerCrop"
                         android:layout_alignParentTop="true"
                         app:placeholderImage="@drawable/ic_coronavirus_icon_app"
                         />
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="80dp"
-                        android:layout_marginLeft="10dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="10dp"
                         android:layout_toEndOf="@+id/lottieLogo"
-                        android:layout_toRightOf="@+id/lottieLogo"
                         android:gravity="center"
                         >
                         <TextView
@@ -75,7 +73,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="MODO"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textColor="@color/white"
                             android:textStyle="bold|italic"
                             android:ellipsize="end"
@@ -87,7 +85,7 @@
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/logoTitle"
                             android:text="Covid-19 au Cameroun"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="@color/white"
                             android:textStyle="bold|italic"
                             android:ellipsize="end"
@@ -99,14 +97,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/lottieLogo"
-                        android:layout_marginTop="30dp"
+                        android:layout_marginTop="10dp"
                         >
                         <TextView
                             android:id="@+id/accountMail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Mon compte"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             android:textColor="@color/white"
                             android:ellipsize="end"
                             android:maxLines="1"
@@ -118,19 +116,17 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:layout_below="@+id/accountMail"
-                            android:layout_marginTop="20dp"
+                            android:layout_marginTop="10dp"
                             >
                             <androidx.cardview.widget.CardView
                                 android:id="@+id/localisationButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
-                                android:layout_marginRight="10dp"
                                 android:layout_marginEnd="10dp"
                                 app:cardCornerRadius="100dp"
                                 app:cardElevation="0dp"
                                 app:cardBackgroundColor="@color/transparent"
                                 android:layout_alignParentStart="true"
-                                android:layout_alignParentLeft="true"
                                 android:layout_marginTop="10dp"
                                 >
                                 <RelativeLayout
@@ -179,18 +175,17 @@
                                         android:layout_height="wrap_content"
                                         android:text="Sensibiliser"
                                         android:textColor="@color/white"
-                                        android:textStyle="bold"
-                                        android:textSize="16sp"
+                                        android:textStyle="normal"
+                                        android:textSize="14sp"
                                         android:maxLines="1"
                                         android:ellipsize="end"
                                         />
                                 </RelativeLayout>
                             </androidx.cardview.widget.CardView>
                             <RelativeLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="45dp"
-                                android:layout_toRightOf="@+id/sensibilisationButton"
-                                android:layout_alignParentRight="true"
+                                android:layout_toEndOf="@+id/sensibilisationButton"
                                 android:layout_alignParentEnd="true"
                                 android:layout_marginTop="10dp"
                                 >
@@ -200,7 +195,7 @@
                                     android:layout_height="match_parent"
                                     android:text="depistes "
                                     android:textColor="@color/white"
-                                    android:textSize="18sp"
+                                    android:textSize="14sp"
                                     android:checked="true"
                                     android:textOff="OFF"
                                     android:textOn="ON"
@@ -264,14 +259,12 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Citoyen"
-                                android:layout_marginRight="10dp"
                                 android:layout_marginEnd="10dp"
                                 android:textColor="@color/white"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textStyle="normal"
+                                android:textSize="14sp"
                                 android:maxLines="1"
                                 android:ellipsize="end"
-                                android:layout_toRightOf="@+id/newCitizenButtonImage"
                                 android:layout_toEndOf="@+id/newCitizenButtonImage"/>
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>
@@ -279,7 +272,6 @@
                         android:id="@+id/newHasScreenedButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
                         android:layout_marginEnd="10dp"
                         app:cardCornerRadius="5dp"
                         app:cardElevation="0dp"
@@ -308,11 +300,11 @@
                                 android:layout_height="wrap_content"
                                 android:text="Depister"
                                 android:textColor="@color/white"
-                                android:textStyle="bold"
-                                android:textSize="16sp"
+                                android:textStyle="normal"
+                                android:textSize="14sp"
                                 android:maxLines="1"
                                 android:ellipsize="end"
-                                android:layout_toRightOf="@+id/newHasScreenedButtonImage"
+                                android:layout_marginEnd="10dp"
                                 android:layout_toEndOf="@+id/newHasScreenedButtonImage"/>
                         </RelativeLayout>
                     </androidx.cardview.widget.CardView>

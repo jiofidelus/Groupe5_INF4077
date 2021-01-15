@@ -61,26 +61,25 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = requireContext();
-        activity = (AppCompatActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_account, container, false);
-    }
+        View result = inflater.inflate(R.layout.fragment_account, container, false);
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        context = result.getContext();
+        activity = (AppCompatActivity) context;
 
-        getViews();
+        initView(result);
         OverScrollDecoratorHelper.setUpOverScroll(accountScrollView);
         checkInteractions();
         firebaseAuthentification();
+
+        return result;
     }
+
     @Override
     public void onStart() {
         super.onStart();
@@ -183,23 +182,23 @@ public class AccountFragment extends Fragment {
         });
     }
 
-    void getViews(){
-        accountScrollView = activity.findViewById(R.id.accountScrollView);
+    void initView(View view){
+        accountScrollView = view.findViewById(R.id.accountScrollView);
 
-        connectionUserName = activity.findViewById(R.id.connectionUserName);
-        connexionPassword = activity.findViewById(R.id.connectionPassword);
-        connectionButtonClick = activity.findViewById(R.id.connectionButtonClick);
-        connectionError = activity.findViewById(R.id.connectionError);
-        connectionNewUser = activity.findViewById(R.id.newUser);
-        connectAccount = activity.findViewById(R.id.connectAccount);
+        connectionUserName = view.findViewById(R.id.connectionUserName);
+        connexionPassword = view.findViewById(R.id.connectionPassword);
+        connectionButtonClick = view.findViewById(R.id.connectionButtonClick);
+        connectionError = view.findViewById(R.id.connectionError);
+        connectionNewUser = view.findViewById(R.id.newUser);
+        connectAccount = view.findViewById(R.id.connectAccount);
 
-        createUserName = activity.findViewById(R.id.createUserName);
-        createPassword1 = activity.findViewById(R.id.createPassword1);
-        createPassword2 = activity.findViewById(R.id.createPassword2);
-        createButtonClick = activity.findViewById(R.id.createButtonClick);
-        createError = activity.findViewById(R.id.createError);
-        createOldUser = activity.findViewById(R.id.oldUser);
-        createAccount = activity.findViewById(R.id.createAccount);
+        createUserName = view.findViewById(R.id.createUserName);
+        createPassword1 = view.findViewById(R.id.createPassword1);
+        createPassword2 = view.findViewById(R.id.createPassword2);
+        createButtonClick = view.findViewById(R.id.createButtonClick);
+        createError = view.findViewById(R.id.createError);
+        createOldUser = view.findViewById(R.id.oldUser);
+        createAccount = view.findViewById(R.id.createAccount);
 
     }
 

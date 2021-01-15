@@ -44,15 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragmentActivity);
-        if(f instanceof MapFragment){
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-            ft.add(R.id.fragmentActivity, new MainFragment());
-            ft.commit();
-            fragmentManager.popBackStack();
-        }else {
-            super.onBackPressed();
-        }
+        super.onBackPressed();
+//        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragmentActivity);
+//        if(f instanceof MapFragment){
+//            FragmentTransaction ft = fragmentManager.beginTransaction();
+//            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+//            ft.add(R.id.fragmentActivity, new MainFragment());
+//            ft.commit();
+//            fragmentManager.popBackStack();
+//        }
     }
 }

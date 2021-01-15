@@ -42,26 +42,28 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = requireContext();
-        activity = (AppCompatActivity) context;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_statistics, container, false);
+        View result =  inflater.inflate(R.layout.fragment_statistics, container, false);
+
+        context = result.getContext();
+        activity = (AppCompatActivity) context;
+
+        initView(result);
+        OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
+        setupCharts(result);
+
+        return result;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        getViews();
-        OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
-
+    private void setupCharts(View view){
 
         // setup pie char
-        PieChart pieChart = (PieChart) activity.findViewById(R.id.pieChart);
+        PieChart pieChart = (PieChart) view.findViewById(R.id.pieChart);
         ArrayList<PieEntry> cases = new ArrayList<>();
         cases.add(new PieEntry(1223, "Total"));
         cases.add(new PieEntry(783, "Active"));
@@ -78,7 +80,7 @@ public class StatisticsFragment extends Fragment {
         pieChart.animate();
 
         // setup bar char
-        HorizontalBarChart barChart = (HorizontalBarChart) activity.findViewById(R.id.barChart);
+        HorizontalBarChart barChart = (HorizontalBarChart) view.findViewById(R.id.barChart);
         ArrayList<BarEntry> barCses = new ArrayList<>();
         final float[] values = {10, 123, 9, 98, 47, 743, 78, 90, 12, 32};
         final String regions[] = {"Centre ","Adamaoua","Est","Sud", "Nord", "Extreme-nord", "Ouest", "Nord-ouest", "Littoral", "Sud-ouest"};
@@ -118,7 +120,7 @@ public class StatisticsFragment extends Fragment {
         barChart.invalidate();
     }
 
-    void getViews(){
-        statisticScrollView = activity.findViewById(R.id.statisticScrollView);
+    void initView(View view){
+        statisticScrollView = view.findViewById(R.id.statisticScrollView);
     }
 }
