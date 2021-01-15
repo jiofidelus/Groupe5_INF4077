@@ -11,3 +11,15 @@ Nous avons donc 4 applications a developper selon le type : web mobile, native, 
   - DONALD
   - PROSPER
   - EXCEL
+  
+#Web_application (Modo)
+link: http://donaldoempire1999.pythonanywhere.com/
+Sur la page d'accueil:
+  - Cliquer sur Usagers pour faire un test en tant que citoyen
+  - cliquer sur Depisteur || Medecin pour acceder a l'interface admin. 
+  (le nom par defaut est: root && mot de passe: root)
+ suivre les indications du systeme.
+ 
+ #Native_application (MODO APP)
+ Telechargable Via Git Hub (Coming on Play Store)
+ 
