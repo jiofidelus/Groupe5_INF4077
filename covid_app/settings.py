@@ -39,8 +39,16 @@ INSTALLED_APPS = [
     'bootstrap_modal_forms',
     'crispy_forms',
     'widget_tweaks',
-    'django_ajax'
-]
+    'django_ajax',
+    'django_jenkins',]
+
+
+JENKINS_TASKS = (
+    'django_jenkins.tasks.run_pep8',
+    'django_jenkins.tasks.run_pyflakes',
+
+)
+
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
