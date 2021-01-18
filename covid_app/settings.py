@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'widget_tweaks',
     'django_ajax',
-    'django_jenkins',]
+    'django_jenkins']
 
 
 JENKINS_TASKS = (
