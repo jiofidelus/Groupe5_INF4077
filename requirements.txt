@@ -6,3 +6,4 @@ django-bootstrap-modal-forms
 django-crispy-forms
 django-widget-tweaks
 django-jenkins
+coverage~=5.3.1

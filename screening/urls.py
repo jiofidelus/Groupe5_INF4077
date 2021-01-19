@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('citizens/', views.HasScreenedListView.as_view(), name='has_screened-list'),
     # path('citizens/<int:pk>', views.CitizenDetailView.as_view(), name='citizens-detail'),
-    path(r'citizens/create/$', views.CitizenCreateModalView.as_view(), name="citizens-create"),
+    path('citizens/create', views.CitizenCreateModalView.as_view(), name="citizens-create"),
 
     path('citizens/create_2', views.CitizenCreateView.as_view(), name="citizens-create_2"),
 
