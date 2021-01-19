@@ -9,7 +9,6 @@ urlpatterns = [
     path('login', views.LoginView.as_view(), name="login"),
     path('', views.index, name="home"),
     path('backOffice', views.index_back_office, name="home_back_office"),
-    path('forgot-password', views.forgot_password, name='forgot_password'),
     path('register', views.register, name='register'),
     path('online_test', views.OnlineTestView.as_view(), name="online_test"),
 
