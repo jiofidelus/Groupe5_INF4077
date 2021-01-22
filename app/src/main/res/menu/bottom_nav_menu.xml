@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/homeFragment"
+        android:title="Accueil"
+        android:icon="@drawable/ic_outline_home_24"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+    <item android:id="@+id/statisticsFragment"
+        android:title="Statistiques"
+        android:icon="@drawable/ic_outline_analytics_24"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+    <item android:id="@+id/roomFragment"
+        android:title="Salon"
+        android:icon="@drawable/ic_outline_sms_24"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+    <item android:id="@+id/accountFragment"
+        android:title="Compte"
+        android:icon="@drawable/ic_outline_account_circle_24"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
+</menu>

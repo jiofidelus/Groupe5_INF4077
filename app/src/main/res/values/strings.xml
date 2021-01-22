@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">covid_app</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapbox_access_token" translatable="false">pk.eyJ1IjoiNGtwcm9zeiIsImEiOiJja2kzMzlyazMxanN4MnVvYTFzNWJ6YTB6In0.hRk8q2p_yO2vMet15s7t3g</string>
+    <string name="user_location_permission_explanation">Veillez accepter cette permission pouir continuer</string>
+    <string name="user_location_permission_not_granted">Permissions refusees</string>
+    <string name="agora_app_id">b89b97f875c44707aac6c6fd5774f7b8</string>
+    <string name="active">+</string>
+    <string name="recovered">R</string>
+    <string name="dead">D</string>
+    <string name="negative">-</string>
+    <string name="undetermined">\?</string>
+    <string-array name="genders">
+        <item>Masculin</item>
+        <item>Feminin</item>
+    </string-array>
+    <string-array name="nationality">
+        <item>Cameroun</item>
+        <item>Autres</item>
+    </string-array>
+    <string-array name="status">
+        <item>+</item>
+        <item>-</item>
+        <item>\?</item>
+        <item>R</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="type">
+        <item>Rapide</item>
+        <item>Longue duree</item>
+    </string-array>
+    <string-array name="region">
+        <item>Adamaoua</item>
+        <item>Est</item>
+        <item>Extrême-Nord</item>
+        <item>Centre</item>
+        <item>Littoral</item>
+        <item>Nord</item>
+        <item>Nord-Ouest</item>
+        <item>Ouest</item>
+        <item>Sud</item>
+        <item>Sud-Ouest</item>
+    </string-array>
+</resources>

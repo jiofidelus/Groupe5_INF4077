@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    >
+    <androidx.cardview.widget.CardView
+        android:id="@+id/symptomCard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerHorizontal="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="6dp"
+        android:layout_margin="5dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/symptomImage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                app:tint="@color/black"
+                app:srcCompat="@drawable/lungs"
+                android:layout_margin="15dp"
+                />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/symptomTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Symptom 1"
+        android:textSize="14sp"
+        android:layout_below="@+id/symptomCard"
+        android:layout_marginTop="0dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="@color/grey5"
+        />
+</RelativeLayout>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="topBarColor">#524180</color>
+    <color name="mainColor">#524180</color>
+    <color name="mainButton">#6C599E</color>
+    <color name="BackgroundIconColor">#ECE6FF</color>
+
+    <color name="grey0">#FFFFFF</color>
+    <color name="grey1">#F4F4F4</color>
+    <color name="grey12">#E6E6E6</color>
+    <color name="grey2">#D1D1D1</color>
+    <color name="grey3">#AEAEAE</color>
+    <color name="grey4">#8A8A8A</color>
+    <color name="grey5">#575757</color>
+    <color name="grey6">#2B2B2B</color>
+    <color name="semiWhite">#80FFFFFF</color>
+    <color name="miniWhite">#40FFFFFF</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="subWhite">#B3FFFFFF</color>
+    <color name="semiBlack">#80FFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="transparent">#00FFFFFF</color>
+
+    <color name="me">#CEBDFF</color>
+    <color name="other">#F1F1F1</color>
+
+    <color name="red">#FF6A6A</color>
+    <color name="blueLight">#4473F8</color>
+    <color name="orange">#FFB546</color>
+    <color name="green">#36B63B</color>
+
+    <color name="link">#6A91FF</color>
+    <color name="ripple_citizen">#47C174</color>
+    <color name="ripple_hasscreened">#787878</color>
+
+    <color name="prevention">#E2ECD8</color>
+    <color name="symptom">#ECE7D8</color>
+
+    <color name="positiveColor">#8D8D8D</color>
+    <color name="recoveredColor">#65FF93</color>
+    <color name="deadColor">#FF6565</color>
+    <color name="activeColor">#FFD165</color>
+</resources>
