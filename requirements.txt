@@ -7,3 +7,5 @@ django-crispy-forms
 django-widget-tweaks
 django-jenkins
 coverage==4.3
+selenium
+django-selenium-test
