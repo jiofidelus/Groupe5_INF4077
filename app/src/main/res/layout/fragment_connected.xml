@@ -381,6 +381,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/citizenTopTitle"
+                        android:layoutAnimation="@anim/layout_animation"
                         android:layout_marginTop="0dp"
                         />
                 </RelativeLayout>
@@ -472,6 +473,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/hasScreenednTopTitle"
+                        android:layoutAnimation="@anim/layout_animation"
                         android:layout_marginTop="0dp"
                         />
                 </RelativeLayout>

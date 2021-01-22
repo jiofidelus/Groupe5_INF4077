@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
 import androidx.annotation.Nullable;
@@ -70,6 +72,7 @@ public class StatisticsFragment extends Fragment {
     private float recoveredCases = 0;
     private float deadCases = 0;
     private boolean canRunThread;
+    private RelativeLayout chartContainer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -91,6 +94,8 @@ public class StatisticsFragment extends Fragment {
 
         initView(result);
         OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
+        setupCharts();
+        chartContainer.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fall_down));
         getHasScreenedList();
         return result;
     }
@@ -279,15 +284,19 @@ public class StatisticsFragment extends Fragment {
             @Override
             public void run() {
                 String tempPositive = totalCases+"";
+                statsPositive.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
                 statsPositive.setText(tempPositive);
 
                 String tempActive = activeCases+"";
+                statsActive.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
                 statsActive.setText(tempActive);
 
                 String tempDead = deadCases+"";
+                statsDead.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
                 statsDead.setText(tempDead);
 
                 String tempRecovered = recoveredCases+"";
+                statsRecovered.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
                 statsRecovered.setText(tempRecovered);
             }
         });
@@ -303,17 +312,17 @@ public class StatisticsFragment extends Fragment {
         pieDataSet.setColors(ColorTemplate.MATERIAL_COLORS);
         pieDataSet.setValueTextColor(Color.WHITE);
         pieDataSet.setValueTextSize(12f);
-        pieDataSet.setColors(new int[] {0xFF424242, 0xFFFF7300, 0xFF22B531, 0xFFD10F0F});
+        pieDataSet.setColors(0xFF424242, 0xFFFF7300, 0xFF22B531, 0xFFD10F0F);
         PieData pieData = new PieData(pieDataSet);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                pieChart.setData(pieData);
-                pieChart.getDescription().setText("Progression");
-                pieChart.animate();
-                pieChart.invalidate();
-            }
-        });
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//            }
+//        });
+        pieChart.setData(pieData);
+        pieChart.getDescription().setText("Progression");
+        pieChart.animate();
+        pieChart.invalidate();
 
         ArrayList<BarEntry> barCases = new ArrayList<>();
         final int[] colors = {0xFFD4D4D4, 0xFFC2C2C2, 0xFFB8B8B8, 0xFFA3A3A3, 0xFF959595, 0xFF888888, 0xFF707070, 0xFF636363, 0xFF595959, 0xFF545454};
@@ -348,20 +357,20 @@ public class StatisticsFragment extends Fragment {
         barDataSet.setValueTextColor(0xFF000000);
         barDataSet.setValueTextSize(12f);
         BarData barData = new BarData(barDataSet);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                barChart.setData(barData);
-                barChart.getDescription().setText("");
-                barChart.animateY( 1000);
-                barChart.setDrawBarShadow(false);
-                barChart.setDrawValueAboveBar(true);
-                barChart.setDrawBorders(false);
-                barChart.setDrawingCacheEnabled(true);
-                barChart.setFitBars(true);
-                barChart.invalidate();
-            }
-        });
+//        activity.runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//            }
+//        });
+        barChart.setData(barData);
+        barChart.getDescription().setText("");
+        barChart.animateY( 1000);
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawValueAboveBar(true);
+        barChart.setDrawBorders(false);
+        barChart.setDrawingCacheEnabled(true);
+        barChart.setFitBars(true);
+        barChart.invalidate();
     }
 
     void initView(View view){
@@ -371,6 +380,7 @@ public class StatisticsFragment extends Fragment {
         // setup bar char
         barChart = (HorizontalBarChart) view.findViewById(R.id.barChart);
 
+        chartContainer = (RelativeLayout) view.findViewById(R.id.chartContainer);
 
         statsPositive = (AppCompatTextView) view.findViewById(R.id.statsPositive);
         statsRecovered = (AppCompatTextView) view.findViewById(R.id.statsRecovered);

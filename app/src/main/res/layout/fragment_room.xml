@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="45dp"
-            android:scrollbars="none"
+            android:scrollbars="vertical"
             android:overScrollMode="never"
             android:background="@color/white"
             >
@@ -139,6 +139,8 @@
                         android:layout_below="@+id/room_user_name"
                         android:layout_centerHorizontal="true"
                         android:overScrollMode="never"
+                        android:nestedScrollingEnabled="false"
+                        android:scrollbars="none"
                         android:layout_margin="0dp"/>
                 </RelativeLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>

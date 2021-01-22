@@ -147,7 +147,6 @@ public class RoomFragment extends Fragment {
         getUid();
         checkInteractions();
         setupAdapter();
-        canRunThread = true;
         getSmsList();
         return result;
     }
@@ -207,6 +206,7 @@ public class RoomFragment extends Fragment {
     }
 
     private void checkInteractions() {
+        canRunThread = true;
         threadCheckInteractions = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -330,6 +330,7 @@ public class RoomFragment extends Fragment {
 
 
     void getSmsList(){
+        canRunThread = true;
         threadGetSmsList = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -518,16 +519,13 @@ public class RoomFragment extends Fragment {
     }
 
     private void setupAdapter(){
-        FlexboxLayoutManager smsLayoutManager = new FlexboxLayoutManager(context);
-        smsLayoutManager.setFlexDirection(FlexDirection.ROW);
-        smsLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
+                FlexboxLayoutManager smsLayoutManager = new FlexboxLayoutManager(context);
+                smsLayoutManager.setFlexDirection(FlexDirection.ROW);
+                smsLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
                 room_recycler_view_sms.setLayoutManager(smsLayoutManager);
-                room_recycler_view_sms.setNestedScrollingEnabled(false);
-                room_recycler_view_sms.clearOnScrollListeners();
-                room_recycler_view_sms.setOverScrollMode(View.OVER_SCROLL_NEVER);
                 smsAdapter = new SmsAdapter(context, smsList, userUID, new SmsAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -753,6 +751,7 @@ public class RoomFragment extends Fragment {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putString(USER_NAME_PREFS, userName);
             editor.apply();
+            dialog.dismiss();
         }
     }
 

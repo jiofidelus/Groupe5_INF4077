@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -70,6 +71,12 @@ public class CitizenAdapter extends RecyclerView.Adapter<CitizenHolder> {
     @Override
     public int getItemCount() {
         return citizenList.size();
+    }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull CitizenHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        holder.citizenCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
     }
 
     private void showDialogCitizenInfo(int position){

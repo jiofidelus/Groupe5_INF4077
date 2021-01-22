@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -65,6 +66,7 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
     public void onViewAttachedToWindow(@NonNull SmsHolder holder) {
         super.onViewAttachedToWindow(holder);
         updateUi(holder, holder.getAdapterPosition());
+        holder.card_view_sms.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
     }
 
     @Override

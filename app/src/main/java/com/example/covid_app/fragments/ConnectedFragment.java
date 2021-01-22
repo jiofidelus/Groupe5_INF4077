@@ -305,7 +305,6 @@ ConnectedFragment extends Fragment {
         citizenLayoutManager.setFlexDirection(FlexDirection.COLUMN);
         citizenLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
         citizenRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        citizenRecyclerView.setNestedScrollingEnabled(false);
         citizenRecyclerView.setLayoutManager(citizenLayoutManager);
         citizenAdapter = new CitizenAdapter(activity, context, citizenList);
         citizenRecyclerView.setAdapter(citizenAdapter);
@@ -314,7 +313,6 @@ ConnectedFragment extends Fragment {
         hasScreenedLayoutManager.setFlexDirection(FlexDirection.COLUMN);
         hasScreenedLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
         hasScreenedRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
-        hasScreenedRecyclerView.setNestedScrollingEnabled(false);
         hasScreenedRecyclerView.setLayoutManager(hasScreenedLayoutManager);
         hasScreenedAdapter = new HasScreenedAdapter(context, hasScreenedList);
         hasScreenedRecyclerView.setAdapter(hasScreenedAdapter);
