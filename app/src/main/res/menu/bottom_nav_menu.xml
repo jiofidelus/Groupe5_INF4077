@@ -7,15 +7,21 @@
         app:showAsAction="ifRoom"
         android:enabled="true"
         />
+    <item android:id="@+id/roomFragment"
+        android:title="Salon"
+        android:icon="@drawable/ic_outline_sms_24"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        />
     <item android:id="@+id/statisticsFragment"
         android:title="Statistiques"
         android:icon="@drawable/ic_outline_analytics_24"
         app:showAsAction="ifRoom"
         android:enabled="true"
         />
-    <item android:id="@+id/roomFragment"
-        android:title="Salon"
-        android:icon="@drawable/ic_outline_sms_24"
+    <item android:id="@+id/mapFragment"
+        android:title="Localisation"
+        android:icon="@drawable/ic_baseline_map_24"
         app:showAsAction="ifRoom"
         android:enabled="true"
         />

@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -35,8 +36,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +47,7 @@ import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
 import com.example.covid_app.adapters.SmsAdapter;
 import com.example.covid_app.models.SmsModel;
+import com.example.covid_app.models.User;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
 import com.google.android.flexbox.JustifyContent;
@@ -59,6 +63,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -72,6 +77,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -95,6 +101,9 @@ public class RoomFragment extends Fragment {
     private Dialog dialog;
 
     boolean isRecording;
+
+    CardView logOutButton;
+    RelativeLayout logOutButtonClick;
 
     AppCompatTextView room_user_name;
     RelativeLayout room_send_voice_button_click;
@@ -128,6 +137,9 @@ public class RoomFragment extends Fragment {
     private boolean canRunThread;
     private Thread threadCheckInteractions;
     boolean canAddNull = true;
+    private ArrayList<User> userList = new ArrayList<>();
+    private RelativeLayout anonymButtonclick;
+    LinearLayout room_no_log_sms;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -168,11 +180,15 @@ public class RoomFragment extends Fragment {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.alpha_0));
-                getUid();
-                checkInteractions();
-                setupAdapter();
-                firebaseAuthentification();
+                if (canRunThread){
+                    hideLogOutButton();
+                    hideNoUserPage();
+                    room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.alpha_0));
+                    getUid();
+                    checkInteractions();
+                    setupAdapter();
+                    firebaseAuthentification();
+                }
             }
         }).start();
     }
@@ -230,6 +246,12 @@ public class RoomFragment extends Fragment {
             @Override
             public void run() {
                 if (canRunThread){
+                    logOutButtonClick.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            logOutFirebase();
+                        }
+                    });
                     room_send_voice_button_click.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -272,6 +294,44 @@ public class RoomFragment extends Fragment {
             }
         });
         threadCheckInteractions.start();
+    }
+
+    private void logOutAnonymousFirebase(){
+        FirebaseAuth.getInstance()
+                .signOut();
+    }
+
+    private void logOutFirebase() {
+        if (dialog == null){
+            dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.custom_log_out_alert);
+            RelativeLayout log_out_button_click = dialog.findViewById(R.id.log_out_button_click);
+            RelativeLayout log_out_cancel_button_click = dialog.findViewById(R.id.log_out_cancel_button_click);
+            log_out_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    dialog = null;
+                    FirebaseAuth.getInstance()
+                            .signOut();
+                    Toast.makeText(activity, "Deconnecte", Toast.LENGTH_SHORT).show();
+                    FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
+                    ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
+                    ft.add(R.id.fragment, new RoomFragment());
+                    ft.commit();
+                }
+            });
+            log_out_cancel_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    dialog = null;
+                }
+            });
+            dialog.show();
+        }
     }
 
     private void uploadVoiceToFirebaseStorage(SmsModel smsModel){
@@ -703,10 +763,6 @@ public class RoomFragment extends Fragment {
         uploadMessageDataToFireStore(smsModel);
     }
 
-    private void logOutRoom() {
-        //
-    }
-
     private void initView(View view) {
         room_user_name = (AppCompatTextView) view.findViewById(R.id.room_user_name);
         room_recycler_view_sms = (RecyclerView) view.findViewById(R.id.room_recycler_view_sms);
@@ -717,6 +773,11 @@ public class RoomFragment extends Fragment {
         room_record_image = (AppCompatImageView) view.findViewById(R.id.room_record_image);
         room_cancel_voice_button_click = (RelativeLayout) view.findViewById(R.id.room_cancel_voice_button_click);
         topLoadingAnimation = (LottieAnimationView) view.findViewById(R.id.topLoadingAnimation);
+
+        anonymButtonclick = (RelativeLayout) view.findViewById(R.id.anonymButtonclick);
+        room_no_log_sms = (LinearLayout) view.findViewById(R.id.room_no_log_sms);
+        logOutButton = (CardView) view.findViewById(R.id.logOutButton);
+        logOutButtonClick = (RelativeLayout) view.findViewById(R.id.logOutButtonClick);
     }
 
     void firebaseAuthentification(){
@@ -728,15 +789,64 @@ public class RoomFragment extends Fragment {
             logged = true;
             updateUI();
         }else {
-            signInAnonymously();
+            showNoUserPage();
         }
     }
 
+    private void showNoUserPage() {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                room_no_log_sms.setVisibility(View.VISIBLE);
+                room_no_log_sms.setAlpha(1);
+                room_user_name.setText("-- Vous etes hors line --");
+                anonymButtonclick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        signInAnonymously();
+                    }
+                });
+            }
+        });
+        room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_linear));
+    }
+
+    private void hideNoUserPage(){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                room_no_log_sms.setAlpha(0);
+                room_no_log_sms.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    private void showLogOutButton(){activity.runOnUiThread(new Runnable() {
+        @Override
+        public void run() {
+            logOutButton.setVisibility(View.VISIBLE);
+            logOutButton.setAlpha(1);
+            }
+        });
+    }
+
+    private void hideLogOutButton(){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                logOutButton.setAlpha(0);
+                logOutButton.setVisibility(View.INVISIBLE);
+            }
+        });
+    }
+
     private void signInAnonymously() {
+        showLoadingDialog();
         firebaseAuth.signInAnonymously()
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        hideLoadingDialog();
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInAnonymously:success");
@@ -756,6 +866,8 @@ public class RoomFragment extends Fragment {
             if (currentUser.isAnonymous()){
                 getSavedUserName();
                 if (userName == null){
+                    room_user_name.setText("-- Vous etes hors line --");
+                    room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_linear));
                     showNewUserNameDialog();
                 }
                 if (userName != null){
@@ -772,7 +884,12 @@ public class RoomFragment extends Fragment {
             @Override
             public void run() {
                 if (name != null){
-                    room_user_name.setText(name);
+                    if (name.isEmpty()){
+                        room_user_name.setText("-- Vous etes hors line --");
+                    }else {
+                        room_user_name.setText(name);
+                    }
+                    showLogOutButton();
                 }else {
                     room_user_name.setText("-- Vous etes hors line --");
                 }
@@ -783,30 +900,27 @@ public class RoomFragment extends Fragment {
     }
 
     void showLoadingDialog(){
-        dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_loading_dialog);
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
-                loadingAnimation.playAnimation();
-                RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
-                cancelButtonClick.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        hideLoadingDialog();
-                        cancelLoading();
-                    }
-                });
-            }
-        });
-        dialog.show();
-    }
-
-    private void cancelLoading() {
-
+        if (dialog == null){
+            dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.custom_loading_dialog);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                    loadingAnimation.playAnimation();
+                    RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
+                    cancelButtonClick.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            hideLoadingDialog();
+                        }
+                    });
+                }
+            });
+            dialog.show();
+        }
     }
 
     void hideLoadingDialog(){
@@ -820,6 +934,7 @@ public class RoomFragment extends Fragment {
             });
             dialog.dismiss();
         }
+        dialog = null;
     }
 
     void showTopLoadingDialog(){
@@ -832,15 +947,8 @@ public class RoomFragment extends Fragment {
         topLoadingAnimation.setVisibility(View.INVISIBLE);
     }
 
-    private void saveNewUserName() {
-        if (currentUser.isAnonymous()) {
-            sharedPref = context.getSharedPreferences(
-                    USER_PREFS, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString(USER_NAME_PREFS, userName);
-            editor.apply();
-            dialog.dismiss();
-        }
+    private void saveNewUserName(String userName) {
+        getUsersWithName(userName.toString());
     }
 
     private void getSavedUserName() {
@@ -850,51 +958,162 @@ public class RoomFragment extends Fragment {
     }
 
     void showNewUserNameDialog(){
-        dialog = new Dialog(activity);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.custom_dialog_user_name);
-        final RelativeLayout[] user_name_edit_save_button_click = new RelativeLayout[1];
-        final RelativeLayout[] user_name_edit_cancel_button_click = new RelativeLayout[1];
-        final EditText[] userNameEditText = new EditText[1];
-        final TextView[] user_name_error = new TextView[1];
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                userNameEditText[0] = dialog.findViewById(R.id.user_name_edit);
-                user_name_error[0] = dialog.findViewById(R.id.user_name_error);
-                user_name_error[0].setAlpha(0);
-                user_name_edit_save_button_click[0] = dialog.findViewById(R.id.user_name_edit_save_button_click);
-                user_name_edit_cancel_button_click[0] = dialog.findViewById(R.id.user_name_edit_cancel_button_click);
-            }
-        });
-        user_name_edit_save_button_click[0].setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                showTopLoadingDialog();
-                String tempUsername = userNameEditText[0].getText().toString();
-                if(!tempUsername.isEmpty()){
-                    if (tempUsername.length() > 3){
-                        userName = tempUsername;
-                        saveNewUserName();
-                    }else {
-                        user_name_error[0].setText("Votre nom doit contenir au moins 3 caracteres !!!");
-                        user_name_error[0].setAlpha(1);
-                    }
-                }else {
-                    user_name_error[0].setText("Votre nom doit contenir au moins 3 caracteres !!!");
-                    user_name_error[0].setAlpha(1);
+                if (dialog == null){
+                    dialog = new Dialog(activity);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(false);
+                    dialog.setContentView(R.layout.custom_dialog_user_name);
+                    final RelativeLayout[] user_name_edit_save_button_click = new RelativeLayout[1];
+                    final RelativeLayout[] user_name_edit_cancel_button_click = new RelativeLayout[1];
+                    final EditText[] userNameEditText = new EditText[1];
+                    final TextView[] user_name_error = new TextView[1];
+                    userNameEditText[0] = dialog.findViewById(R.id.user_name_edit);
+                    user_name_error[0] = dialog.findViewById(R.id.user_name_error);
+                    user_name_error[0].setAlpha(0);
+                    user_name_edit_save_button_click[0] = dialog.findViewById(R.id.user_name_edit_save_button_click);
+                    user_name_edit_cancel_button_click[0] = dialog.findViewById(R.id.user_name_edit_cancel_button_click);
+                    userNameEditText[0].addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                            //
+                        }
+
+                        @Override
+                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+                            //
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable s) {
+                            //
+                        }
+                    });
+                    user_name_edit_save_button_click[0].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            dialog = null;
+                            showTopLoadingDialog();
+                            String tempUsername = userNameEditText[0].getText().toString();
+                            room_user_name.setText("-- Vous etes hors line --");
+                            if(!tempUsername.isEmpty()){
+                                if (tempUsername.length() > 3){
+                                    userName = tempUsername;
+                                    saveNewUserName(userName);
+                                }else {
+                                    user_name_error[0].setText("Votre nom doit contenir au moins 3 caracteres !!!");
+                                    user_name_error[0].setAlpha(1);
+                                }
+                            }else {
+                                user_name_error[0].setText("Votre nom doit contenir au moins 3 caracteres !!!");
+                                user_name_error[0].setAlpha(1);
+                            }
+                        }
+                    });
+                    user_name_edit_cancel_button_click[0].setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            dialog = null;
+                            logOutAnonymousFirebase();
+                            Toast.makeText(context, "Aucun nom fourni", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_linear));
+                    dialog.show();
                 }
             }
         });
-        user_name_edit_cancel_button_click[0].setOnClickListener(new View.OnClickListener() {
+    }
+
+
+    private void getUsersWithName(String userName){
+        canRunThread = true;
+        new Thread(new Runnable() {
             @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                Toast.makeText(context, "Aucun nom fourni", Toast.LENGTH_SHORT).show();
+            public void run() {
+                if (canRunThread){
+                    db.collection("usersnames").whereEqualTo("username", userName).whereNotEqualTo("id", userUID)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    //
+                                    Log.w(TAG, "Loading user data finished");
+                                    userList.clear();
+                                    userList = new ArrayList<>();
+                                    if (task.isSuccessful()) {
+                                        Log.w(TAG, "Loading successfull");
+                                        for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
+                                            User user1 = documentSnapshot.toObject(User.class);
+                                            userList.add(user1);
+                                        }
+                                        int numberUsersWithThisName = 0;
+                                        if (userList.isEmpty()){
+                                            // now we can save the user name
+                                            uploadUserNameToFirestore(userName);
+                                        }else{
+                                            for (User user2 : userList){
+                                                if (user2 != null){
+                                                    if (user2.getUsername().equals(userName)){
+                                                        numberUsersWithThisName++;
+                                                    }
+                                                }
+                                            }
+                                            if (numberUsersWithThisName <= 0){
+                                                uploadUserNameToFirestore(userName);
+                                            }else {
+                                                showErrorForUserName("Ce nom existe deja !!! Veillez choisir un autre !!!");
+                                                hideTopLoadingDialog();
+                                                showNewUserNameDialog();
+                                            }
+                                        }
+                                    }else {
+                                        showErrorForUserName("Erreur de connexion !!");
+                                        hideTopLoadingDialog();
+                                        logOutAnonymousFirebase();
+                                    }
+                                }
+                            });
+                }
             }
-        });
-        dialog.show();
+        }).start();
+    }
+
+    private void showErrorForUserName(String sms) {
+        Toast.makeText(context, sms+"", Toast.LENGTH_SHORT).show();
+    }
+
+    private void uploadUserNameToFirestore(String name) {
+        User user = new User();
+        user.setId(userUID);
+        user.setUsername(name);
+        db.collection("usersnames").add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        hideTopLoadingDialog();
+                        if (currentUser.isAnonymous()) {
+                            sharedPref = context.getSharedPreferences(
+                                    USER_PREFS, Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(USER_NAME_PREFS, userName);
+                            editor.apply();
+                            dialog = null;
+                            room_user_name.setText(userName);
+                        }
+                        Toast.makeText(activity, "Enregistre avec succes", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        hideTopLoadingDialog();
+                        Toast.makeText(activity, "Echec d'enregistrement", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }

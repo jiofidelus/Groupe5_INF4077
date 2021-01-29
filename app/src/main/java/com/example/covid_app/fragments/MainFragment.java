@@ -63,6 +63,7 @@ public class MainFragment extends Fragment {
                             ft.commit();
                         } else if (item.getItemId() == R.id.accountFragment) {
                             FragmentTransaction ft = fragmentManager.beginTransaction();
+                            currentUser = firebaseAuth.getCurrentUser();
                             if (currentUser != null) {
                                 if (currentUser.isAnonymous()){
                                     //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
@@ -80,6 +81,11 @@ public class MainFragment extends Fragment {
                             FragmentTransaction ft = fragmentManager.beginTransaction();
                             //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                             ft.replace(R.id.fragment, new RoomFragment());
+                            ft.commit();
+                        }else if(item.getItemId() == R.id.mapFragment){
+                            FragmentTransaction ft = fragmentManager.beginTransaction();
+                            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                            ft.replace(R.id.fragment, new MapFragment());
                             ft.commit();
                         }
                         return true;

@@ -109,91 +109,12 @@ public class HomeFragment extends Fragment {
                     getPreventionList();
                     getSymptomList();
                     bottomRelative.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fall_down));
-                    activity.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            configureDialogs();
-                        }
-                    });
                     checkInteractions();
                     setupAdapter();
                 }
             }
         });
         getThread.start();
-    }
-
-
-    private void configureDialogs() {
-        smsDialog = new Dialog(activity);
-        smsDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        smsDialog.setCancelable(false);
-        smsDialog.setContentView(R.layout.custom_dialog_sms);
-        AppCompatEditText send_sms_destination_edit = smsDialog.findViewById(R.id.send_sms_destination_edit);
-        String tempDefaultNumber = ORANGE_NUMBER+"";
-        send_sms_destination_edit.setText(tempDefaultNumber);
-        AppCompatEditText send_sms_edit = smsDialog.findViewById(R.id.send_sms_edit);
-        AppCompatTextView send_sms_error = smsDialog.findViewById(R.id.send_sms_error);
-        RelativeLayout send_sms_button_click = smsDialog.findViewById(R.id.send_sms_button_click);
-        RelativeLayout send_sms_cancel_button_click = smsDialog.findViewById(R.id.send_sms_cancel_button_click);
-        send_sms_button_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tempNumber = send_sms_destination_edit.getText().toString();
-                if (tempNumber.isEmpty()){
-                    send_sms_error.setText("Numero invalide !!!");
-                    send_sms_error.setAlpha(1);
-                }else {
-                    send_sms_error.setAlpha(0);
-                    String tempSms = send_sms_edit.getText().toString();
-                    if (tempSms.isEmpty()){
-                        send_sms_error.setText("Message vide !!!");
-                        send_sms_error.setAlpha(1);
-                    }else {
-                        send_sms_error.setAlpha(0);
-                        hideSmsDialog();
-                        sendSms(tempNumber, tempSms);
-                    }
-                }
-            }
-        });
-        send_sms_cancel_button_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideSmsDialog();
-            }
-        });
-
-        callDialog = new Dialog(activity);
-        callDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        callDialog.setCancelable(false);
-        callDialog.setContentView(R.layout.custom_dialog_call);
-        AppCompatEditText call_edit = callDialog.findViewById(R.id.call_edit);
-        String tempDefaultNumber2 = ORANGE_NUMBER+"";
-        call_edit.setText(tempDefaultNumber2);
-        AppCompatTextView call_error = callDialog.findViewById(R.id.call_error);
-        RelativeLayout call_button_click = callDialog.findViewById(R.id.call_button_click);
-        RelativeLayout call_cancel_button_click = callDialog.findViewById(R.id.call_cancel_button_click);
-        call_button_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tempNumber = call_edit.getText().toString();
-                if (tempNumber.isEmpty()){
-                    call_error.setText("Numero invalide !!!");
-                    call_error.setAlpha(1);
-                }else {
-                    call_error.setAlpha(0);
-                    hideCallDialog();
-                    call(tempNumber);
-                }
-            }
-        });
-        call_cancel_button_click.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                hideCallDialog();
-            }
-        });
     }
 
     @Override
@@ -226,7 +147,6 @@ public class HomeFragment extends Fragment {
                 }else {
                     showCallDialog(true);
                 }
-                showCallDialog(true);
             }
         });
 
@@ -242,12 +162,6 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void showSmsDialog(boolean b) {
-        if (smsDialog != null){
-            smsDialog.show();
-        }
     }
 
     private void sendSms(String destinationNumber, String tempSms) {
@@ -275,24 +189,104 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    private void showSmsDialog(boolean b) {
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                if (smsDialog == null){
+                    smsDialog = new Dialog(activity);
+                    smsDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    smsDialog.setCancelable(false);
+                    smsDialog.setContentView(R.layout.custom_dialog_sms);
+                    AppCompatEditText send_sms_destination_edit = smsDialog.findViewById(R.id.send_sms_destination_edit);
+                    String tempDefaultNumber = ORANGE_NUMBER + "";
+                    send_sms_destination_edit.setText(tempDefaultNumber);
+                    AppCompatEditText send_sms_edit = smsDialog.findViewById(R.id.send_sms_edit);
+                    AppCompatTextView send_sms_error = smsDialog.findViewById(R.id.send_sms_error);
+                    RelativeLayout send_sms_button_click = smsDialog.findViewById(R.id.send_sms_button_click);
+                    RelativeLayout send_sms_cancel_button_click = smsDialog.findViewById(R.id.send_sms_cancel_button_click);
+                    send_sms_button_click.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String tempNumber = send_sms_destination_edit.getText().toString();
+                            if (tempNumber.isEmpty()) {
+                                send_sms_error.setText("Numero invalide !!!");
+                                send_sms_error.setAlpha(1);
+                            } else {
+                                send_sms_error.setAlpha(0);
+                                String tempSms = send_sms_edit.getText().toString();
+                                if (tempSms.isEmpty()) {
+                                    send_sms_error.setText("Message vide !!!");
+                                    send_sms_error.setAlpha(1);
+                                } else {
+                                    send_sms_error.setAlpha(0);
+                                    hideSmsDialog();
+                                    sendSms(tempNumber, tempSms);
+                                }
+                            }
+                        }
+                    });
+                    send_sms_cancel_button_click.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            hideSmsDialog();
+                        }
+                    });
+                    smsDialog.show();
+                }
+            }
+        });
+    }
+
+    private void showCallDialog(boolean b) {
+        if (callDialog == null) {
+            callDialog = new Dialog(activity);
+            callDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            callDialog.setCancelable(false);
+            callDialog.setContentView(R.layout.custom_dialog_call);
+            AppCompatEditText call_edit = callDialog.findViewById(R.id.call_edit);
+            String tempDefaultNumber2 = ORANGE_NUMBER + "";
+            call_edit.setText(tempDefaultNumber2);
+            AppCompatTextView call_error = callDialog.findViewById(R.id.call_error);
+            RelativeLayout call_button_click = callDialog.findViewById(R.id.call_button_click);
+            RelativeLayout call_cancel_button_click = callDialog.findViewById(R.id.call_cancel_button_click);
+            call_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String tempNumber = call_edit.getText().toString();
+                    if (tempNumber.isEmpty()) {
+                        call_error.setText("Numero invalide !!!");
+                        call_error.setAlpha(1);
+                    } else {
+                        call_error.setAlpha(0);
+                        hideCallDialog();
+                        call(tempNumber);
+                    }
+                }
+            });
+            call_cancel_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    hideCallDialog();
+                }
+            });
+            callDialog.show();
+        }
+    }
+
     private void hideSmsDialog() {
         if (smsDialog != null){
             smsDialog.dismiss();
         }
+        smsDialog = null;
     }
 
     private void hideCallDialog() {
         if (callDialog != null){
             callDialog.dismiss();
         }
+        callDialog = null;
     }
-
-    private void showCallDialog(boolean b) {
-        if (callDialog != null){
-            callDialog.show();
-        }
-    }
-
 
     void initView(View view){
         preventionRecyclerView = view.findViewById(R.id.preventionRecyclerView);

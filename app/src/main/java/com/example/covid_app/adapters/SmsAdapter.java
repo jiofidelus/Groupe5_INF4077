@@ -18,12 +18,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covid_app.R;
 import com.example.covid_app.models.SmsModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
 
+    private final FirebaseAuth firebaseAuth;
     Context context;
     AppCompatActivity activity;
     ArrayList<SmsModel> smsList;
@@ -50,6 +54,7 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
                 handlePlayingVoice = new Handler();
             }
         });
+        firebaseAuth = FirebaseAuth.getInstance();
     }
 
     @NonNull
@@ -87,7 +92,6 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
         updateUi(holder, holder.getAdapterPosition());
     }
 
-
     private void updateUi(SmsHolder holder, int position){
         if (position < smsList.size()) {
             if (!onItemClickListener.currentPlaying(position)) {
@@ -113,7 +117,14 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
     private void checkContent(SmsHolder holder, int position) {
         if (smsList.get(position) != null){
             // check if it me the sender of content
-            if (userUID.equals(smsList.get(position).getUserUid())){
+            boolean itMe = false;
+            FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+            if (Objects.requireNonNull(currentUser).isAnonymous()){
+                itMe = userUID.equals(smsList.get(position).getUserUid());
+            }else {
+                itMe = Objects.requireNonNull(currentUser.getEmail()).equals(smsList.get(position).getUserName());
+            }
+            if (itMe){
                 holder.left_card.setVisibility(View.VISIBLE);
                 holder.right_card.setVisibility(View.GONE);
                 // for sms

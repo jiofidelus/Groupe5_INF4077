@@ -136,37 +136,6 @@
                             android:layout_marginTop="10dp"
                             >
                             <androidx.cardview.widget.CardView
-                                android:id="@+id/localisationButton"
-                                android:layout_width="45dp"
-                                android:layout_height="45dp"
-                                android:layout_marginEnd="10dp"
-                                app:cardCornerRadius="22.5dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/transparent"
-                                android:layout_alignParentStart="true"
-                                android:layout_marginTop="10dp"
-                                >
-                                <RelativeLayout
-                                    android:id="@+id/localisationButtonClick"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:background="@drawable/ripple_light_main_color"
-                                    android:clickable="true"
-                                    android:focusable="true"
-                                    android:padding="10dp"
-                                    android:gravity="center"
-                                    android:layout_gravity="center"
-                                    >
-                                    <androidx.appcompat.widget.AppCompatImageView
-                                        android:id="@+id/localisationButtonImage"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        app:srcCompat="@drawable/ic_baseline_location_on_24"
-                                        app:tint="@color/white"
-                                        android:alpha="1"/>
-                                </RelativeLayout>
-                            </androidx.cardview.widget.CardView>
-                            <androidx.cardview.widget.CardView
                                 android:id="@+id/sensibilisationButton"
                                 android:layout_width="wrap_content"
                                 android:layout_height="45dp"
@@ -176,7 +145,6 @@
                                 app:cardElevation="0dp"
                                 app:cardBackgroundColor="@color/transparent"
                                 android:layout_marginTop="10dp"
-                                android:layout_toEndOf="@+id/localisationButton"
                                 >
                                 <RelativeLayout
                                     android:id="@+id/sensibilisationButtonClick"
@@ -201,11 +169,13 @@
                                 </RelativeLayout>
                             </androidx.cardview.widget.CardView>
                             <RelativeLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="45dp"
                                 android:layout_toEndOf="@+id/sensibilisationButton"
-                                android:layout_alignParentEnd="true"
+                                android:layout_centerHorizontal="true"
                                 android:layout_marginTop="10dp"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="10dp"
                                 >
                                 <androidx.appcompat.widget.SwitchCompat
                                     android:id="@+id/listCitizenSwitch"
@@ -215,14 +185,43 @@
                                     android:textColor="@color/white"
                                     android:textSize="14sp"
                                     android:checked="true"
-                                    android:textOff="OFF"
-                                    android:textOn="ON"
                                     android:ellipsize="marquee"
                                     android:singleLine="true"
                                     app:thumbTint="@color/white"
-                                    android:layout_alignParentRight="true"
-                                    android:layout_alignParentEnd="true"/>
+                                    android:layout_centerHorizontal="true"/>
                             </RelativeLayout>
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/logOutButton"
+                                android:layout_width="45dp"
+                                android:layout_height="45dp"
+                                android:layout_marginEnd="10dp"
+                                app:cardCornerRadius="22.5dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/transparent"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginTop="10dp"
+                                android:visibility="invisible"
+                                >
+                                <RelativeLayout
+                                    android:id="@+id/logOutButtonClick"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:background="@drawable/ripple_light_main_color"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:padding="10dp"
+                                    android:gravity="center"
+                                    android:layout_gravity="center"
+                                    >
+                                    <androidx.appcompat.widget.AppCompatImageView
+                                        android:id="@+id/logOutButtonImage"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        app:srcCompat="@drawable/ic_baseline_account_circle_24"
+                                        app:tint="@color/white"
+                                        android:alpha="1"/>
+                                </RelativeLayout>
+                            </androidx.cardview.widget.CardView>
                         </RelativeLayout>
                     </RelativeLayout>
                 </RelativeLayout>

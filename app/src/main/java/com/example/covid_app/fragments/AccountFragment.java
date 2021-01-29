@@ -41,7 +41,7 @@ public class AccountFragment extends Fragment {
     EditText connexionPassword;
     RelativeLayout connectionButtonClick;
     TextView connectionError;
-    TextView connectionNewUser;
+    TextView anonymButtonclick;
     ConstraintLayout createAccount;
 
     EditText createUserName;
@@ -85,6 +85,12 @@ public class AccountFragment extends Fragment {
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
     }
     private void checkInteractions() {
+        anonymButtonclick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
         connectionButtonClick.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +138,7 @@ public class AccountFragment extends Fragment {
                     FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                     FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                     ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
-                    ft.replace(R.id.fragment, new ConnectedFragment()).addToBackStack(null);
+                    ft.replace(R.id.fragment, new ConnectedFragment());
                     ft.commit();
                     assert firebaseUser != null;
                     Toast.makeText(context, "Utilisateur "+ firebaseUser.getEmail() + " connecte", Toast.LENGTH_SHORT).show();
@@ -144,44 +150,44 @@ public class AccountFragment extends Fragment {
         });
     }
 
-    void removed(){
-        createOldUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                createAccount.setAlpha(0.0f);
-                connectionError.setAlpha(0);
-                connectAccount.setVisibility(View.VISIBLE);
-                connectAccount.setAlpha(1.0f);
-                createAccount.setVisibility(View.GONE);
-            }
-        });
-        connectionNewUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connectAccount.setAlpha(0.0f);
-                createError.setAlpha(0);
-                createAccount.setVisibility(View.VISIBLE);
-                createAccount.setAlpha(1.0f);
-                connectAccount.setVisibility(View.GONE);
-            }
-        });
-        createButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(createUserName.getText().toString().isEmpty() || createPassword1.getText().toString().isEmpty() || createPassword2.getText().toString().isEmpty()){
-                    createError.setText("Email ou mot de passe invalide");
-                    createError.setAlpha(1.0f);
-                }else {
-                    if (!createPassword1.getText().toString().equals(createPassword2.getText().toString())){
-                        createError.setText("Les mots de passe ne correspondent pas");
-                        createError.setAlpha(1.0f);
-                    }else {
-                        createAccount(createUserName.getText().toString(), createPassword1.getText().toString());
-                    }
-                }
-            }
-        });
-    }
+//    void removed(){
+//        createOldUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                createAccount.setAlpha(0.0f);
+//                connectionError.setAlpha(0);
+//                connectAccount.setVisibility(View.VISIBLE);
+//                connectAccount.setAlpha(1.0f);
+//                createAccount.setVisibility(View.GONE);
+//            }
+//        });
+//        connectionNewUser.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                connectAccount.setAlpha(0.0f);
+//                createError.setAlpha(0);
+//                createAccount.setVisibility(View.VISIBLE);
+//                createAccount.setAlpha(1.0f);
+//                connectAccount.setVisibility(View.GONE);
+//            }
+//        });
+//        createButtonClick.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(createUserName.getText().toString().isEmpty() || createPassword1.getText().toString().isEmpty() || createPassword2.getText().toString().isEmpty()){
+//                    createError.setText("Email ou mot de passe invalide");
+//                    createError.setAlpha(1.0f);
+//                }else {
+//                    if (!createPassword1.getText().toString().equals(createPassword2.getText().toString())){
+//                        createError.setText("Les mots de passe ne correspondent pas");
+//                        createError.setAlpha(1.0f);
+//                    }else {
+//                        createAccount(createUserName.getText().toString(), createPassword1.getText().toString());
+//                    }
+//                }
+//            }
+//        });
+//    }
 
     void initView(View view){
         accountScrollView = view.findViewById(R.id.accountScrollView);
@@ -190,7 +196,7 @@ public class AccountFragment extends Fragment {
         connexionPassword = view.findViewById(R.id.connectionPassword);
         connectionButtonClick = view.findViewById(R.id.connectionButtonClick);
         connectionError = view.findViewById(R.id.connectionError);
-        connectionNewUser = view.findViewById(R.id.newUser);
+        anonymButtonclick = view.findViewById(R.id.anonymButtonclick);
         connectAccount = view.findViewById(R.id.connectAccount);
 
         createUserName = view.findViewById(R.id.createUserName);
