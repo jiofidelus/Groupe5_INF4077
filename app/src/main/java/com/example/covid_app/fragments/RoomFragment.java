@@ -12,11 +12,18 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -30,6 +37,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -97,8 +105,7 @@ public class RoomFragment extends Fragment {
     RelativeLayout room_cancel_voice_button_click;
     EditText room_edit_text;
     private RelativeLayout room_send_message_button_click;
-    ScrollView room_scroll_view;
-
+    LottieAnimationView topLoadingAnimation;
     ArrayList<SmsModel> smsList = new ArrayList<>();
     SmsAdapter smsAdapter;
     private boolean logged;
@@ -120,6 +127,7 @@ public class RoomFragment extends Fragment {
     private Thread threadGetSmsList;
     private boolean canRunThread;
     private Thread threadCheckInteractions;
+    boolean canAddNull = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -144,10 +152,6 @@ public class RoomFragment extends Fragment {
                 USER_PREFS, Context.MODE_PRIVATE);
 
         initView(result);
-        getUid();
-        checkInteractions();
-        setupAdapter();
-        getSmsList();
         return result;
     }
 
@@ -155,7 +159,22 @@ public class RoomFragment extends Fragment {
     public void onStart() {
         super.onStart();
         canRunThread = true;
-        firebaseAuthentification();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.alpha_0));
+                getUid();
+                checkInteractions();
+                setupAdapter();
+                firebaseAuthentification();
+            }
+        }).start();
     }
 
     @Override
@@ -315,19 +334,18 @@ public class RoomFragment extends Fragment {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        hideLoadingDialog();
+                        hideTopLoadingDialog();
                         Toast.makeText(activity, "Envoye avec succes", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        hideLoadingDialog();
+                        hideTopLoadingDialog();
                         Toast.makeText(activity, "Echec d'envoie", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
-
 
     void getSmsList(){
         canRunThread = true;
@@ -341,12 +359,45 @@ public class RoomFragment extends Fragment {
                             if (error != null) {
                                 return;
                             }
-                            for (DocumentSnapshot doc : Objects.requireNonNull(value)) {
-                                SmsModel smsModel = doc.toObject(SmsModel.class);
-                                if (smsModel != null){
-                                    tryToAddSms(smsModel);
-                                }
+                            showTopLoadingDialog();
+                            if (canAddNull){
+                                canAddNull = false;
                             }
+                            if (smsList.size() >= 2){
+                                smsList.remove(smsList.size()-2);
+                                smsList.remove(smsList.size()-1);
+                            }
+                            int oldSize = smsList.size()-1;
+                            boolean canScrollEnd = false;
+                            for (DocumentSnapshot doc : value) {
+                                SmsModel smsModel = doc.toObject(SmsModel.class);
+                                tryToAddSms(smsModel);
+                            }
+                            Collections.sort(smsList, new Comparator<SmsModel>() {
+                                @Override
+                                public int compare(SmsModel o1, SmsModel o2) {
+                                    return o1.getTimeInMilli().compareTo(o2.getTimeInMilli());
+                                }
+                            });
+                            if (oldSize < smsList.size()-1){
+                                canScrollEnd = true;
+                                int number = smsList.size()-1 - oldSize;
+                                activity.runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        smsAdapter.notifyItemChanged(smsList.size()-number);
+                                    }
+                                });
+                            }
+                            smsList.add(null);
+                            smsList.add(null);
+                            smsAdapter.notifyItemChanged(smsList.size()-2);
+                            smsAdapter.notifyItemInserted(smsList.size()-1);
+                            if (canScrollEnd){
+                                canScrollEnd = false;
+                                scrollToBottom();
+                            }
+                            hideTopLoadingDialog();
                         }
                     });
                 }
@@ -356,35 +407,57 @@ public class RoomFragment extends Fragment {
     }
 
     private void tryToAddSms(SmsModel smsModel) {
-        for (SmsModel smsModel1 : smsList){
+        for (int i=0; i<smsList.size(); i++){
+            SmsModel smsModel1 = smsList.get(i);
             if (smsModel1 != null){
-                if (smsModel.getUserUid().equals(smsModel1.getUserUid())){
-                    if (smsModel.getMessage().equals(smsModel1.getMessage())){
-                        if (smsModel.getSendDate().equals(smsModel1.getSendDate())){
-                            if (smsModel.getUserName().equals(smsModel1.getUserName())){
-                                if (smsModel.getVoiceDuration() == (smsModel1.getVoiceDuration())){
-                                    if (smsModel.getVoiceUrl().equals(smsModel1.getVoiceUrl())){
-                                        return;
-                                    }
-                                }
+                if (smsModel.getTimeInMilli() != null && smsModel1.getTimeInMilli() != null) {
+                    if (smsModel.getTimeInMilli().equals(smsModel1.getTimeInMilli())) {
+                        if (smsModel.getUserUid().equals(smsModel1.getUserUid())) {
+                            if (smsModel.getVoiceDuration() != smsModel1.getVoiceDuration()) {
+                                smsModel.setVoiceDuration(smsModel1.getVoiceDuration());
+                                smsList.set(i, smsModel);
+                                smsAdapter.notifyItemChanged(i);
                             }
+                            if (!smsModel.getVoiceUrl().equals(smsModel1.getVoiceUrl())) {
+                                smsModel.setVoiceUrl(smsModel1.getVoiceUrl());
+                                smsList.set(i, smsModel);
+                                smsAdapter.notifyItemChanged(i);
+                            }
+                            if (!smsModel.getUserName().equals(smsModel1.getUserName())) {
+                                smsModel.setUserName(smsModel1.getUserName());
+                                smsList.set(i, smsModel);
+                                smsAdapter.notifyItemChanged(i);
+                            }
+                            if (!smsModel.getSendDate().equals(smsModel1.getSendDate())) {
+                                smsModel.setSendDate(smsModel1.getSendDate());
+                                smsList.set(i, smsModel);
+                                smsAdapter.notifyItemChanged(i);
+                            }
+                            if (!smsModel.getMessage().equals(smsModel1.getMessage())) {
+                                smsModel.setMessage(smsModel1.getMessage());
+                                smsList.set(i, smsModel);
+                                smsAdapter.notifyItemChanged(i);
+                            }
+                            return;
                         }
                     }
                 }
             }
         }
         smsList.add(smsModel);
-        Collections.sort(smsList, new Comparator<SmsModel>() {
-            @Override
-            public int compare(SmsModel o1, SmsModel o2) {
-                return o2.getTimeInMilli().compareTo(o1.getTimeInMilli());
-            }
-        });
-        activity.runOnUiThread(new Runnable() {
+    }
+
+    private void scrollToBottom() {
+        room_recycler_view_sms.post(new Runnable() {
             @Override
             public void run() {
-                smsAdapter.notifyItemChanged(0);
-                smsAdapter.notifyItemInserted(smsList.size()-1);
+                if (canRunThread){
+                    try {
+                        room_recycler_view_sms.scrollToPosition(smsList.size()-1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
@@ -413,7 +486,6 @@ public class RoomFragment extends Fragment {
             updateRecordingDuration();
         }
     }
-
 
     private void recordAudio() {
         voiceDuration = 0;
@@ -519,31 +591,36 @@ public class RoomFragment extends Fragment {
     }
 
     private void setupAdapter(){
+        GridLayoutManager smsLayoutManager = new GridLayoutManager(context, 1);
+        smsLayoutManager.setOrientation(RecyclerView.VERTICAL);
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                FlexboxLayoutManager smsLayoutManager = new FlexboxLayoutManager(context);
-                smsLayoutManager.setFlexDirection(FlexDirection.ROW);
-                smsLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
                 room_recycler_view_sms.setLayoutManager(smsLayoutManager);
-                smsAdapter = new SmsAdapter(context, smsList, userUID, new SmsAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        if (currentPosition >= 0){
-                            if (currentPosition != position){
-                                if (position >= 0){
-                                    smsAdapter.notifyItemChanged(currentPosition);
-                                }
-                            }
+                OverScrollDecoratorHelper.setUpOverScroll(room_recycler_view_sms, OverScrollDecoratorHelper.ORIENTATION_VERTICAL);
+            }
+        });
+        smsAdapter = new SmsAdapter(context, smsList, userUID, new SmsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                if (currentPosition >= 0){
+                    if (currentPosition != position){
+                        if (position >= 0){
+                            smsAdapter.notifyItemChanged(currentPosition);
                         }
-                        currentPosition = position;
                     }
+                }
+                currentPosition = position;
+            }
 
-                    @Override
-                    public boolean currentPlaying(int position) {
-                        return position == currentPosition;
-                    }
-                });
+            @Override
+            public boolean currentPlaying(int position) {
+                return position == currentPosition;
+            }
+        });
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
                 room_recycler_view_sms.setAdapter(smsAdapter);
             }
         });
@@ -583,7 +660,7 @@ public class RoomFragment extends Fragment {
     }
 
     public void sendChannelMessage(String msg) {
-        showLoadingDialog();
+        showTopLoadingDialog();
         SmsModel smsModel = new SmsModel();
         smsModel.setUserName(userName);
         smsModel.setMessage(msg);
@@ -607,7 +684,7 @@ public class RoomFragment extends Fragment {
     }
 
     private void sendChannelVoice(){
-        showLoadingDialog();
+        showTopLoadingDialog();
         SmsModel smsModel = new SmsModel();
         smsModel.setUserName(userName);
         smsModel.setMessage("");
@@ -631,18 +708,15 @@ public class RoomFragment extends Fragment {
     }
 
     private void initView(View view) {
-        textTitle = (AppCompatTextView) view.findViewById(R.id.textTitle);
         room_user_name = (AppCompatTextView) view.findViewById(R.id.room_user_name);
         room_recycler_view_sms = (RecyclerView) view.findViewById(R.id.room_recycler_view_sms);
         room_edit_text = (EditText) view.findViewById(R.id.room_edit_text);
         room_send_message_button_click = (RelativeLayout) view.findViewById(R.id.room_send_message_button_click);
-        room_scroll_view = (ScrollView) view.findViewById(R.id.room_scroll_view);
         room_send_voice_button_click = (RelativeLayout) view.findViewById(R.id.room_send_voice_button_click);
         room_recorded_time = (AppCompatTextView) view.findViewById(R.id.room_recorded_time);
         room_record_image = (AppCompatImageView) view.findViewById(R.id.room_record_image);
         room_cancel_voice_button_click = (RelativeLayout) view.findViewById(R.id.room_cancel_voice_button_click);
-
-        OverScrollDecoratorHelper.setUpOverScroll(room_scroll_view);
+        topLoadingAnimation = (LottieAnimationView) view.findViewById(R.id.topLoadingAnimation);
     }
 
     void firebaseAuthentification(){
@@ -672,16 +746,6 @@ public class RoomFragment extends Fragment {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInAnonymously:failure", task.getException());
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {activity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        showMessages(null);
-                                    }
-                                });
-                                }
-                            });
                         }
                     }
                 });
@@ -714,6 +778,8 @@ public class RoomFragment extends Fragment {
                 }
             }
         });
+        room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_linear));
+        getSmsList();
     }
 
     void showLoadingDialog(){
@@ -726,9 +792,21 @@ public class RoomFragment extends Fragment {
             public void run() {
                 LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
                 loadingAnimation.playAnimation();
+                RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
+                cancelButtonClick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideLoadingDialog();
+                        cancelLoading();
+                    }
+                });
             }
         });
         dialog.show();
+    }
+
+    private void cancelLoading() {
+
     }
 
     void hideLoadingDialog(){
@@ -742,6 +820,16 @@ public class RoomFragment extends Fragment {
             });
             dialog.dismiss();
         }
+    }
+
+    void showTopLoadingDialog(){
+        topLoadingAnimation.playAnimation();
+        topLoadingAnimation.setVisibility(View.VISIBLE);
+    }
+
+    void hideTopLoadingDialog(){
+        topLoadingAnimation.pauseAnimation();
+        topLoadingAnimation.setVisibility(View.INVISIBLE);
     }
 
     private void saveNewUserName() {
@@ -784,7 +872,7 @@ public class RoomFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                showLoadingDialog();
+                showTopLoadingDialog();
                 String tempUsername = userNameEditText[0].getText().toString();
                 if(!tempUsername.isEmpty()){
                     if (tempUsername.length() > 3){

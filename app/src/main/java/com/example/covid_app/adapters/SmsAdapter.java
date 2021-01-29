@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.covid_app.R;
@@ -29,11 +30,12 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
     MediaPlayer mediaPlayer = new MediaPlayer();
     OnItemClickListener onItemClickListener;
 
+
     String userUID;
 
     boolean isPlaying = false;
     private String currentPath = null;
-    private Handler handlePlayingVoice = new Handler();
+    private Handler handlePlayingVoice;
     private Runnable runnablePlayVoice;
 
     public SmsAdapter(Context context, ArrayList<SmsModel> smsList, String userUID, OnItemClickListener onItemClickListener) {
@@ -42,6 +44,12 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
         this.onItemClickListener = onItemClickListener;
         this.userUID = userUID;
         activity = (AppCompatActivity) context;
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                handlePlayingVoice = new Handler();
+            }
+        });
     }
 
     @NonNull
@@ -52,8 +60,13 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull SmsHolder holder, int position) {
-        checkContent(holder, position);
-        updateUi(holder, position);
+        if (position < smsList.size()) {
+            checkContent(holder, position);
+            updateUi(holder, position);
+            if (smsList.get(position) != null) {
+                holder.card_view_sms.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
+            }
+        }
     }
 
     @Override
@@ -66,7 +79,6 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
     public void onViewAttachedToWindow(@NonNull SmsHolder holder) {
         super.onViewAttachedToWindow(holder);
         updateUi(holder, holder.getAdapterPosition());
-        holder.card_view_sms.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
     }
 
     @Override
@@ -77,27 +89,33 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
 
 
     private void updateUi(SmsHolder holder, int position){
-        if (!onItemClickListener.currentPlaying(position)){
-            holder.voice_play_pause.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
-            resetProgress(holder);
-        }else {
-            if (isPlaying){
-                holder.voice_play_pause.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_pause_24));
-            }else {
+        if (position < smsList.size()) {
+            if (!onItemClickListener.currentPlaying(position)) {
                 holder.voice_play_pause.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                resetProgress(holder);
+            } else {
+                if (isPlaying) {
+                    holder.voice_play_pause.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_pause_24));
+                } else {
+                    holder.voice_play_pause.setImageDrawable(context.getResources().getDrawable(R.drawable.ic_baseline_play_arrow_24));
+                }
+            }
+            if (smsList.get(position) == null) {
+                holder.card_view_sms.setVisibility(View.GONE);
+                holder.relative_visibility.setVisibility(View.VISIBLE);
+            } else {
+                holder.card_view_sms.setVisibility(View.VISIBLE);
+                holder.relative_visibility.setVisibility(View.GONE);
             }
         }
     }
 
     private void checkContent(SmsHolder holder, int position) {
-        if (smsList.get(position) == null){
-            holder.card_view_sms.setVisibility(View.GONE);
-            holder.relative_visibility.setVisibility(View.VISIBLE);
-        }else {
-            holder.card_view_sms.setVisibility(View.VISIBLE);
-            holder.relative_visibility.setVisibility(View.GONE);
+        if (smsList.get(position) != null){
             // check if it me the sender of content
             if (userUID.equals(smsList.get(position).getUserUid())){
+                holder.left_card.setVisibility(View.VISIBLE);
+                holder.right_card.setVisibility(View.GONE);
                 // for sms
                 holder.card_background.setBackgroundColor(context.getResources().getColor(R.color.me));
                 holder.message_user_name_sms.setTextColor(context.getResources().getColor(R.color.mainColor));
@@ -112,6 +130,8 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
                 holder.voice_play_pause.setColorFilter(context.getResources().getColor(R.color.mainColor));
                 holder.voice_play_pause.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.ripple_me));
             }else {
+                holder.right_card.setVisibility(View.VISIBLE);
+                holder.left_card.setVisibility(View.GONE);
                 // for sms
                 holder.card_background.setBackgroundColor(context.getResources().getColor(R.color.other));
                 holder.message_user_name_sms.setTextColor(context.getResources().getColor(R.color.grey6));

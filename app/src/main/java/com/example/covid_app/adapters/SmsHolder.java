@@ -20,6 +20,8 @@ public class SmsHolder extends RecyclerView.ViewHolder {
 
     RelativeLayout card_background;
 
+    LinearLayoutCompat right_card;
+    LinearLayoutCompat left_card;
 
     LinearLayoutCompat isSms;
     AppCompatTextView message_user_name_sms;
@@ -57,5 +59,8 @@ public class SmsHolder extends RecyclerView.ViewHolder {
         voice_stop = itemView.findViewById(R.id.voice_stop);
         voice_play_pause = itemView.findViewById(R.id.voice_play_pause);
         send_date_voice = itemView.findViewById(R.id.send_date_voice);
+
+        right_card = itemView.findViewById(R.id.right_card);
+        left_card = itemView.findViewById(R.id.left_card);
     }
 }

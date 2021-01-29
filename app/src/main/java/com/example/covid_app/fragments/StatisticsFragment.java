@@ -1,20 +1,24 @@
 package com.example.covid_app.fragments;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
 import com.example.covid_app.models.HasScreened;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -73,6 +77,8 @@ public class StatisticsFragment extends Fragment {
     private float deadCases = 0;
     private boolean canRunThread;
     private RelativeLayout chartContainer;
+    private Dialog dialog;
+    private LottieAnimationView topLoadingAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -94,10 +100,15 @@ public class StatisticsFragment extends Fragment {
 
         initView(result);
         OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
+        return result;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         setupCharts();
         chartContainer.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fall_down));
         getHasScreenedList();
-        return result;
     }
 
     @Override
@@ -153,6 +164,7 @@ public class StatisticsFragment extends Fragment {
                             if (error != null) {
                                 return;
                             }
+                            showTopLoadingDialog();
                             for (DocumentSnapshot doc : Objects.requireNonNull(value)) {
                                 HasScreened hasScreened = doc.toObject(HasScreened.class);
                                 if (hasScreened != null){
@@ -160,6 +172,7 @@ public class StatisticsFragment extends Fragment {
                                 }
                             }
                             setValuesForRegions();
+                            hideTopLoadingDialog();
                         }
                     });
                 }
@@ -373,6 +386,56 @@ public class StatisticsFragment extends Fragment {
         barChart.invalidate();
     }
 
+    void showLoadingDialog(){
+        dialog = new Dialog(activity);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.custom_loading_dialog);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                loadingAnimation.playAnimation();
+                RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
+                cancelButtonClick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideLoadingDialog();
+                        cancelLoading();
+                    }
+                });
+            }
+        });
+        dialog.show();
+    }
+
+    private void cancelLoading() {
+
+    }
+
+    void hideLoadingDialog(){
+        if (dialog != null){
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                    loadingAnimation.pauseAnimation();
+                }
+            });
+            dialog.dismiss();
+        }
+    }
+
+    void showTopLoadingDialog(){
+        topLoadingAnimation.playAnimation();
+        topLoadingAnimation.setVisibility(View.VISIBLE);
+    }
+
+    void hideTopLoadingDialog(){
+        topLoadingAnimation.pauseAnimation();
+        topLoadingAnimation.setVisibility(View.INVISIBLE);
+    }
+
     void initView(View view){
         statisticScrollView = view.findViewById(R.id.statisticScrollView);
         // setup pie char
@@ -386,5 +449,6 @@ public class StatisticsFragment extends Fragment {
         statsRecovered = (AppCompatTextView) view.findViewById(R.id.statsRecovered);
         statsDead = (AppCompatTextView) view.findViewById(R.id.statsDead);
         statsActive = (AppCompatTextView) view.findViewById(R.id.statsActive);
+        topLoadingAnimation = (LottieAnimationView) view.findViewById(R.id.topLoadingAnimation);
     }
 }

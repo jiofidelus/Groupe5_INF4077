@@ -208,15 +208,37 @@ public class AccountFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_loading_dialog);
-        loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
-        loadingAnimation.playAnimation();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                loadingAnimation.playAnimation();
+                RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
+                cancelButtonClick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideLoadingDialog();
+                        cancelLoading();
+                    }
+                });
+            }
+        });
         dialog.show();
+    }
+
+    private void cancelLoading() {
+
     }
 
     void hideLoadingDialog(){
         if (dialog != null){
-            loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
-            loadingAnimation.pauseAnimation();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                    loadingAnimation.pauseAnimation();
+                }
+            });
             dialog.dismiss();
         }
     }

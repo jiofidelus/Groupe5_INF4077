@@ -12,14 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -56,6 +59,8 @@ public class HomeFragment extends Fragment {
 
     ScrollView scrollView;
 
+    RelativeLayout bottomRelative;
+
     Dialog smsDialog;
     Dialog callDialog;
     private int ORANGE_NUMBER = 690000000;
@@ -63,6 +68,9 @@ public class HomeFragment extends Fragment {
 
     private int CALL_PERMISSION_CODE = 2;
     private int SMS_PERMISSION_CODE = 1;
+
+    Thread getThread;
+    boolean canRunThread = false;
 
     public HomeFragment() {
     }
@@ -75,6 +83,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        canRunThread = true;
         // Inflate the layout for this fragment
         View result =  inflater.inflate(R.layout.fragment_home, container, false);
 
@@ -82,16 +91,38 @@ public class HomeFragment extends Fragment {
         activity = (AppCompatActivity) context;
 
         initView(result);
-        configureDialogs();
+        return result;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        bottomRelative.startAnimation(AnimationUtils.loadAnimation(context, R.anim.alpha_0));
         symptomRecyclerView.setNestedScrollingEnabled(false);
         preventionRecyclerView.setNestedScrollingEnabled(false);
         OverScrollDecoratorHelper.setUpOverScroll(scrollView);
-        getPreventionList();
-        getSymptomList();
-        setupAdapter();
-        checkInteractions();
-        return result;
+        getThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (canRunThread){
+                    getPreventionList();
+                    getSymptomList();
+                    bottomRelative.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fall_down));
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            configureDialogs();
+                        }
+                    });
+                    checkInteractions();
+                    setupAdapter();
+                }
+            }
+        });
+        getThread.start();
     }
+
 
     private void configureDialogs() {
         smsDialog = new Dialog(activity);
@@ -269,22 +300,33 @@ public class HomeFragment extends Fragment {
         scrollView = view.findViewById(R.id.scrollView);
         callButtonClick = view.findViewById(R.id.callButtonClick);
         smsButtonClick = view.findViewById(R.id.smsButtonClick);
+        bottomRelative = view.findViewById(R.id.bottomRelative);
     }
 
     void setupAdapter(){
         FlexboxLayoutManager preventionLayoutManager = new FlexboxLayoutManager(context);
         preventionLayoutManager.setFlexDirection(FlexDirection.ROW);
         preventionLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
-        preventionRecyclerView.setLayoutManager(preventionLayoutManager);
-        preventionAdapter = new PreventionAdapter(context, preventionList);
-        preventionRecyclerView.setAdapter(preventionAdapter);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                preventionRecyclerView.setLayoutManager(preventionLayoutManager);
+                preventionAdapter = new PreventionAdapter(context, preventionList);
+                preventionRecyclerView.setAdapter(preventionAdapter);
+            }
+        });
 
         FlexboxLayoutManager symptomLayoutManager = new FlexboxLayoutManager(context);
         symptomLayoutManager.setFlexDirection(FlexDirection.ROW);
         symptomLayoutManager.setJustifyContent(JustifyContent.SPACE_AROUND);
-        symptomRecyclerView.setLayoutManager(symptomLayoutManager);
-        symptomAdapter = new SymptomAdapter(context, symptomList);
-        symptomRecyclerView.setAdapter(symptomAdapter);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                symptomRecyclerView.setLayoutManager(symptomLayoutManager);
+                symptomAdapter = new SymptomAdapter(context, symptomList);
+                symptomRecyclerView.setAdapter(symptomAdapter);
+            }
+        });
     }
 
     void getPreventionList(){
@@ -364,5 +406,42 @@ public class HomeFragment extends Fragment {
 //        symptom.setTitle("Grave : perte de motricite");
 //        symptom.setImage(null);
 //        symptomList.add(symptom);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        canRunThread = true;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        canRunThread = false;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        canRunThread = false;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        canRunThread = false;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        canRunThread = false;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        canRunThread = false;
     }
 }

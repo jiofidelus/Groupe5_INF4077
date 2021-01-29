@@ -73,10 +73,4 @@ public class HasScreenedAdapter extends RecyclerView.Adapter<HasScreenedHolder> 
         return hasScreenedList.size();
     }
 
-    @Override
-    public void onViewAttachedToWindow(@NonNull HasScreenedHolder holder) {
-        super.onViewAttachedToWindow(holder);
-
-        holder.hasScreenedCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
-    }
 }

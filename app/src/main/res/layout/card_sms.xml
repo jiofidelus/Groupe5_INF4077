@@ -12,16 +12,40 @@
         android:layout_height="60dp"
         android:visibility="gone"
         />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/left_card"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/right_card"
+        android:layout_width="50dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_sms"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/left_card"
+        app:layout_constraintRight_toLeftOf="@+id/right_card"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp"
         app:cardBackgroundColor="@color/grey0"
         android:layout_marginTop="5dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         >
         <RelativeLayout
             android:id="@+id/card_background"

@@ -124,6 +124,7 @@ ConnectedFragment extends Fragment {
     private SimpleDraweeView registerCitizenPicture;
     private HasScreened hasScreened;
     private int LOCATION_PERMISSION_CODE = 200;
+    private LottieAnimationView topLoadingAnimation;
 
 
     @Override
@@ -171,6 +172,7 @@ ConnectedFragment extends Fragment {
 
         citizenRelativeList = view.findViewById(R.id.citizenRelativeList);
         hasScreenedRelativeList = view.findViewById(R.id.hasScreenedRelativeList);
+        topLoadingAnimation = view.findViewById(R.id.topLoadingAnimation);
     }
 
     private void uploadImageToFirebaseStorage(){
@@ -325,11 +327,13 @@ ConnectedFragment extends Fragment {
                 if (error != null) {
                     return;
                 }
+                showTopLoadingDialog();
                 citizenList.clear();
                 for (DocumentSnapshot doc : value) {
                     Citizen citizen = doc.toObject(Citizen.class);
                     tryToAddCitizen(citizen);
                 }
+                hideTopLoadingDialog();
             }
         });
     }
@@ -341,11 +345,13 @@ ConnectedFragment extends Fragment {
                 if (error != null) {
                     return;
                 }
+                showTopLoadingDialog();
                 hasScreenedList.clear();
                 for (DocumentSnapshot doc : value) {
                     HasScreened hasScreened = doc.toObject(HasScreened.class);
                     tryToAddHasScreened(hasScreened);
                 }
+                hideTopLoadingDialog();
             }
         });
     }
@@ -414,18 +420,51 @@ ConnectedFragment extends Fragment {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.custom_loading_dialog);
-        loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
-        loadingAnimation.playAnimation();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                loadingAnimation.playAnimation();
+                RelativeLayout cancelButtonClick = dialog.findViewById(R.id.cancelButtonClick);
+                cancelButtonClick.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        hideLoadingDialog();
+                        cancelLoading();
+                    }
+                });
+            }
+        });
         dialog.show();
+    }
+
+    private void cancelLoading() {
+
     }
 
     void hideLoadingDialog(){
         if (dialog != null){
-            loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
-            loadingAnimation.pauseAnimation();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LottieAnimationView loadingAnimation = dialog.findViewById(R.id.loadingAnimation);
+                    loadingAnimation.pauseAnimation();
+                }
+            });
             dialog.dismiss();
         }
     }
+
+    void showTopLoadingDialog(){
+        topLoadingAnimation.playAnimation();
+        topLoadingAnimation.setVisibility(View.VISIBLE);
+    }
+
+    void hideTopLoadingDialog(){
+        topLoadingAnimation.pauseAnimation();
+        topLoadingAnimation.setVisibility(View.INVISIBLE);
+    }
+
 
     void showNewHasScreenedDialog(){
         newHasScreenedDDialog = new Dialog(activity);

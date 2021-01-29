@@ -1,6 +1,7 @@
 package com.example.covid_app.fragments;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -9,6 +10,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
@@ -20,6 +22,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
@@ -64,6 +67,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
     private int requestCode;
     private String[] permissions;
     private int[] grantResults;
+    private LottieAnimationView topLoadingAnimation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -121,6 +125,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
 
     void initView(View view) {
         mapView = view.findViewById(R.id.mapView);
+        topLoadingAnimation = view.findViewById(R.id.topLoadingAnimation);
 //        navigationButton = view.findViewById(R.id.navigationButton);
 //        navigationButtonClick = view.findViewById(R.id.navigationButtonClick);
     }
@@ -200,4 +205,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback, Permiss
     public void onPermissionResult(boolean granted) {
         //
     }
+
+    void showTopLoadingDialog(){
+        topLoadingAnimation.playAnimation();
+        topLoadingAnimation.setVisibility(View.VISIBLE);
+    }
+
+    void hideTopLoadingDialog(){
+        topLoadingAnimation.pauseAnimation();
+        topLoadingAnimation.setVisibility(View.INVISIBLE);
+    }
+
 }

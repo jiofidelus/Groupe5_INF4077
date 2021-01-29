@@ -73,12 +73,6 @@ public class CitizenAdapter extends RecyclerView.Adapter<CitizenHolder> {
         return citizenList.size();
     }
 
-    @Override
-    public void onViewAttachedToWindow(@NonNull CitizenHolder holder) {
-        super.onViewAttachedToWindow(holder);
-        holder.citizenCard.startAnimation(AnimationUtils.loadAnimation(context, R.anim.item_animation_fall_down));
-    }
-
     private void showDialogCitizenInfo(int position){
         Dialog citizenInfoDialog;
         citizenInfoDialog = new Dialog(context);
