@@ -19,7 +19,6 @@ public class HasScreenedHolder extends RecyclerView.ViewHolder {
 
     RelativeLayout hasScreenedCard;
 
-    RelativeLayout hasScreenedInfoButtonClick;
     public HasScreenedHolder(@NonNull View itemView) {
         super(itemView);
 
@@ -28,6 +27,5 @@ public class HasScreenedHolder extends RecyclerView.ViewHolder {
         hasScreenedStatus = itemView.findViewById(R.id.hasScreenedStatus);
         hasScreenedCard = itemView.findViewById(R.id.hasScreenedCard);
 
-        hasScreenedInfoButtonClick = itemView.findViewById(R.id.hasScreenedInfoButtonClick);
     }
 }

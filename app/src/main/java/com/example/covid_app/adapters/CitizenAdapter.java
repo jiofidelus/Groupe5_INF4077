@@ -60,12 +60,6 @@ public class CitizenAdapter extends RecyclerView.Adapter<CitizenHolder> {
                 showDialogCitizenInfo(position);
             }
         });
-        holder.citizenEditButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
     }
 
     @Override

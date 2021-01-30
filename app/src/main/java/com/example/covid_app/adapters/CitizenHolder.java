@@ -15,7 +15,6 @@ public class CitizenHolder extends RecyclerView.ViewHolder {
     TextView citizenPhone;
 
     RelativeLayout citizenInfoButtonClick;
-    RelativeLayout citizenEditButtonClick;
 
     RelativeLayout citizenCard;
 
@@ -26,7 +25,6 @@ public class CitizenHolder extends RecyclerView.ViewHolder {
         citizenPhone = itemView.findViewById(R.id.citizenPhone);
 
         citizenInfoButtonClick = itemView.findViewById(R.id.citizenInfoButtonClick);
-        citizenEditButtonClick = itemView.findViewById(R.id.citizenEditButtonClick);
         citizenCard = itemView.findViewById(R.id.citizenCard);
     }
 }

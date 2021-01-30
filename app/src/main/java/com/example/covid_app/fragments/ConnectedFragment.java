@@ -30,6 +30,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatEditText;
+import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.SwitchCompat;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -45,6 +47,8 @@ import com.example.covid_app.adapters.CustomCitizenSpinnerAdapter;
 import com.example.covid_app.adapters.HasScreenedAdapter;
 import com.example.covid_app.models.Citizen;
 import com.example.covid_app.models.HasScreened;
+import com.example.covid_app.models.SensibilisationMessage;
+import com.example.covid_app.models.User;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
@@ -61,6 +65,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -129,6 +134,7 @@ ConnectedFragment extends Fragment {
     CardView logOutButton;
     RelativeLayout logOutButtonClick;
     private boolean canRunThread = true;
+    private String sensibilisationId;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -272,6 +278,7 @@ ConnectedFragment extends Fragment {
                         @Override
                         public void run() {
                             citizenRelativeList.setVisibility(View.INVISIBLE);
+                            listCitizenSwitch.setText("Depistes");
                             hasScreenedRelativeList.setVisibility(View.VISIBLE);
                         }
                     });
@@ -280,6 +287,7 @@ ConnectedFragment extends Fragment {
                         @Override
                         public void run() {
                             hasScreenedRelativeList.setVisibility(View.INVISIBLE);
+                            listCitizenSwitch.setText("Citoyens");
                             citizenRelativeList.setVisibility(View.VISIBLE);
                         }
                     });
@@ -313,7 +321,70 @@ ConnectedFragment extends Fragment {
     }
 
     private void sensibilisation() {
-        //
+        if (dialog == null){
+            dialog = new Dialog(activity);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCancelable(false);
+            dialog.setContentView(R.layout.custom_dialog_sensibilise);
+            RelativeLayout send_sms_button_click = dialog.findViewById(R.id.send_sms_button_click);
+            RelativeLayout send_sms_cancel_button_click = dialog.findViewById(R.id.send_sms_cancel_button_click);
+            AppCompatTextView send_sms_error = dialog.findViewById(R.id.send_sms_error);
+            AppCompatEditText send_sms_edit = dialog.findViewById(R.id.send_sms_edit);
+            send_sms_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String tempSms = send_sms_edit.getText().toString();
+                    if (tempSms.isEmpty()) {
+                        send_sms_error.setText("Message invalide !!!");
+                        send_sms_error.setAlpha(1);
+                    } else {
+                        send_sms_error.setAlpha(0);
+                        dialog.dismiss();
+                        dialog = null;
+                        updateSensibilisationMessage(tempSms);
+                    }
+                }
+            });
+            send_sms_cancel_button_click.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    dialog = null;
+                }
+            });
+            dialog.show();
+        }
+    }
+
+    private void updateSensibilisationMessage(String message) {
+        showTopLoadingDialog();
+        db.collection("sensibilisation")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
+                                sensibilisationId = documentSnapshot.getId();
+                            }
+                            if (sensibilisationId != null){
+                                db.collection("sensibilisation")
+                                        .document(sensibilisationId)
+                                        .update("message", message)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                hideTopLoadingDialog();
+                                                Toast.makeText(activity, "Envoye avec succes", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }else {
+                                hideTopLoadingDialog();
+                                Toast.makeText(activity, "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
     }
 
     private void logOutFirebase() {
@@ -334,7 +405,7 @@ ConnectedFragment extends Fragment {
                     Toast.makeText(activity, "Deconnecte", Toast.LENGTH_SHORT).show();
                     FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                     ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-                    ft.add(R.id.fragment, new RoomFragment());
+                    ft.replace(R.id.fragment, new RoomFragment());
                     ft.commit();
                 }
             });

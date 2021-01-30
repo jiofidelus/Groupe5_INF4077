@@ -120,9 +120,13 @@ public class SmsAdapter extends RecyclerView.Adapter<SmsHolder> {
             boolean itMe = false;
             FirebaseUser currentUser = firebaseAuth.getCurrentUser();
             if (Objects.requireNonNull(currentUser).isAnonymous()){
-                itMe = userUID.equals(smsList.get(position).getUserUid());
+                if (smsList.get(position).getUserMail() == null){
+                    itMe = userUID.equals(smsList.get(position).getUserUid());
+                }
             }else {
-                itMe = Objects.requireNonNull(currentUser.getEmail()).equals(smsList.get(position).getUserName());
+                if (smsList.get(position).getUserMail() != null){
+                    itMe = Objects.requireNonNull(currentUser.getEmail()).equals(smsList.get(position).getUserMail());
+                }
             }
             if (itMe){
                 holder.left_card.setVisibility(View.VISIBLE);

@@ -246,6 +246,12 @@ public class RoomFragment extends Fragment {
             @Override
             public void run() {
                 if (canRunThread){
+                    anonymButtonclick.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            signInAnonymously();
+                        }
+                    });
                     logOutButtonClick.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -319,7 +325,7 @@ public class RoomFragment extends Fragment {
                     Toast.makeText(activity, "Deconnecte", Toast.LENGTH_SHORT).show();
                     FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                     ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-                    ft.add(R.id.fragment, new RoomFragment());
+                    ft.replace(R.id.fragment, new RoomFragment());
                     ft.commit();
                 }
             });
@@ -723,6 +729,9 @@ public class RoomFragment extends Fragment {
         showTopLoadingDialog();
         SmsModel smsModel = new SmsModel();
         smsModel.setUserName(userName);
+        if (!currentUser.isAnonymous()){
+            smsModel.setUserMail(currentUser.getEmail());
+        }
         smsModel.setMessage(msg);
         smsModel.setSMS(true);
         if (userUID == null){
@@ -800,12 +809,6 @@ public class RoomFragment extends Fragment {
                 room_no_log_sms.setVisibility(View.VISIBLE);
                 room_no_log_sms.setAlpha(1);
                 room_user_name.setText("-- Vous etes hors line --");
-                anonymButtonclick.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        signInAnonymously();
-                    }
-                });
             }
         });
         room_user_name.startAnimation(AnimationUtils.loadAnimation(context, R.anim.fade_in_linear));
@@ -852,6 +855,7 @@ public class RoomFragment extends Fragment {
                             Log.d(TAG, "signInAnonymously:success");
                             currentUser = firebaseAuth.getCurrentUser();
                             logged = true;
+                            hideNoUserPage();
                             updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -1036,6 +1040,7 @@ public class RoomFragment extends Fragment {
             @Override
             public void run() {
                 if (canRunThread){
+                    getUid();
                     db.collection("usersnames").whereEqualTo("username", userName).whereNotEqualTo("id", userUID)
                             .get()
                             .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -1106,6 +1111,7 @@ public class RoomFragment extends Fragment {
                             room_user_name.setText(userName);
                         }
                         Toast.makeText(activity, "Enregistre avec succes", Toast.LENGTH_SHORT).show();
+                        showMessages(userName);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

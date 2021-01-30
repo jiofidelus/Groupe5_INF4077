@@ -5,6 +5,7 @@ public class SmsModel {
 
     String userUid;
     String userName;
+    String userMail;
     String message;
     String sendDate;
     boolean isSMS;
@@ -13,6 +14,14 @@ public class SmsModel {
     String timeInMilli;
 
     public SmsModel() {
+    }
+
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
     }
 
     public String getTimeInMilli() {

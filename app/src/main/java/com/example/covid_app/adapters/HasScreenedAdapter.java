@@ -59,13 +59,6 @@ public class HasScreenedAdapter extends RecyclerView.Adapter<HasScreenedHolder> 
         if (tempStatus.equals("D")){
             holder.hasScreenedStatus.setTextColor(context.getResources().getColor(R.color.red));
         }
-
-        holder.hasScreenedInfoButtonClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
     }
 
     @Override
