@@ -52,7 +52,6 @@
                             android:layout_height="50dp"
                             android:scaleType="centerCrop"
                             android:layout_alignParentTop="true"
-                            android:visibility="gone"
                             app:placeholderImage="@drawable/ic_coronavirus_icon_app"
                             />
                         <RelativeLayout
@@ -61,7 +60,6 @@
                             android:layout_marginStart="10dp"
                             android:layout_toEndOf="@+id/lottieLogo"
                             android:gravity="center"
-                            android:visibility="gone"
                             >
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/logoTitle"

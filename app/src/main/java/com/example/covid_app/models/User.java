@@ -2,9 +2,6 @@ package com.example.covid_app.models;
 
 import androidx.annotation.Nullable;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class User {
 
     String id;

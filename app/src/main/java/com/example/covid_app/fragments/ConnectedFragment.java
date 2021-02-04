@@ -47,8 +47,6 @@ import com.example.covid_app.adapters.CustomCitizenSpinnerAdapter;
 import com.example.covid_app.adapters.HasScreenedAdapter;
 import com.example.covid_app.models.Citizen;
 import com.example.covid_app.models.HasScreened;
-import com.example.covid_app.models.SensibilisationMessage;
-import com.example.covid_app.models.User;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.flexbox.FlexDirection;
 import com.google.android.flexbox.FlexboxLayoutManager;
