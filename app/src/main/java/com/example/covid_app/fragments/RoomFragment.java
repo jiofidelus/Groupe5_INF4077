@@ -457,13 +457,6 @@ public class RoomFragment extends Fragment {
                                 scrollToBottom();
                             }
                             hideTopLoadingDialog();
-                            activity.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-
-                                    Toast.makeText(context, smsList.size()+"", Toast.LENGTH_SHORT).show();
-                                }
-                            });
                         }
                     });
                 }
@@ -812,6 +805,7 @@ public class RoomFragment extends Fragment {
                                 if (lastSmsPosition >= 0){
                                     SmsModel smsModel = new SmsModel();
                                     smsModel.setUserName(userName);
+                                    smsModel.setUserMail(currentUser.getEmail());
                                     smsModel.setMessage("");
                                     smsModel.setSMS(false);
                                     smsModel.setUserUid(userUID);
