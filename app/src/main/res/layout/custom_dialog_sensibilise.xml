@@ -23,7 +23,7 @@
                 app:layout_constraintRight_toRightOf="parent"
                 android:layout_marginStart="30dp"
                 android:layout_marginEnd="30dp"
-                android:text="Envoyez-nous un message de sensibilisation a tout le monde"
+                android:text="Envoyez un message de sensibilisation a tout le monde"
                 android:gravity="center"
                 android:textSize="16sp"
                 android:ellipsize="end"
@@ -86,7 +86,7 @@
                         android:id="@+id/send_sms_button_click"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_hascreened"
+                        android:background="@drawable/ripple_light_main_color"
                         android:clickable="true"
                         android:focusable="true"
                         >

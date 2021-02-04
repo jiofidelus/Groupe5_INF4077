@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradient_background_bottom_rounded"
-                    android:padding="20dp"
+                    android:padding="10dp"
                     >
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/lottieLogo"
@@ -217,7 +217,7 @@
                                         android:id="@+id/logOutButtonImage"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
-                                        app:srcCompat="@drawable/ic_baseline_account_circle_24"
+                                        android:src="@drawable/ic_baseline_account_circle_24"
                                         app:tint="@color/white"
                                         android:alpha="1"/>
                                 </RelativeLayout>
@@ -263,7 +263,7 @@
                                 android:id="@+id/newCitizenButtonImage"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_baseline_add_24"
+                                android:src="@drawable/ic_baseline_add_24"
                                 app:tint="@color/white"
                                 android:alpha="1"/>
                             <androidx.appcompat.widget.AppCompatTextView
@@ -303,7 +303,7 @@
                                 android:id="@+id/newHasScreenedButtonImage"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                app:srcCompat="@drawable/ic_baseline_add_24"
+                                android:src="@drawable/ic_baseline_add_24"
                                 app:tint="@color/white"
                                 android:alpha="1"/>
                             <androidx.appcompat.widget.AppCompatTextView
@@ -379,10 +379,9 @@
                             android:layout_weight="1"
                             />
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/citizenEditTitle"
                             android:layout_width="45dp"
                             android:layout_height="45dp"
-                            android:text=""
+                            android:text="Infos"
                             android:ellipsize="marquee"
                             android:singleLine="true"
                             android:gravity="start|center_vertical"
@@ -462,19 +461,6 @@
                             android:layout_width="50dp"
                             android:layout_height="45dp"
                             android:text="Statut"
-                            android:ellipsize="marquee"
-                            android:singleLine="true"
-                            android:gravity="start|center_vertical"
-                            android:textColor="@color/ripple_hasscreened"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:layout_margin="5dp"
-                            />
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/hasScreenedInfoTitle"
-                            android:layout_width="45dp"
-                            android:layout_height="45dp"
-                            android:text=""
                             android:ellipsize="marquee"
                             android:singleLine="true"
                             android:gravity="start|center_vertical"

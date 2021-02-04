@@ -3,10 +3,12 @@ package com.example.covid_app;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.covid_app.fragments.MainFragment;
+import com.example.covid_app.fragments.MapFragment;
 import com.facebook.drawee.backends.pipeline.Fresco;
 
 public class MainActivity extends AppCompatActivity {
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+//        getSupportFragmentManager().popBackStack();
 //        Fragment f = getSupportFragmentManager().findFragmentById(R.id.fragmentActivity);
 //        if(f instanceof MapFragment){
 //            FragmentTransaction ft = fragmentManager.beginTransaction();

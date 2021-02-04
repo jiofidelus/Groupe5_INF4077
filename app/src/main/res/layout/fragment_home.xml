@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradient_background_bottom_rounded"
-                    android:padding="20dp">
+                    android:padding="10dp">
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/lottieLogo"
                         android:layout_width="50dp"
@@ -167,7 +167,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="2dp"
-                                    app:srcCompat="@drawable/ic_baseline_call_24"
+                                    android:src="@drawable/ic_baseline_call_24"
                                     android:layout_alignParentStart="true"
                                     android:layout_centerVertical="true"
                                     app:tint="@color/white"
@@ -213,7 +213,7 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="5dp"
-                                    app:srcCompat="@drawable/ic_baseline_sms_24"
+                                    android:src="@drawable/ic_baseline_sms_24"
                                     android:layout_alignParentStart="true"
                                     android:layout_centerVertical="true"
                                     android:layout_marginStart="10dp"
@@ -240,16 +240,42 @@
                 android:id="@+id/bottomRelative"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 app:layout_constraintTop_toBottomOf="@+id/topRelative"
                 >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/news"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Conseils du jours"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/mainColor"
+                    android:layout_marginBottom="10dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Aucun conseil pour l'instant !!!"
+                    android:layout_below="@+id/news"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:maxLines="15"
+                    android:ellipsize="end"
+                    android:textColor="@color/grey4"
+                    android:layout_marginBottom="30dp"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/prevention"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Prevention"
+                    android:layout_below="@+id/message"
                     android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:textSize="16sp"
                     android:textColor="@color/mainColor"
                     android:layout_marginBottom="10dp"/>
@@ -264,7 +290,7 @@
                 <androidx.cardview.widget.CardView
                     android:id="@+id/testRelative"
                     android:layout_width="match_parent"
-                    android:layout_height="120dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="30dp"
                     android:layout_marginLeft="10dp"
@@ -274,8 +300,10 @@
                     android:layout_below="@+id/preventionRecyclerView"
                     >
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/testConstraint"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:visibility="gone"
                         android:background="@drawable/gradient_background_rounded">
                         <com.facebook.drawee.view.SimpleDraweeView
                             android:id="@+id/testAnimation"
@@ -352,6 +380,89 @@
                             </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/anotherTestConstraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:background="@drawable/gradient_background_rounded">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/anotherTestTitle"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="Votre dernier resultat de test en ligne est de :"
+                            android:textColor="@color/white"
+                            android:textStyle="normal"
+                            android:textSize="16sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:gravity="center_horizontal"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="20dp"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/anotherTestResult"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:text="50% de chances d'avoir le covid"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:textColor="@color/orange"
+                            android:textStyle="normal"
+                            android:textSize="16sp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:layout_constraintTop_toBottomOf="@+id/anotherTestTitle"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:gravity="center_horizontal"
+                            android:layout_marginTop="0dp"/>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/anotherTestButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginTop="10dp"
+                            app:cardCornerRadius="5dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/transparent"
+                            app:layout_constraintTop_toBottomOf="@+id/anotherTestResult"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintLeft_toLeftOf="parent"
+                            app:layout_constraintRight_toRightOf="parent"
+                            android:layout_marginBottom="10dp"
+                            >
+                            <RelativeLayout
+                                android:id="@+id/anotherTestButtonClick"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ripple_light"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                >
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/anotherTestButtonText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:text="Nouveau test"
+                                    android:layout_marginRight="20dp"
+                                    android:layout_marginLeft="20dp"
+                                    android:textColor="@color/white"
+                                    android:textStyle="normal"
+                                    android:textSize="14sp"
+                                    android:maxLines="1"
+                                    android:ellipsize="end"/>
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/symptom"
@@ -360,6 +471,8 @@
                     android:layout_below="@+id/testRelative"
                     android:text="Symptomes"
                     android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     android:textSize="16sp"
                     android:textColor="@color/mainColor"
                     android:layout_marginTop="10dp"
@@ -372,6 +485,42 @@
                     android:layout_centerHorizontal="true"
                     android:overScrollMode="never"
                     android:layout_margin="0dp"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sensibilisation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/symptomRecyclerView"
+                    android:text="A la une"
+                    android:textStyle="bold"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:textSize="16sp"
+                    android:textColor="@color/mainColor"
+                    android:visibility="gone"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/sensibilisationRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/sensibilisation"
+                    android:layout_centerHorizontal="true"
+                    android:overScrollMode="never"
+                    android:layout_margin="0dp"
+                    android:visibility="gone"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/newsSensibilisations"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:ellipsize="end"
+                    android:text="Aucune nouveaute"
+                    android:textColor="@color/grey4"
+                    android:layout_below="@+id/sensibilisation"
+                    android:visibility="gone"
+                    />
             </RelativeLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

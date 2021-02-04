@@ -21,7 +21,7 @@
         />
     <item android:id="@+id/mapFragment"
         android:title="Localisation"
-        android:icon="@drawable/ic_baseline_map_24"
+        android:icon="@drawable/ic_baseline_location_on_24"
         app:showAsAction="ifRoom"
         android:enabled="true"
         />

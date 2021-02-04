@@ -102,7 +102,7 @@
                         android:id="@+id/send_sms_button_click"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_hascreened"
+                        android:background="@drawable/ripple_light_main_color"
                         android:clickable="true"
                         android:focusable="true"
                         >

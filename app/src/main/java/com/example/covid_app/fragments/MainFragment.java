@@ -84,7 +84,7 @@ public class MainFragment extends Fragment {
                             ft.commit();
                         }else if(item.getItemId() == R.id.mapFragment){
                             FragmentTransaction ft = fragmentManager.beginTransaction();
-                            //ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+//                            ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
                             ft.replace(R.id.fragment, new MapFragment());
                             ft.commit();
                         }

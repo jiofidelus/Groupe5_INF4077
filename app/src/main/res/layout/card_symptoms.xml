@@ -23,7 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerInside"
-                app:tint="@color/black"
                 app:srcCompat="@drawable/lungs"
                 android:layout_margin="15dp"
                 />

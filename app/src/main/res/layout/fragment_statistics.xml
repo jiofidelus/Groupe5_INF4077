@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/gradient_background_bottom_rounded"
-                    android:padding="20dp"
+                    android:padding="10dp"
                     >
                     <com.facebook.drawee.view.SimpleDraweeView
                         android:id="@+id/lottieLogo"
@@ -109,24 +109,59 @@
                             android:visibility="invisible"
                             />
                     </RelativeLayout>
-                    <RelativeLayout
+                    <LinearLayout
                         android:id="@+id/middleRelative"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/lottieLogo"
                         android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
                         >
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/firstTitle"
-                            android:layout_width="match_parent"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Statistiques"
+                            android:textStyle="normal"
                             android:textSize="16sp"
-                            android:textColor="@color/white"
-                            android:ellipsize="end"
                             android:maxLines="1"
-                            />
-                    </RelativeLayout>
+                            android:ellipsize="end"
+                            android:layout_gravity="center"
+                            android:gravity="start"
+                            android:textColor="@color/white"
+                            android:layout_marginEnd="10dp"/>
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/locationButton"
+                            android:layout_width="45dp"
+                            android:layout_height="45dp"
+                            android:layout_marginEnd="10dp"
+                            android:visibility="invisible"
+                            app:cardCornerRadius="22.5dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/transparent"
+                            >
+                            <RelativeLayout
+                                android:id="@+id/locationButtonClick"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/ripple_light_main_color"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:padding="10dp"
+                                android:gravity="center"
+                                android:layout_gravity="center"
+                                >
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/locationButtonImage"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:src="@drawable/ic_baseline_location_on_24"
+                                    app:tint="@color/white"
+                                    android:alpha="1"/>
+                            </RelativeLayout>
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
             <RelativeLayout

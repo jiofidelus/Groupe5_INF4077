@@ -53,7 +53,7 @@
                         android:id="@+id/log_out_button_click"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@drawable/ripple_hascreened"
+                        android:background="@drawable/ripple_light_main_color"
                         android:clickable="true"
                         android:focusable="true"
                         >
@@ -62,7 +62,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:text="Deconnexion"
+                            android:text="Se deconnecter"
                             android:layout_marginRight="20dp"
                             android:layout_marginLeft="20dp"
                             android:textColor="@color/white"

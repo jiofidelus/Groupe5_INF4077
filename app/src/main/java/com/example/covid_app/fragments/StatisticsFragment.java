@@ -17,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
@@ -79,6 +81,8 @@ public class StatisticsFragment extends Fragment {
     private RelativeLayout chartContainer;
     private Dialog dialog;
     private LottieAnimationView topLoadingAnimation;
+    private RelativeLayout locationButtonClick;
+    private FragmentManager fragmentManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -100,7 +104,21 @@ public class StatisticsFragment extends Fragment {
 
         initView(result);
         OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
+        checkInteractions();
         return result;
+    }
+
+    private void checkInteractions() {
+        locationButtonClick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fragmentManager = activity.getSupportFragmentManager();
+                FragmentTransaction ft = fragmentManager.beginTransaction();
+                ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out);
+                ft.replace(R.id.fragmentActivity, new MapFragment()).addToBackStack(null);
+                ft.commit();
+            }
+        });
     }
 
     @Override
@@ -401,16 +419,11 @@ public class StatisticsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         hideLoadingDialog();
-                        cancelLoading();
                     }
                 });
             }
         });
         dialog.show();
-    }
-
-    private void cancelLoading() {
-
     }
 
     void hideLoadingDialog(){
@@ -450,5 +463,6 @@ public class StatisticsFragment extends Fragment {
         statsDead = (AppCompatTextView) view.findViewById(R.id.statsDead);
         statsActive = (AppCompatTextView) view.findViewById(R.id.statsActive);
         topLoadingAnimation = (LottieAnimationView) view.findViewById(R.id.topLoadingAnimation);
+        locationButtonClick = (RelativeLayout) view.findViewById(R.id.locationButtonClick);
     }
 }
