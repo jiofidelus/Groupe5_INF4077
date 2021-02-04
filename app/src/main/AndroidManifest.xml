@@ -19,7 +19,6 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.Covid_app">
-        <activity android:name=".activities.MapActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">

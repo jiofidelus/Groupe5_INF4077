@@ -13,21 +13,16 @@ import android.os.Environment;
 import android.os.Handler;
 import android.provider.Settings;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,11 +41,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.covid_app.R;
 import com.example.covid_app.adapters.SmsAdapter;
+import com.example.covid_app.models.LastPosition;
 import com.example.covid_app.models.SmsModel;
 import com.example.covid_app.models.User;
-import com.google.android.flexbox.FlexDirection;
-import com.google.android.flexbox.FlexboxLayoutManager;
-import com.google.android.flexbox.JustifyContent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -77,7 +70,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -140,6 +132,7 @@ public class RoomFragment extends Fragment {
     private ArrayList<User> userList = new ArrayList<>();
     private RelativeLayout anonymButtonclick;
     LinearLayout room_no_log_sms;
+    private int lastSmsPosition = -1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -164,19 +157,7 @@ public class RoomFragment extends Fragment {
                 USER_PREFS, Context.MODE_PRIVATE);
 
         initView(result);
-        return result;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         canRunThread = true;
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -191,6 +172,18 @@ public class RoomFragment extends Fragment {
                 }
             }
         }).start();
+        return result;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        canRunThread = true;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
@@ -464,6 +457,13 @@ public class RoomFragment extends Fragment {
                                 scrollToBottom();
                             }
                             hideTopLoadingDialog();
+                            activity.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+
+                                    Toast.makeText(context, smsList.size()+"", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                 }
@@ -727,49 +727,133 @@ public class RoomFragment extends Fragment {
 
     public void sendChannelMessage(String msg) {
         showTopLoadingDialog();
-        SmsModel smsModel = new SmsModel();
-        smsModel.setUserName(userName);
-        if (!currentUser.isAnonymous()){
-            smsModel.setUserMail(currentUser.getEmail());
-        }
-        smsModel.setMessage(msg);
-        smsModel.setSMS(true);
-        if (userUID == null){
-            userUID = "";
-        }
-        String time= String.valueOf(System.currentTimeMillis());
-        smsModel.setTimeInMilli(time);
-        smsModel.setUserUid(userUID);
-        smsModel.setVoiceDuration(voiceDuration);
-        smsModel.setVoiceUrl("");
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = month+1;
-        String date = day+"/"+month+"/"+year;
-        smsModel.setSendDate(date);
-        uploadMessageDataToFireStore(smsModel);
+        getlastPositionSms(msg);
     }
 
     private void sendChannelVoice(){
         showTopLoadingDialog();
-        SmsModel smsModel = new SmsModel();
-        smsModel.setUserName(userName);
-        smsModel.setMessage("");
-        smsModel.setSMS(false);
-        smsModel.setUserUid(userUID);
-        String time= String.valueOf(System.currentTimeMillis());
-        smsModel.setTimeInMilli(time);
-        smsModel.setVoiceDuration(voiceDuration);
-        Calendar calendar = Calendar.getInstance();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-        month = month+1;
-        String date = day+"/"+month+"/"+year;
-        smsModel.setSendDate(date);
-        uploadMessageDataToFireStore(smsModel);
+        getlastPositionVoice();
+    }
+
+    private void getlastPositionSms(String msg){
+        lastSmsPosition = -1;
+        db.collection("lastmessage")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            String lastPositionId = null;
+                            for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
+                                lastPositionId = documentSnapshot.getId();
+                                LastPosition lastPosition = documentSnapshot.toObject(LastPosition.class);
+                                lastSmsPosition = lastPosition.getPosition();
+                            }
+                            if (lastPositionId != null){
+                                updateLastPosition(lastSmsPosition, lastPositionId);
+                                if (lastSmsPosition >= 0){
+                                    SmsModel smsModel = new SmsModel();
+                                    smsModel.setUserName(userName);
+                                    if (!currentUser.isAnonymous()){
+                                        smsModel.setUserMail(currentUser.getEmail());
+                                    }
+                                    smsModel.setMessage(msg);
+                                    smsModel.setSMS(true);
+                                    if (userUID == null){
+                                        userUID = "";
+                                    }
+                                    String time = String.valueOf(lastSmsPosition);
+                                    smsModel.setTimeInMilli(time);
+                                    smsModel.setUserUid(userUID);
+                                    smsModel.setVoiceDuration(voiceDuration);
+                                    smsModel.setVoiceUrl("");
+                                    Calendar calendar = Calendar.getInstance();
+                                    int year = calendar.get(Calendar.YEAR);
+                                    int month = calendar.get(Calendar.MONTH);
+                                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                    month = month+1;
+                                    String date = day+"/"+month+"/"+year;
+                                    smsModel.setSendDate(date);
+                                    uploadMessageDataToFireStore(smsModel);
+                                }else {
+                                    hideTopLoadingDialog();
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, "Erreur d'envoi !!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }else {
+                                hideTopLoadingDialog();
+                                Toast.makeText(activity, "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void getlastPositionVoice(){
+        lastSmsPosition = -1;
+        db.collection("lastmessage")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            String lastPositionId = null;
+                            for (QueryDocumentSnapshot documentSnapshot : Objects.requireNonNull(task.getResult())){
+                                lastPositionId = documentSnapshot.getId();
+                                LastPosition lastPosition = documentSnapshot.toObject(LastPosition.class);
+                                lastSmsPosition = lastPosition.getPosition();
+                            }
+                            if (lastPositionId != null){
+                                updateLastPosition(lastSmsPosition, lastPositionId);
+                                if (lastSmsPosition >= 0){
+                                    SmsModel smsModel = new SmsModel();
+                                    smsModel.setUserName(userName);
+                                    smsModel.setMessage("");
+                                    smsModel.setSMS(false);
+                                    smsModel.setUserUid(userUID);
+                                    String time = String.valueOf(lastSmsPosition);
+                                    smsModel.setTimeInMilli(time);
+                                    smsModel.setVoiceDuration(voiceDuration);
+                                    Calendar calendar = Calendar.getInstance();
+                                    int year = calendar.get(Calendar.YEAR);
+                                    int month = calendar.get(Calendar.MONTH);
+                                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                                    month = month+1;
+                                    String date = day+"/"+month+"/"+year;
+                                    smsModel.setSendDate(date);
+                                    uploadMessageDataToFireStore(smsModel);
+                                }else {
+                                    hideTopLoadingDialog();
+                                    activity.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(context, "Erreur d'envoi !!!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+                            }else {
+                                hideTopLoadingDialog();
+                                Toast.makeText(activity, "Erreur de connexion", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void updateLastPosition(int lastSmsPosition, String smsId){
+        db.collection("lastmessage")
+                .document(smsId)
+                .update("position", lastSmsPosition+1)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        //
+                    }
+                });
     }
 
     private void initView(View view) {

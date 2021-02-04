@@ -480,11 +480,16 @@ public class HomeFragment extends Fragment {
 
     private void showCurrentMessage(){
         if (!Objects.equals(messageResult, oldMessage)){
-            if (messageResult.isEmpty()){
-                message.setText("Aucun conseil pour l'instant !!!");
-            }else {
-                message.setText(messageResult);
-            }
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (messageResult.isEmpty()){
+                        message.setText("Aucun conseil pour l'instant !!!");
+                    }else {
+                        message.setText(messageResult);
+                    }
+                }
+            });
         }
     }
 
