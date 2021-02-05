@@ -38,8 +38,7 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustran chaque page.
 
-[![Fibonacci RMI Java EE](http://img.youtube.com/vi/nX_inqaAzOI/0.jpg)](https://www.youtube.com/watch?v=nX_inqaAzOI&feature=youtu.be&hd=1 "RMI Fibonacci Java")
+[![Demo Covid_app](https://drive.google.com/file/d/1lu9Q7tKz0wNopyUJZJc8_wh9RBSVSIVc/view?usp=sharing)](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
 
- Telechargable Via google drive
- link: https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
- 
+ Telechargable Via google drive : 
+ ![covid_app.apk](https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing)
