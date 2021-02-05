@@ -38,9 +38,9 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustrant chaque page.
 
- ![](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)
+ ![Demo covid_app.mp4](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
  
- ![Demo covid_app](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
+ ![](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)
 
  Telechargable Via google drive : 
  ![covid_app.apk](https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing)
