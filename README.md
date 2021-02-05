@@ -34,14 +34,14 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustrant chaque page.
 
-![](https://media.giphy.com/media/6vbaG1SIXbU0j8UnGl/giphy.gif)
-
 NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe deja enregistre. Voici un compte de test
 
     mail : test.covid_app@gmail.com
     mot de passe : test.covid_app
 
 ![](http://i.imgur.com/Ssfp7.gif)
+
+![](https://media.giphy.com/media/6vbaG1SIXbU0j8UnGl/giphy.gif)
 
  Telechargable Via google drive : 
 https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
