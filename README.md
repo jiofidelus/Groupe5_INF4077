@@ -38,7 +38,7 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustran chaque page.
 
-
+![](/home/amine/Bureau/covid_app.gif)
 
  Telechargable Via google drive
  link: https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
