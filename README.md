@@ -36,7 +36,7 @@ Vous pouvez donc entre autres
   * Voir les malades qui sont connectes (ici il faudra accepter de partager sa position) ------- cette partie a ete abandonnee-----
   * Une page d'accueil.
 
-Ci-dessous les captures d'ecran illustran chaque page.
+Ci-dessous les captures d'ecran illustrant chaque page.
 
 [![Demo Covid_app](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
 
