@@ -41,5 +41,7 @@ NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe 
     mail : test.covid_app@gmail.com
     mot de passe : test.covid_app
 
+![](http://i.imgur.com/Ssfp7.gif)
+
  Telechargable Via google drive : 
 https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
