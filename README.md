@@ -38,7 +38,9 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustran chaque page.
 
-![](/home/amine/Bureau/covid_app.gif)
+<video width="720" height="1280" controls>
+  <source src="https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing" type="video/mp4">
+</video>
 
  Telechargable Via google drive
  link: https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
