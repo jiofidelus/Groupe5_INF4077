@@ -113,7 +113,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -126,6 +125,7 @@ public class HomeFragment extends Fragment {
         context = result.getContext();
         activity = (AppCompatActivity) context;
 
+        db = FirebaseFirestore.getInstance();
         initView(result);
 
         return result;

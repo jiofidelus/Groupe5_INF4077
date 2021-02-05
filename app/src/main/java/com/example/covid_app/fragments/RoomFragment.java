@@ -137,11 +137,6 @@ public class RoomFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
     }
 
     @Override
@@ -152,6 +147,11 @@ public class RoomFragment extends Fragment {
 
         context = result.getContext();
         activity = (AppCompatActivity) context;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
 
         sharedPref = context.getSharedPreferences(
                 USER_PREFS, Context.MODE_PRIVATE);

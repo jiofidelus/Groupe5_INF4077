@@ -137,9 +137,6 @@ ConnectedFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        db = FirebaseFirestore.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
-        storageReference = firebaseStorage.getReference();
     }
 
     @Override
@@ -150,6 +147,10 @@ ConnectedFragment extends Fragment {
 
         context = result.getContext();
         activity = (AppCompatActivity) getContext();
+
+        db = FirebaseFirestore.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
+        storageReference = firebaseStorage.getReference();
 
         initViews(result);
         return result;
@@ -403,7 +404,7 @@ ConnectedFragment extends Fragment {
                     Toast.makeText(activity, "Deconnecte", Toast.LENGTH_SHORT).show();
                     FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                     ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-                    ft.replace(R.id.fragment, new ConnectedFragment());
+                    ft.replace(R.id.fragment, new AccountFragment());
                     ft.commit();
                 }
             });

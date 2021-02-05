@@ -87,10 +87,6 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        firebaseAuth = FirebaseAuth.getInstance();
-        db = FirebaseFirestore.getInstance();
-        firebaseStorage = FirebaseStorage.getInstance();
     }
 
     @Override
@@ -101,6 +97,10 @@ public class StatisticsFragment extends Fragment {
         canRunThread = true;
         context = result.getContext();
         activity = (AppCompatActivity) context;
+
+        firebaseAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        firebaseStorage = FirebaseStorage.getInstance();
 
         initView(result);
         OverScrollDecoratorHelper.setUpOverScroll(statisticScrollView);
