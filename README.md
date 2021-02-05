@@ -37,6 +37,10 @@ Vous pouvez donc entre autres
   * Une page d'accueil.
 
 Ci-dessous les captures d'ecran illustrant chaque page.
+NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe deja enregistre. Voici un compte que j'ai rajoute *
+
+    mail : prosper.abouar@gmail.com
+    mot de passe : prosper
  
  ![](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)
 
