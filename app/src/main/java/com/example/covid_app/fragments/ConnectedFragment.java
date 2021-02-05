@@ -403,7 +403,7 @@ ConnectedFragment extends Fragment {
                     Toast.makeText(activity, "Deconnecte", Toast.LENGTH_SHORT).show();
                     FragmentTransaction ft = activity.getSupportFragmentManager().beginTransaction();
                     ft.setCustomAnimations(R.anim.fade_in, R.anim.fade_out, R.anim.fade_in, R.anim.fade_out);
-                    ft.replace(R.id.fragment, new RoomFragment());
+                    ft.replace(R.id.fragment, new ConnectedFragment());
                     ft.commit();
                 }
             });
