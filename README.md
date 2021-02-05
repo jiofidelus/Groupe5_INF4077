@@ -38,7 +38,7 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustran chaque page.
 
-[![Demo Covid_app](https://gifyu.com/image/UOra)](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
+[![Demo Covid_app](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
 
  Telechargable Via google drive : 
  ![covid_app.apk](https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing)
