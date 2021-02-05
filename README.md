@@ -43,3 +43,6 @@ NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe 
 
  Telechargable Via google drive : 
 https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
+
+Ou Mega sync
+https://mega.nz/file/VQQBgQrb#upaIZfkfJ2hWGDFH3Pv87LiPYcsEk3kCUHGEm_3cnOg
