@@ -33,7 +33,7 @@ Vous pouvez donc entre autres
   * Dans le panneau de connexion pour depisteur: enregistrer des citoyens et les depister et leur assignant le statut de leur etat, envoyer un message de sensibilisation;
   * Echanger dans le salon general en tant qu'anonyme ou depisteur grace aux sms et voices;
   * Voir les statistiques;
-  * Voir les malades qui sont connectes (ici il faudra accepter de partager sa position) ------- cette partie a ete abandonnee-----
+  * Voir les malades qui sont connectes (ici il faudra accepter de partager sa position) ------- incomplete -----
   * Une page d'accueil.
 
 Ci-dessous les captures d'ecran illustrant chaque page.
