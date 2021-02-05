@@ -6,11 +6,6 @@ Nous avons donc 4 applications a developper selon le type : web mobile, native, 
   - App native : Android(java), xml, firebase.
   - App cross-platform : flutter, firebase.
   - App compile : kotlin, xml, firebase.
- 
- Les participants sont:
-  - DONALD
-  - PROSPER
-  - EXCEL
   
 #Web_application (Modo)
 link: http://donaldoempire1999.pythonanywhere.com/
@@ -20,7 +15,8 @@ Sur la page d'accueil:
   (le nom par defaut est: root && mot de passe: root)
  suivre les indications du systeme.
  
- #Native_application Android avec JAVA
+ 
+#Native_application Android avec JAVA
  
  Ce projet est totalement gratuit et open-source.
  
