@@ -39,7 +39,7 @@ NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe 
     mail : test.covid_app@gmail.com
     mot de passe : test.covid_app
 
-![](https://s17.aconvert.com/convert/p3r68-cdx67/e52k6-6ff44.gif)
+![](https://s33.aconvert.com/convert/p3r68-cdx67/67kku-isa43.gif)
 
  Telechargable Via google drive : 
 https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
