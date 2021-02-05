@@ -37,10 +37,8 @@ Vous pouvez donc entre autres
   * Une page d'accueil.
 
 Ci-dessous les captures d'ecran illustrant chaque page.
-
- ![Demo covid_app.mp4](https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing)
  
  ![](https://media.giphy.com/media/gUZZt4D9rJ64A6UfvI/giphy.gif)
 
  Telechargable Via google drive : 
- ![covid_app.apk](https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing)
+https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
