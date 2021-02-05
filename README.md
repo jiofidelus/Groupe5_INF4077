@@ -38,9 +38,7 @@ Vous pouvez donc entre autres
 
 Ci-dessous les captures d'ecran illustran chaque page.
 
-<video width="720" height="1280" controls>
-  <source src="https://drive.google.com/file/d/1AYGYqJn89Ojg7NQYL9uMv4S-Q5SgwbdA/view?usp=sharing" type="video/mp4">
-</video>
+[![Fibonacci RMI Java EE](http://img.youtube.com/vi/nX_inqaAzOI/0.jpg)](https://www.youtube.com/watch?v=nX_inqaAzOI&feature=youtu.be&hd=1 "RMI Fibonacci Java")
 
  Telechargable Via google drive
  link: https://drive.google.com/file/d/1ty12JMN6s2QGfM6_Il8PyiDincZTWjQn/view?usp=sharing
