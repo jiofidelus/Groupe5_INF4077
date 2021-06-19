@@ -33,6 +33,7 @@ Vous pouvez donc entre autres :
   * Voir les statistiques;
   * Voir les malades qui sont connectes (ici il faudra accepter de partager sa position) ------- incomplete -----
   * Une page d'accueil.
+  
 NB: Pour vous connecter en tant qu'admin il vous faudra un mail et mot de passe deja enregistre. Voici un compte de test
     mail : test.covid_app@gmail.com
     mot de passe : test.covid_app
