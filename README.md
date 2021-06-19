@@ -43,4 +43,4 @@ Ci-dessous les captures d'ecran illustrant chaque page.
 ![Alt Text](https://docs.google.com/uc?export=download&id=1_q79CJ9yn1_HBA4WqBgkG3GGdHdR5h6S)
 
 
-Le lien de l'application (sur Mega synch) : https://mega.nz/file/VQQBgQrb#upaIZfkfJ2hWGDFH3Pv87LiPYcsEk3kCUHGEm_3cnOg
+Le lien de l'application (sur Mega) : https://mega.nz/file/VQQBgQrb#upaIZfkfJ2hWGDFH3Pv87LiPYcsEk3kCUHGEm_3cnOg
