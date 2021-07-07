@@ -24,6 +24,15 @@ Sur la page d'accueil:
   (le nom par defaut est: root && mot de passe: root)
  suivre les indications du systeme.
  
+ Captures d'ecran : 
+ 
+ ![alt text](https://docs.google.com/uc?export=download&id=1ybzAiVgF3ByPev2Btz_xU8RXWR7BsGt-)
+ ![alt text](https://docs.google.com/uc?export=download&id=1ynfzcC2IEkALuAYgEltXlwxcODKB3ozb)
+ ![alt text](https://docs.google.com/uc?export=download&id=125HwK5W0aov2Hv5VT3tB-LWxlRIPaPxv)
+ ![alt text](https://docs.google.com/uc?export=download&id=1FIXWJg4ryCULxMm0RPGflIDIccpvWwpC)
+ ![alt text](https://docs.google.com/uc?export=download&id=1uXJLUEPR0o5TeDIBjC77kSLM7FbePo9E)
+ ![alt text](https://docs.google.com/uc?export=download&id=1jWcNEf13vSFe8tTkCrf_Kk4yTvViXb8Q)
+ 
  
 #Native_application Android avec JAVA
 Les fonctionnalites tels que l'appel, le sms, le stockage en ligne avec firebase, l'authentification et la messagerie instantanee avec firestore, les statistiques en temps reel sont les principales. Cette application permet la surveillance epidemiologique du COVID-19 au 237.
